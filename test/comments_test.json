@@ -1,0 +1,50 @@
+{
+  "Tests": [{
+      "Convey": "createComments link to base",
+      "Zome": "comments",
+      "FnName": "createComments",
+      "Input": {
+        "comment": "The First Main Layer Comment",
+        "commentedOnHash": "%agent%"
+      },
+      "Output": "%h1%"
+    },
+    {
+      "Convey": "createComments reply to the previous comment",
+      "Zome": "comments",
+      "FnName": "createComments",
+      "Input": {
+        "comment": "The Second Layer Comment",
+        "commentedOnHash": "%r1%"
+      },
+      "Output": "%h1%"
+    },
+    {
+      "Convey": "createComments reply to the previous comment",
+      "Zome": "comments",
+      "FnName": "createComments",
+      "Input": {
+        "comment": "The Third Layer Comment",
+        "commentedOnHash": "%r1%"
+      },
+      "Output": "%h1%"
+    },
+    {
+      "Convey": "createComments reply to the previous comment",
+      "Zome": "comments",
+      "FnName": "createComments",
+      "Input": {
+        "comment": "The Second Main Layer Comment",
+        "commentedOnHash": "%agent%"
+      },
+      "Output": "%h1%"
+    },
+    {
+      "Convey": "test for getComments",
+      "Zome": "comments",
+      "FnName": "getComments",
+      "Input": {"commentedOnHash":"%agent%"},
+      "Regexp": "[{\"author\":\"\",\"comment\":,\"}]"
+    }
+  ]
+}

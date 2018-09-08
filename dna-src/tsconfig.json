@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "outDir": "../build/dna",
+    "rootDir": ".",
+    "typeRoots": ["../@types"],
+    "newLine" : "lf"
+  }
+}

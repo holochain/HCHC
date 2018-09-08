@@ -1,0 +1,33 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "dna",
+    "test"
+  ],
+  "properties": {
+    "dna": {
+      "$id": "#/properties/dna",
+      "type": "string",
+      "title": "The Dna Schema",
+      "default": "",
+      "examples": [
+        ""
+      ],
+      "pattern": "^(.*)$"
+    },
+    "test": {
+      "$id": "#/properties/test",
+      "type": "string",
+      "title": "The Test Schema",
+      "default": "",
+      "examples": [
+        ""
+      ],
+      "pattern": "^(.*)$"
+    }
+  }
+}

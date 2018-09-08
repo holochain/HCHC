@@ -1,0 +1,44 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "comment",
+    "author",
+    "timestamp"
+  ],
+  "properties": {
+    "comment": {
+      "$id": "#/properties/comment",
+      "type": "string",
+      "title": "The Comment Schema",
+      "default": "",
+      "examples": [
+        "This is an example comment"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "author": {
+      "$id": "#/properties/author",
+      "type": "string",
+      "title": "The Author Schema",
+      "default": "",
+      "examples": [
+        "QuahfjvrioasdfcAfvrsaFAE"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "timestamp": {
+      "$id": "#/properties/timestamp",
+      "type": "string",
+      "title": "The Timestamp Schema",
+      "default": "",
+      "examples": [
+        ""
+      ],
+      "pattern": "^(.*)$"
+    }
+  }
+}

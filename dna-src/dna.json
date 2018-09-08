@@ -1,0 +1,122 @@
+{
+  "Version": 1,
+  "UUID": "4a4beb46-a3cf-476f-8593-e30155186707",
+  "Name": "HCHC",
+  "Properties": {
+    "description": "The Holochain of Holochains",
+    "language": "en"
+  },
+  "PropertiesSchemaFile": "properties_schema.json",
+  "DHTConfig": {
+    "HashType": "sha2-256"
+  },
+  "Zomes": [
+    {
+      "Name": "hchc",
+      "Description": "A main zome | used to add Apps to the HC of HCs",
+      "RibosomeType": "js",
+      "CodeFile": "hchc.js",
+      "Entries": [
+        {
+          "Name": "app",
+          "Required": true,
+          "DataFormat": "json",
+          "Sharing": "public",
+          "SchemaFile": "app.json"
+        },
+        {
+          "Name": "app_code",
+          "Required": true,
+          "DataFormat": "json",
+          "Sharing": "public",
+          "SchemaFile": "app_code.json"
+        },
+        {
+          "Name": "ui_skin",
+          "Required": true,
+          "DataFormat": "json",
+          "Sharing": "public",
+          "SchemaFile": "ui_skin.json"
+        },
+        {
+          "Name": "app_link",
+          "DataFormat": "links",
+          "Sharing": "public"
+        }
+      ],
+      "Functions": [
+        {
+          "Name": "createApp",
+          "CallingType": "json",
+          "Exposure": "public"
+        },
+        {
+          "Name": "getApps",
+          "CallingType": "json",
+          "Exposure": "public"
+        },
+        {
+          "Name": "addAppCode",
+          "CallingType": "json",
+          "Exposure": "public"
+        },
+        {
+          "Name": "getAppCode",
+          "CallingType": "json",
+          "Exposure": "public"
+        },
+        {
+          "Name": "addUISkin",
+          "CallingType": "json",
+          "Exposure": "public"
+        },
+        {
+          "Name": "getUISkin",
+          "CallingType": "json",
+          "Exposure": "public"
+        }
+      ]
+    },{
+      "Name": "whoami",
+      "Description": "A whoami zome | used to retrive the agent identity",
+      "RibosomeType": "js",
+      "CodeFile": "whoami.js",
+      "Entries": [],
+      "Functions": [{
+        "Name": "getAgent",
+        "CallingType": "json",
+        "Exposure": "public"
+      }]
+    },
+    {
+      "Name": "comments",
+      "Description": "A comments zome | used to comments on an Item (Hash)",
+      "RibosomeType": "js",
+      "CodeFile": "comments.js",
+      "Entries": [{
+          "Name": "comments",
+          "Required": true,
+          "DataFormat": "json",
+          "Sharing": "public",
+          "SchemaFile": "comments.json"
+        },
+        {
+          "Name": "comments_link",
+          "DataFormat": "links",
+          "Sharing": "public"
+        }
+      ],
+      "Functions": [{
+          "Name": "createComments",
+          "CallingType": "json",
+          "Exposure": "public"
+        },
+        {
+          "Name": "getComments",
+          "CallingType": "json",
+          "Exposure": "public"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Tests": [{
+      "Convey": "test for gettog",
+      "Zome": "whoami",
+      "FnName": "getAgent",
+      "Input": "",
+      "Output": {"Hash":"%agent%","Name":"%agentstr%"}
+    }
+  ]
+}
