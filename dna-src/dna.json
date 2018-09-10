@@ -51,7 +51,7 @@
           "Exposure": "public"
         },
         {
-          "Name": "getApps",
+          "Name": "getAllApps",
           "CallingType": "json",
           "Exposure": "public"
         },

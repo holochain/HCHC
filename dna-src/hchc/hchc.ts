@@ -34,7 +34,7 @@ function createApp({ title, description, thumbnail }) {
 }
 
 // To get all apps in the HC
-function getApps() {
+function getAllApps() {
   return getLinks(App.DNA.Hash, "app_tag", { Load: true }).map(e => e.Entry);
 }
 

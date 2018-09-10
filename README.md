@@ -1,14 +1,13 @@
 # HCHC
 
+![GitHub last commit](https://img.shields.io/github/last-commit/Holo-Host/HCHC.svg)
+![GitHub](https://img.shields.io/github/license/Holo-Host/HCHC.svg)
+
 The Holochain of Holochains
 
 Its a distributed directory for finding and installing distributed apps that run on holochain
 
 > Note : This is the developer.console for Holochain devs to upload their HApps
-
-
-![GitHub last commit](https://img.shields.io/github/last-commit/Holo-Host/HCHC.svg)
-![GitHub](https://img.shields.io/github/license/Holo-Host/HCHC.svg)
 
 ## Getting Started
 
@@ -30,7 +29,7 @@ The app can now be started for development purposes using
 ```
 npm run hc:dev
 ```
-and opening the browser to http://localhost:3000
+and opening the browser to http://localhost:4141
 
 ---
 If you would like to persist data between sessions install to the local holochain directory by running the following from the project root directory:
@@ -54,4 +53,4 @@ hcd HCHC
 
 ## License
 
-This project is licensed under the GPL-3 License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details

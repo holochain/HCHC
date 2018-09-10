@@ -13,7 +13,7 @@
     {
       "Convey": "test for Adding a new app",
       "Zome": "hchc",
-      "FnName": "getApps",
+      "FnName": "getAllApps",
       "Input": "",
       "Regexp": "[{\"author\":\"\",\"title\":,\"description\":\"\"}]"
     },
