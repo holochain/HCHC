@@ -25,11 +25,14 @@ function createApp({ title, description, thumbnail }) {
     thumbnail
   };
   const hash: Hash = commit("app", appParam);
+  // Comment for testing purposes
+  debug("Hash That is commited to the HCHC for App details"+hash);
   commit("app_link", {
     Links: [
       { Base: App.DNA.Hash, Link: hash, Tag: 'app_tag' }
     ]
   });
+  call("bridge_request", "pushAppDetailsToStore", { appParam });
   return hash;
 }
 
@@ -77,6 +80,11 @@ function addUISkin({ title, link,thumbnail, app_hash }) {
 function getUISkin(app_hash) {
   return getLinks(app_hash, "app_ui_code_tag", { Load: true }).map(e => e.Entry);
 }
+
+
+// function getAppHash(app){
+//   return makeHash("app",app);
+// }
 
 //------------------------------
 // Helper Functions

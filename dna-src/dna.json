@@ -10,14 +10,29 @@
   "DHTConfig": {
     "HashType": "sha2-256"
   },
-  "Zomes": [
+  "Zomes": [{
+      "Name": "bridge_request",
+      "Description": "A bridge_request zome | used to bridge",
+      "RibosomeType": "js",
+      "CodeFile": "bridge_request.js",
+      "Entries": [],
+      "Functions": [{
+        "Name": "pushAppDetailsToStore",
+        "CallingType": "json",
+        "Exposure": "public"
+      },
+      {
+        "Name": "getAppDetails",
+        "CallingType": "json",
+        "Exposure": "public"
+      }]
+    },
     {
       "Name": "hchc",
       "Description": "A main zome | used to add Apps to the HC of HCs",
       "RibosomeType": "js",
       "CodeFile": "hchc.js",
-      "Entries": [
-        {
+      "Entries": [{
           "Name": "app",
           "Required": true,
           "DataFormat": "json",
@@ -76,7 +91,7 @@
           "Exposure": "public"
         }
       ]
-    },{
+    }, {
       "Name": "whoami",
       "Description": "A whoami zome | used to retrive the agent identity",
       "RibosomeType": "js",
