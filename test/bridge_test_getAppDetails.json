@@ -13,7 +13,7 @@
     },
     {
       "Convey": "Test for get the hash of the app just pushed into the HApps Store",
-      "Zome": "bridge_request",
+      "Zome": "hchc",
       "FnName": "getAppDetails",
       "Input": {
         "app_hash": "%r1%"

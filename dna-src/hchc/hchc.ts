@@ -26,7 +26,7 @@ function createApp({ title, description, thumbnail }) {
   };
   const hash: Hash = commit("app", appParam);
   // Comment for testing purposes
-  debug("Hash That is commited to the HCHC for App details"+hash);
+  debug("Hash That is commited to the HCHC for App details" + hash);
   commit("app_link", {
     Links: [
       { Base: App.DNA.Hash, Link: hash, Tag: 'app_tag' }
@@ -36,9 +36,10 @@ function createApp({ title, description, thumbnail }) {
   return hash;
 }
 
-// To get all apps in the HC
-function getAllApps() {
-  return getLinks(App.DNA.Hash, "app_tag", { Load: true }).map(e => e.Entry);
+// Public functions to get the app details
+function getAppDetails({ app_hash }) {
+  const details = call("bridge_request", "getAppDetails", { app_hash })
+  return  details;
 }
 
 function addAppCode({ dna, test, app_hash }) {
@@ -60,11 +61,11 @@ function getAppCode(app_hash) {
   return getLinks(app_hash, "app_code_tag", { Load: true }).map(e => e.Entry);
 }
 
-function addUISkin({ title, link,thumbnail, app_hash }) {
-  const uiSkinParams= {
+function addUISkin({ title, link, thumbnail, app_hash }) {
+  const uiSkinParams = {
     title,
     link,
-    author:App.Key.Hash,
+    author: App.Key.Hash,
     thumbnail
   };
   const hash: Hash = commit("ui_skin", uiSkinParams);
@@ -80,11 +81,6 @@ function addUISkin({ title, link,thumbnail, app_hash }) {
 function getUISkin(app_hash) {
   return getLinks(app_hash, "app_ui_code_tag", { Load: true }).map(e => e.Entry);
 }
-
-
-// function getAppHash(app){
-//   return makeHash("app",app);
-// }
 
 //------------------------------
 // Helper Functions

@@ -66,7 +66,7 @@
           "Exposure": "public"
         },
         {
-          "Name": "getAllApps",
+          "Name": "getAppDetails",
           "CallingType": "json",
           "Exposure": "public"
         },

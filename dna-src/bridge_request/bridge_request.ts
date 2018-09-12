@@ -10,14 +10,14 @@ let module = {};
 
 function pushAppDetailsToStore({ appParam }) {
   const hash = bridge(getBackupAppsHash()[0].CalleeApp, 'bridge_replies', 'addAppDetails', { appParam });
-  //debug("Return from HApps(For app that was created):" + JSON.parse(hash));
+  // debug("Return from HApps(For app that was created):" + JSON.parse(hash));
   return JSON.parse(hash);
 }
 
 // Should return all the details including the stats for the app
 function getAppDetails({ app_hash }) {
   const app_details = bridge(getBackupAppsHash()[0].CalleeApp, 'bridge_replies', 'getAppDetails', { app_hash });
-  debug("App_details from the App Store"+app_details);
+  // debug("App_details from the App Store"+JSON.parse(app_details));
   return JSON.parse(app_details)
 }
 
