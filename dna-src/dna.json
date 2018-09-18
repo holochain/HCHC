@@ -66,6 +66,11 @@
           "Exposure": "public"
         },
         {
+          "Name": "getMyApps",
+          "CallingType": "json",
+          "Exposure": "public"
+        },
+        {
           "Name": "getAppDetails",
           "CallingType": "json",
           "Exposure": "public"
