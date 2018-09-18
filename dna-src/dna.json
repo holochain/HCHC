@@ -29,6 +29,25 @@
       ]
     },
     {
+      "Name": "bridge_replies",
+      "Description": "A bridge_replies zome | used to bridge",
+      "RibosomeType": "js",
+      "CodeFile": "bridge_replies.js",
+      "BridgeFuncs": ["getAppDNA", "getAppUISkin"],
+      "Entries": [],
+      "Functions": [{
+          "Name": "getAppDNA",
+          "CallingType": "json",
+          "Exposure": "public"
+        },
+        {
+          "Name": "getAppUISkin",
+          "CallingType": "json",
+          "Exposure": "public"
+        }
+      ]
+    },
+    {
       "Name": "hchc",
       "Description": "A main zome | used to add Apps to the HC of HCs",
       "RibosomeType": "js",
