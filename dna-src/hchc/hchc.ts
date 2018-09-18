@@ -1,7 +1,4 @@
 'use strict';
-
-// import {CreateAppParams, CodeParams, UiSkinParams} from "../../hchc"
-
 export = 0;
 let module = {};
 // -----------------------------------------------------------------
@@ -32,6 +29,7 @@ function createApp({ title, description, thumbnail }) {
       { Base: App.DNA.Hash, Link: hash, Tag: 'app_tag' }
     ]
   });
+  // Commiting same details in the HApps-Store
   call("bridge_request", "pushAppDetailsToStore", { appParam });
   return hash;
 }

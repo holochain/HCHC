@@ -11,24 +11,17 @@
       "Output": "%h1%"
     },
     {
-      "Convey": "test for Adding a new app",
-      "Zome": "hchc",
-      "FnName": "getAllApps",
-      "Input": "",
-      "Regexp": "[{\"author\":\"\",\"title\":,\"description\":\"\"}]"
-    },
-    {
      "Convey": "test for Adding a code for the app",
      "Zome": "hchc",
      "FnName": "addAppCode",
-     "Input":{"dna":"file://dna/","test":"file://test/","app_hash":"%r2%"},
+     "Input":{"dna":"file://dna/","test":"file://test/","app_hash":"%r1%"},
      "Output": "%h1%"
    },
    {
     "Convey": "test for Adding a code for the app",
     "Zome": "hchc",
     "FnName": "getAppCode",
-    "Input":"%r3%",
+    "Input":"%r2%",
     "Regexp": "[{\"dna\":\"\",\"test\":,\"\"}]"
   }
   ]

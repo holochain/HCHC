@@ -11,24 +11,17 @@
       "Output": "%h1%"
     },
     {
-      "Convey": "test for Adding a new app",
-      "Zome": "hchc",
-      "FnName": "getAllApps",
-      "Input": "",
-      "Regexp": "[{\"author\":\"\",\"title\":,\"description\":\"\"}]"
-    },
-    {
-     "Convey": "test for Adding a code for the app",
+     "Convey": "test for Adding a UISkin code for the app",
      "Zome": "hchc",
      "FnName": "addUISkin",
-     "Input":{"title":"UI_TITLE","link":"file://ui/","thumbnail":"image.jpg","app_hash":"%r2%"},
+     "Input":{"title":"UI_TITLE","link":"file://ui/","thumbnail":"image.jpg","app_hash":"%r1%"},
      "Output": "%h1%"
    },
    {
-    "Convey": "test for Adding a code for the app",
+    "Convey": "test for Getting a UISkin code for the app",
     "Zome": "hchc",
     "FnName": "getUISkin",
-    "Input":"%r3%",
+    "Input":"%r2%",
     "Regexp": "[{\"title\":\"\",\"link\":,\"\"thumbnail\":\"\",\"author\":\"\"}]"
   }
   ]
