@@ -21,7 +21,7 @@
     "Convey": "test for Getting a UISkin code for the app",
     "Zome": "hchc",
     "FnName": "getUISkin",
-    "Input":"%r2%",
+    "Input":{"app_hash":"%r2%"},
     "Regexp": "[{\"title\":\"\",\"link\":,\"\"thumbnail\":\"\",\"author\":\"\"}]"
   }
   ]

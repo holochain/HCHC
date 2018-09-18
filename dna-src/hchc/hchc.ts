@@ -17,7 +17,10 @@ function createApp({ title, description, thumbnail }) {
   const appParam = {
     uuid: uuidGenerator(),
     title,
-    author: App.Key.Hash,
+    author: {
+      Hash: App.Key.Hash,
+      Name: App.Agent.String
+    },
     description,
     thumbnail
   };
@@ -34,7 +37,7 @@ function createApp({ title, description, thumbnail }) {
   return hash;
 }
 
-function getMyApps(){
+function getMyApps() {
   return getLinks(App.Key.Hash, "app_tag", { Load: true }).map(e => {
     return {
       "Entry": e.Entry,
@@ -46,7 +49,7 @@ function getMyApps(){
 // Public functions to get the app details
 function getAppDetails({ app_hash }) {
   const details = call("bridge_request", "getAppDetails", { app_hash })
-  return  details;
+  return details;
 }
 
 // Function to upload the DNA Code
@@ -65,7 +68,7 @@ function addAppCode({ dna, test, app_hash }) {
 }
 
 // To get all apps in the HC
-function getAppCode({app_hash}) {
+function getAppCode({ app_hash }) {
   return getLinks(app_hash, "app_code_tag", { Load: true }).map(e => e.Entry);
 }
 
@@ -87,7 +90,7 @@ function addUISkin({ title, link, thumbnail, app_hash }) {
 }
 
 // To get all apps in the HC
-function getUISkin({app_hash}) {
+function getUISkin({ app_hash }) {
   return getLinks(app_hash, "app_ui_code_tag", { Load: true }).map(e => e.Entry);
 }
 

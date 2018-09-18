@@ -42,13 +42,34 @@
     },
     "author": {
       "$id": "#/properties/author",
-      "type": "string",
+      "type": "object",
       "title": "The Author Schema",
-      "default": "",
-      "examples": [
-        ""
+      "required": [
+        "Hash",
+        "Name"
       ],
-      "pattern": "^(.*)$"
+      "properties": {
+        "Hash": {
+          "$id": "#/properties/author/properties/Hash",
+          "type": "string",
+          "title": "The Hash Schema",
+          "default": "",
+          "examples": [
+            ""
+          ],
+          "pattern": "^(.*)$"
+        },
+        "Name": {
+          "$id": "#/properties/author/properties/Name",
+          "type": "string",
+          "title": "The Name Schema",
+          "default": "",
+          "examples": [
+            ""
+          ],
+          "pattern": "^(.*)$"
+        }
+      }
     },
     "thumbnail": {
       "$id": "#/properties/thumbnail",
