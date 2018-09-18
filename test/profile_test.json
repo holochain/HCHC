@@ -1,0 +1,46 @@
+{
+  "Tests": [{
+      "Convey": "Test for get default profile",
+      "Zome": "profile",
+      "FnName": "getProfile",
+      "Input": "",
+      "Regexp": "{\"handle\":\"zo-el@zoel-Inspiron-7559\"}"
+    },
+    {
+      "Convey": "Test for adding a new profile",
+      "Zome": "profile",
+      "FnName": "createProfile",
+      "Input": {
+        "handle": "Sakura",
+        "email": "sakura@haruno.com",
+        "avatar": "/IMG.jpg"
+      },
+      "Output": "%h1%"
+    },
+    {
+      "Convey": "Test for get profile created",
+      "Zome": "profile",
+      "FnName": "getProfile",
+      "Input": "",
+      "Regexp": "{\"avatar\":\"/IMG.jpg\",\"email\":\"sakura@haruno.com\",\"handle\":\"Sakura\"}"
+    },
+    {
+      "Convey": "Test for updating a profile",
+      "Zome": "profile",
+      "FnName": "updateProfile",
+      "Input": {
+        "handle": "Saske",
+        "email": "saske@uchiha.com",
+        "avatar": "/IMG.jpg"
+      },
+      "Output": "%h%"
+    },
+    {
+      "Convey": "Test for get profile created",
+      "Zome": "profile",
+      "FnName": "getProfile",
+      "Input": "",
+      "Regexp": "{\"avatar\":\"/IMG.jpg\",\"email\":\"saske@uchiha.com\",\"handle\":\"Saske\"}"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "email"
+  ],
+  "properties": {
+    "handle": {
+      "$id": "#/properties/handle",
+      "type": "string",
+      "title": "The Handle Schema",
+      "default": "",
+      "examples": [
+        "zo-el"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "email": {
+      "$id": "#/properties/email",
+      "type": "string",
+      "title": "The Email Schema",
+      "default": "",
+      "examples": [
+        "zo@el.com"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "avatar": {
+      "$id": "#/properties/avatar",
+      "type": "string",
+      "title": "The Avatar Schema",
+      "default": "",
+      "examples": [
+        "/image.jpg"
+      ],
+      "pattern": "^(.*)$"
+    }
+  }
+}

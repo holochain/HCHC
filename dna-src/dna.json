@@ -17,15 +17,16 @@
       "CodeFile": "bridge_request.js",
       "Entries": [],
       "Functions": [{
-        "Name": "pushAppDetailsToStore",
-        "CallingType": "json",
-        "Exposure": "public"
-      },
-      {
-        "Name": "getAppDetails",
-        "CallingType": "json",
-        "Exposure": "public"
-      }]
+          "Name": "pushAppDetailsToStore",
+          "CallingType": "json",
+          "Exposure": "public"
+        },
+        {
+          "Name": "getAppDetails",
+          "CallingType": "json",
+          "Exposure": "public"
+        }
+      ]
     },
     {
       "Name": "hchc",
@@ -59,8 +60,7 @@
           "Sharing": "public"
         }
       ],
-      "Functions": [
-        {
+      "Functions": [{
           "Name": "createApp",
           "CallingType": "json",
           "Exposure": "public"
@@ -107,6 +107,44 @@
         "CallingType": "json",
         "Exposure": "public"
       }]
+    },
+    {
+      "Name": "profile",
+      "Description": "Helps you create a user profile",
+      "RibosomeType": "js",
+      "CodeFile": "index.js",
+      "Config": {
+        "ErrorHandling": "throwErrors"
+      },
+      "Entries": [{
+          "Name": "profile",
+          "Required": true,
+          "DataFormat": "json",
+          "Sharing": "public",
+          "SchemaFile": "profile.json"
+        },
+        {
+          "Name": "profileLink",
+          "DataFormat": "links",
+          "Sharing": "public"
+        }
+      ],
+      "Functions": [{
+          "Name": "createProfile",
+          "CallingType": "json",
+          "Exposure": "public"
+        },
+        {
+          "Name": "getProfile",
+          "CallingType": "json",
+          "Exposure": "public"
+        },
+        {
+          "Name": "updateProfile",
+          "CallingType": "json",
+          "Exposure": "public"
+        }
+      ]
     },
     {
       "Name": "comments",
