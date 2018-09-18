@@ -26,12 +26,21 @@ function createApp({ title, description, thumbnail }) {
   debug("Hash That is commited to the HCHC for App details" + hash);
   commit("app_link", {
     Links: [
-      { Base: App.DNA.Hash, Link: hash, Tag: 'app_tag' }
+      { Base: App.Key.Hash, Link: hash, Tag: 'app_tag' }
     ]
   });
   // Commiting same details in the HApps-Store
   call("bridge_request", "pushAppDetailsToStore", { appParam });
   return hash;
+}
+
+function getMyApps(){
+  return getLinks(App.Key.Hash, "app_tag", { Load: true }).map(e => {
+    return {
+      "Entry": e.Entry,
+      "Hash": e.Hash
+    }
+  });
 }
 
 // Public functions to get the app details
@@ -40,6 +49,7 @@ function getAppDetails({ app_hash }) {
   return  details;
 }
 
+// Function to upload the DNA Code
 function addAppCode({ dna, test, app_hash }) {
   const codeParam = {
     dna,
@@ -59,6 +69,7 @@ function getAppCode({app_hash}) {
   return getLinks(app_hash, "app_code_tag", { Load: true }).map(e => e.Entry);
 }
 
+// Function to upload the UISkin Links and details
 function addUISkin({ title, link, thumbnail, app_hash }) {
   const uiSkinParams = {
     title,

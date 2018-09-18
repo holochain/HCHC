@@ -1,0 +1,22 @@
+{
+  "Tests": [
+    {
+      "Convey": "Test for adding a new app through the bridge",
+      "Zome": "hchc",
+      "FnName": "createApp",
+      "Input": {
+        "title": "Sakura",
+        "description": "The is the details for the first app",
+        "thumbnail": "IMG.jpg"
+      },
+      "Output": "%h1%"
+    },
+    {
+      "Convey": "Test for get All the apps the user has created",
+      "Zome": "hchc",
+      "FnName": "getMyApps",
+      "Input": "",
+      "Regexp": "[.*]"
+    }
+  ]
+}
