@@ -1,8 +1,5 @@
 # HCHC
 
-![GitHub last commit](https://img.shields.io/github/last-commit/Holo-Host/HCHC.svg)
-![GitHub](https://img.shields.io/github/license/Holo-Host/HCHC.svg)
-
 The Holochain of Holochains
 
 Its a distributed directory for finding and installing distributed apps that run on holochain
