@@ -1,0 +1,24 @@
+{
+  "Tests": [
+    {
+      "Convey": "Test for Adding the DNA Code link base to a Agent not the app (Storing it locally)",
+      "Zome": "hchc",
+      "FnName": "addAppCode",
+      "Input": {
+        "dna": "/LONG____________________________BASE64_________DNA",
+        "test":"/LONG____________________________BASE64_________TEST",
+        "app_hash":"%agent%"
+      },
+      "Output": "%h1%"
+    },
+    {
+      "Convey": "Test to get the DNA Code ",
+      "Zome": "hchc",
+      "FnName": "getAppCode",
+      "Input": {
+        "app_hash": "%agent%"
+      },
+      "Regexp": ".*"
+    }
+  ]
+}

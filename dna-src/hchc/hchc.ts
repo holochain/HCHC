@@ -55,7 +55,7 @@ function addAppCode({ dna, test, app_hash }) {
 }
 
 // To get all apps in the HC
-function getAppCode(app_hash) {
+function getAppCode({app_hash}) {
   return getLinks(app_hash, "app_code_tag", { Load: true }).map(e => e.Entry);
 }
 
@@ -76,7 +76,7 @@ function addUISkin({ title, link, thumbnail, app_hash }) {
 }
 
 // To get all apps in the HC
-function getUISkin(app_hash) {
+function getUISkin({app_hash}) {
   return getLinks(app_hash, "app_ui_code_tag", { Load: true }).map(e => e.Entry);
 }
 
