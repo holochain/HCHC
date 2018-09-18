@@ -1,0 +1,25 @@
+{
+  "Tests": [
+    {
+      "Convey": "Test for Adding the UI Skin link base to a Agent not the app  (Storing it locally)",
+      "Zome": "hchc",
+      "FnName": "addUISkin",
+      "Input": {
+        "title":"Ichiraku Ramen App",
+        "link": "/downloadLink.holo.ui.link",
+        "thumbnail":"/images.json",
+        "app_hash":"%agent%"
+      },
+      "Output": "%h1%"
+    },
+    {
+      "Convey": "Test to get the UI Skin ",
+      "Zome": "hchc",
+      "FnName": "getUISkin",
+      "Input": {
+        "app_hash": "%agent%"
+      },
+      "Regexp": ".*"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "Tests": [
+    {
+      "Convey": "Test for adding a new app through the bridge",
+      "Zome": "hchc",
+      "FnName": "createApp",
+      "Input": {
+        "title": "Sakura",
+        "description": "The is the details for the first app",
+        "thumbnail": "IMG.jpg"
+      },
+      "Output": "%h1%"
+    },
+    {
+      "Convey": "Test for get the hash of the app just pushed into the HApps Store",
+      "Zome": "hchc",
+      "FnName": "getAppDetails",
+      "Input": {
+        "app_hash": "%r1%"
+      },
+      "Regexp": "[.*]"
+    },
+    {
+      "Convey": "Test for Adding the DNA Code (Storing it locally)",
+      "Zome": "hchc",
+      "FnName": "addAppCode",
+      "Input": {
+        "dna": "/LONG____________________________BASE64_________DNA",
+        "test":"/LONG____________________________BASE64_________TEST",
+        "app_hash":"%r2%"
+      },
+      "Output": "%h1%"
+    },
+    {
+      "Convey": "Test to get the DNA Code ",
+      "Zome": "hchc",
+      "FnName": "getAppCode",
+      "Input": {
+        "app_hash": "%r3%"
+      },
+      "Regexp": ".*"
+    }
+  ]
+}
