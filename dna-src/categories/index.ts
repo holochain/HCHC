@@ -6,48 +6,22 @@ let module = {};
 // Author : Zo-El
 // -----------------------------------------------------------------
 // Description :
+// This zome can be used to add catogorys to the apps
 // -----------------------------------------------------------------
 
-function pushAppDetailsToStore({ appParam }) {
-  const hash = bridge(getBackupAppsHash()[0].CalleeApp, 'bridge_replies', 'addAppDetails', { appParam });
-  // debug("Return from HApps(For app that was created):" + JSON.parse(hash));
-  return JSON.parse(hash);
+// this function links to the bridge_request function and send the info to be linked in the HApps-Store
+function addCategory(payload:{ category, tags, hash }){
+  return JSON.parse(call("bridge_request","requestAddCategories",payload));
 }
 
-// Should return all the details including the stats for the app
-function getAppDetails({ app_hash }) {
-  const app_details = bridge(getBackupAppsHash()[0].CalleeApp, 'bridge_replies', 'getAppDetails', { app_hash });
-  debug("App_details from the App Store"+app_details);
-  return app_details
+function getAppCategories(payload:{hash}){
+  return JSON.parse(call("bridge_request","requestGetAppCategories",payload));
 }
-
-function requestAddCategories(payload){
-  return JSON.parse(bridge(getBackupAppsHash()[0].CalleeApp, 'bridge_replies', 'replyToAddCategories', payload));
-}
-
-function requestGetAppCategories(payload){
-  const categories = bridge(getBackupAppsHash()[0].CalleeApp, 'bridge_replies', 'replyToGetAppCategories', payload);
-  debug("Categories recieved from the App Store: "+categories);
-  return JSON.parse(categories)
-
-}
-
-function getBackupAppsHash() {
-  return getBridges().filter(function(elem) {
-    return elem.CalleeName === 'HApps-Store'
-  });
-}
-
 // -----------------------------------------------------------------
 //  The Genesis Function https://developer.holochain.org/genesis
 // -----------------------------------------------------------------
 
 function genesis() {
-  return true;
-}
-
-function bridgeGenesis(side, dna, appData) {
-  debug("HCHC: " + side + " " + dna + " " + appData);
   return true;
 }
 

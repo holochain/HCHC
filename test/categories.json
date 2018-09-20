@@ -1,0 +1,28 @@
+{
+  "Tests": [{
+      "Convey": "test for Adding a new app",
+      "Zome": "hchc",
+      "FnName": "createApp",
+      "Input": {
+        "title": "Sakura",
+        "description": "The is the details for the first app",
+        "thumbnail": "IMG.jpg"
+      },
+      "Output": "%h1%"
+    },
+    {
+      "Convey": "test to add Categories",
+      "Zome": "categories",
+      "FnName": "addCategory",
+      "Input": {"category":"Games","tags":"ichiraku","hash":"%r1%"},
+      "Regexp": ".*"
+    },
+    {
+      "Convey": "test to get Categories for the app just created",
+      "Zome": "categories",
+      "FnName": "getAppCategories",
+      "Input": {"hash":"%r2%"},
+      "Output": {"categories":["Games"],"tags":["ichiraku"]}
+    }
+  ]
+}
