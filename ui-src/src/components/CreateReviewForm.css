@@ -1,0 +1,90 @@
+* {
+  box-sizing: border-box;
+  margin: 0 auto;
+  font-family: helvetica neue, helvetica, arial, sans-serif;
+  text-align: center;
+}
+
+.create-game-form {
+  z-index: 99999;
+  border: 2px solid black;
+  width: 600px;
+  height: 600px;
+  background: white;
+  filter: drop-shadow(2px 2px 0.5px gray);
+  color: black;
+  margin-top: 75px;
+}
+
+.registration-header {
+  margin-top: 50px;
+}
+
+.jdenticon {
+  margin: 15px;
+}
+
+.review-author {
+  margin: 10px;
+}
+
+.reg-hr {
+  width: 80%;
+  margin-top: 10px;
+}
+
+#ratingEntry {
+  width: 25%;
+  height: 25px;
+}
+
+#reviewEntry {
+  width: 80%;
+}
+
+.register-input {
+  text-align: center;
+  margin: 0 auto;
+  margin: 20px 10px;
+  background: white;
+  border-radius: 5px;
+}
+
+/* ============= Register Buttons ========= */
+.modal-button {
+  background: #0c5e5b;
+  margin: 30px;
+  padding: 10px;
+  color: white;
+  border-radius: 2px;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.modal-button span {
+    display: inline-block;
+    padding: 5px;
+    border: 1px solid grey;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.modal-button span:hover {
+    text-shadow: 0px -1px grey;
+    cursor: pointer;
+}
+
+/* .button span:after {
+    display: block;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    right: 14px;
+    top: 12px;
+    font-weight: 700;
+    color: #AEBF3B;
+    text-shadow: 0px 1px #fff, 0px -1px #97A63A;
+    font-size: 26px;
+} */
+
+/* =========== =========== =========== =========== ===========*/

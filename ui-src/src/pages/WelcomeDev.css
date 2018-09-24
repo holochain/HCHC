@@ -1,0 +1,69 @@
+.all-apps-header {
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  padding: 20px 50px 0px 50px;
+  margin: 50px;
+  margin-bottom: 25px;
+  color: #d7e0e0; /* #a9dee4 */
+  animation: fade-in-zoom-out 2s 4s 1 ease both
+}
+
+@keyframes fade-in-zoom-out {
+  0% {
+    transform: translateZ(500px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateZ(0px);
+    opacity: 1;
+  }
+}
+
+.page-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App {
+  margin: auto;
+  text-align: center;
+}
+
+.app-logo {
+  /* animation: App-logo-spin .48 5s linear; */
+  /* animation-delay: 2000; */
+  height: 150px;
+  margin: 0px 5px 10px 5px;
+}
+
+.app-title {
+  font-size: 1.5em;
+}
+
+.app-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.appstore-app-icons {
+  display: inline-block;
+  flex: auto;
+  position: relative;
+  animation-name: slide-in-from-right ;
+  animation-duration: 4s;
+}
+
+@keyframes slide-in-from-right {
+    0%   { right: -100% }
+    50%  { right: -2% }
+    100% { right: 0% }
+}
