@@ -380,16 +380,16 @@ const mapDispatchToProps = dispatch => ({
           dispatch({ type: 'CREATE_NEW_APP_DETAILS', appHash})
       })
   },
-  attachDNA: (dna_file, app_hash) => {
-    fetchPOST('/fn/hchc/addAppCode', { dna_file, app_hash })
-        .then(dna_file_hash => {
-        dispatch({type: 'ADD_DNA_FILE', dna_file_hash})
+  attachDNA: (dnaFile, appHash) => {
+    fetchPOST('/fn/hchc/addAppCode', { dnaFile, appHash })
+        .then(dnaFileHash => {
+        dispatch({type: 'ADD_DNA_FILE', dnaFileHash})
       })
   },
-  attachUI: (ui_file_link, title, thumbnail, app_hash) => {
-    fetchPOST('/fn/hchc/addUISkin', { ui_file_link, title, thumbnail, app_hash })
-        .then(dna_file_hash => {
-        dispatch({type: 'ADD_DNA_FILE', dna_file_hash})
+  attachUI: (uiFileLink, title, thumbnail, appHash) => {
+    fetchPOST('/fn/hchc/addUISkin', { uiFileLink, title, thumbnail, appHash })
+        .then(dnaFileHash => {
+        dispatch({type: 'ADD_DNA_FILE', dnaFileHash})
       })
   },
   returnState: () => dispatch({type: 'RETURN_STATE'})

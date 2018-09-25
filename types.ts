@@ -9,15 +9,14 @@ import { Map } from "immutable"
 export type WelcomeMsg = string;
 
 export type HCHCAppState = {
-  AllApps: [{Entry:{AppDetailState}, Hash}] | null, // pairing of the app hash and the an obj with its title and thumbanil url path
   currentAgent: {agent: {Hash: Hash, Name: string}}| null,
-  currentCategory: string | null,
-  currentAppHash: string,
-  appsByCategory: Array<{Hash,string}> | null, // A map parigin of the category string AND the array of app hashes and names(titles), belonging to that app Category...
+  AllApps: [{Entry:{AppDetailState}, Hash}] | null, // pairing of the app hash and the an obj with its title and thumbanil url path
   currentAppDetails: {Entry: AppDetailState, Hash: Hash} | null,
-  appCode: AppDNACode | null,
   reviewEntries: [ReviewLog] | [{}],
-  // reviewEntries: List<ReviewLog>,
+  currentCategory: string | null,
+  appsByCategory: Array<{Entry: AppDetailState, Hash: Hash}> | null, // A map parigin of the category string AND the array of app hashes and names(titles), belonging to that app Category...
+  appCode: AppDNACode | null,
+  UIappLink: uiLinkParams | null,
 };
 
 export type AppDetailState = {
@@ -29,6 +28,17 @@ export type AppDetailState = {
 }
 
 export type AppDNACode = {
+  fileload: Map<Hash, {dna: string}>,
+}
+
+export type uiLinkParams = {
+  title: string,
+  link: string,
+  thumbnail: string,
+  appHash: Hash,
+}
+
+export type coreCodeFile = {
   fileload: Map<Hash, CodeParams>,
 }
 
@@ -57,15 +67,13 @@ export type ReduxAction
   | { type: 'REGISTER_APP_HASH', appHash: string }
 
   | { type: 'FETCH_ALL_APPS', allApps: [{Entry:{AppDetailState}, Hash}] }  // {Hash:Hash, icon: string}
-  | { type: 'GET_APPS_BY_CATEGORY', category :string, appsByCurrentCategory: Array<{Hash,string}> }
+  | { type: 'GET_APPS_BY_CATEGORY', appsByCurrentCategory: Array<{Entry: AppDetailState, Hash: Hash}> }
   | { type: 'VIEW_APP', details: AppDetailState }
-  | { type: 'FETCH_APP_CODE', code: AppDNACode }
-
-  | { type: 'CREATE_REVIEW', params: ReviewParams }
+  | { type: 'FETCH_APP_CODE', code: CodeParams }
   | { type: 'FETCH_REVIEWS', reviewEntries: [ReviewLog]}
 
   | { type: 'CREATE_NEW_APP_DETAILS', params: AppParams }
-  | { type: 'CREATE_NEW_APP_CODE', params: CodeParams }
+  | { type: 'CREATE_NEW_APP_CODE', params: AppDNACode }
   | { type: 'SET_CURRENT_APP', agent: string }
 
 

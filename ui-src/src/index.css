@@ -7,4 +7,5 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#182547', endColorstr='#f5335f84',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
   color: white;
   font-family: 'Poppins', sans-serif;
+  background-repeat: no-repeat;
 }

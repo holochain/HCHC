@@ -1,18 +1,18 @@
 import { Hash } from '../../holochain';
 // import { List, Map } from "immutable"
 import { Map } from "immutable"
-import {HCHCAppState, AppDetailState, AppDNACode, ReviewLog, ReduxAction} from "../../types";
+import {HCHCAppState, AppDetailState, AppDNACode, ReviewLog, uiLinkParams, ReduxAction} from "../../types";
 
 
 const defaultState: HCHCAppState = {
   currentAgent: null,
   AllApps: null,
-  currentCategory: null,
-  currentAppHash: "null",
-  appsByCategory: null,
   currentAppDetails: null,
-  appCode: null,
   reviewEntries: [{}],
+  currentCategory: null,
+  appsByCategory: null,
+  appCode: null,
+  UIappLink: null,
 };
 
 export default (oldState: HCHCAppState = defaultState, action: ReduxAction): HCHCAppState => {
@@ -33,12 +33,6 @@ export default (oldState: HCHCAppState = defaultState, action: ReduxAction): HCH
       return {...state, currentCategory}
     }
 
-    case 'REGISTER_APP_HASH': {
-      const currentAppHash = action.appHash;
-      console.log("INSIDE REDUCER, appHash", currentAppHash);
-      return {...state, currentAppHash}
-    }
-
     case 'CREATE_NEW_APP_DETAILS': {
       return state;
     }
@@ -47,65 +41,7 @@ export default (oldState: HCHCAppState = defaultState, action: ReduxAction): HCH
       return state;
     }
 
-    case 'CREATE_REVIEW': {
-      // const { appId } = state.currentAppDetails;
-      // tslint:disable-next-line:no-console
-      console.log("action.params.appHash", action.params.appHash);
-      // if (appId === null || appId !== action.params.appHash ){
-      //   break;
-      // }
-      let newReview;
-      const { reviewEntries } = state;
-      console.log("action.params", action.params);
-      // const check = Object.entries(reviewEntries)[0]
-      const check = Object.keys(reviewEntries).length;
-      // console.log(">>> reviewEntires.size", reviewEntries.size);
-      // console.log(">>> reviewEntires.keys", Object.keys(reviewEntries));
-      console.log(">>> reviewEntires.keys.length", check);
-      // if ( check === 0 )
-      if ( check === 0 || reviewEntries === null || reviewEntries === undefined ) {
-        newReview = {};
-        newReview = {
-          authorHash: action.params.authorHash,
-          authorName: action.params.authorName,
-          rate: action.params.rating,
-          review: action.params.review,
-          timestamp: "Now"
-        };
-        newReview = [ newReview ];
-        console.log("line 109 newReview", newReview);
-        // tslint:disable-next-line:no-console
-        // console.log({ newReview });
-
-        return {
-          ...state,
-          reviewEntries: newReview,
-        };
-      }
-      else {
-        newReview = [{}];
-        newReview = state.reviewEntries;
-        newReview.push({
-          authorHash: action.params.authorHash,
-          authorName: action.params.authorName,
-          rate: action.params.rating,
-          review: action.params.review,
-          timestamp: "Now"
-        });
-        // newReview = List(newReview);
-
-        // tslint:disable-next-line:no-console
-        // console.log( "newReview (List Version of newReview) >>> " );
-        console.log({ newReview });
-        return {
-          ...state,
-          reviewEntries: newReview
-        };
-      }
-    }
-
     case 'GET_APPS_BY_CATEGORY': {
-      console.log("INSIDE REDUCER >> action.category: ", action.category);
       console.log("INSIDE REDUCER >> action.AppsByCategory : ", action.appsByCurrentCategory);
       return state;
     }
@@ -128,8 +64,8 @@ export default (oldState: HCHCAppState = defaultState, action: ReduxAction): HCH
         state.appCode = null;
       }
       console.log("the FETCH_APP_CODE payload", action);
-      const { fileload } = action.code;
-      console.log("fileload", fileload);
+      const { code } = action;
+      console.log("INSIDE the REDUCER: fetching the app code >>>", code);
 
       // const hash = fileload.hash;
       // const code = fileload.CodeParams.dna;
@@ -156,7 +92,7 @@ export default (oldState: HCHCAppState = defaultState, action: ReduxAction): HCH
         title,
         uuid,
       }
-      const appHash = state.currentAppHash;
+      const appHash = state.currentAppDetails!.Hash;
       const currentAppDetails = {Entry, Hash:appHash};
       return {...state, currentAppDetails}
     }
