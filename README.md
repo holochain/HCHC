@@ -16,11 +16,12 @@ These instructions will get you a copy of the project up and running on your loc
 ### Installing
 
 The app can now be started for **development** purposes using
-For Windows:
+
+**For Windows:**
 ```
 npm run hc:win
 ```
-For Other OS:
+**For Other OS:**
 ```
 npm run hc:dev
 ```
