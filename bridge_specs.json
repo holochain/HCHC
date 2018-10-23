@@ -1,6 +1,6 @@
 [
   {
-    "Path": "/home/zo-el/Documents/GitRepo/Holochain/HApps-Store/build-HApps",
+    "Path": "/var/go/HApps-Store/build-HApps",
     "Side": 1,
     "BridgeZome": "bridge_request"
   }
