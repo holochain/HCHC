@@ -11,6 +11,7 @@
     "hc:dev": "npm run ui:build && npm run hc:build && cd build-HCHC && hcdev web",
     "hc:win": "npm run ui:build && npm run hc:build-win && cd build-HCHC && hcdev web",
     "hc:test": "npm run hc:build && cp -r ./test/ ./build-HCHC/ && cd build-HCHC && hcdev test",
+    "hc:ci-test": "npm run hc:build && cp -r ./test/ ./build-HCHC/ && cd build-HCHC && /var/go/go/bin/hcdev test",
     "ui:build": "rm -rf build-HCHC/ui; node scripts/build.js && cp -r ui-src/build-HCHC/ build-HCHC/ui/",
     "start": "node scripts/start.js",
     "build": "mkdir -p build-HCHC/ui build-HCHC/dna; npm run hc:build && npm run ui:build",
