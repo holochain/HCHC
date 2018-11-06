@@ -1,7 +1,7 @@
 agent.txt
 priv.key
 
-build/
+build-HCHC/
 ui/
 dna/
 node_modules/

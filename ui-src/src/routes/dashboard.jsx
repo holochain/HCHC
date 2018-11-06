@@ -4,7 +4,7 @@ import Buttons from "../views/Applications/Buttons.jsx";
 import GridSystem from "../views/Applications/GridSystem.jsx";
 import Panels from "../views/Applications/Panels.jsx";
 import SweetAlert from "../views/Applications/SweetAlert.jsx";
-import RegularForms from "../views/Financial/RegularForms.jsx";
+import RegularForms from "../views/Holo/RegularForms.jsx";
 
 // page route core components
 import UserProfile from "../views/Pages/UserProfile.jsx";
