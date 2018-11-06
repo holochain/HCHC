@@ -6,8 +6,26 @@ ui/
 dna/
 node_modules/
 .dist/
+linters/
 .cache/
+/Release
+/dll
+.tmp
 npm-debug.log
+
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# compiled output
+/build
 
 # OS generated files #
 ######################
@@ -17,4 +35,5 @@ npm-debug.log
 .Spotlight-V100
 .tags*
 .Trashes
+Thumbs.db
 ehthumbs.db

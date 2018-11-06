@@ -8,13 +8,19 @@
   },
   "rules": {
     "array-type": false,
+    "object-literal-sort-keys": false,
     "interface-name": [true, "never-prefix"],
+    "interface-over-type-literal": false,
     "max-classes-per-file": false,
     "no-bitwise": false,
     "no-console": false,
     "no-reference": false,
-    "interface-over-type-literal": false,
+    "ordered-imports": false,
+    "one-variable-per-declaration": false
+  },
+  "jsRules": {
+    "no-console": false,
     "object-literal-sort-keys": false,
-    "ordered-imports": false
+    "one-variable-per-declaration": false
   }
 }

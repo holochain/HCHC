@@ -1,6 +1,5 @@
 import { Hash } from './holochain'
-import { Map } from "immutable"
-// import { List, Map } from "immutable"
+import { Map } from "immutable"  // import { List, Map } from "immutable"
 
 // ================================
 //       App State Types
@@ -8,9 +7,9 @@ import { Map } from "immutable"
 
 export type WelcomeMsg = string;
 
-export type HCHCAppState = {
+export type HCHCState = {
   currentAgent: {agent: {Hash: Hash, Name: string}}| null,
-  AllApps: [{Entry:{AppDetailState}, Hash}] | null, // pairing of the app hash and the an obj with its title and thumbanil url path
+  MyApps: [{Entry:AppDetailState, Hash: Hash}] | null, // pairing of the app hash and the an obj with its title and thumbanil url path
   currentAppDetails: {Entry: AppDetailState, Hash: Hash} | null,
   reviewEntries: [ReviewLog] | [{}],
   currentCategory: string | null,
@@ -20,7 +19,7 @@ export type HCHCAppState = {
 };
 
 export type AppDetailState = {
-  author: Map<Hash, string>,
+  author: {Hash: Hash, Name: string},
   thumbnail: string,
   description: HTMLInputElement | string,
   title: string,
@@ -62,11 +61,15 @@ export type ReviewLog = {
 
 export type ReduxAction
   = {type: 'RETURN_STATE'}
+  | {type: 'UPLOAD_FILE_REQUEST'}
+  | {type: 'UPLOAD_FILE_SUCCESS'}
+  | {type: 'UPLOAD_FILE_ERROR'}
+
   | { type: 'FETCH_AGENT', agent: {Hash: Hash, Name: string}}
   | { type: 'REGISTER_CATEGORY', category: string }
   | { type: 'REGISTER_APP_HASH', appHash: string }
 
-  | { type: 'FETCH_ALL_APPS', allApps: [{Entry:{AppDetailState}, Hash}] }  // {Hash:Hash, icon: string}
+  | { type: 'FETCH_ALL_APPS', myApps: [{Entry:AppDetailState, Hash: Hash}] }  // {Hash:Hash, icon: string}
   | { type: 'GET_APPS_BY_CATEGORY', appsByCurrentCategory: Array<{Entry: AppDetailState, Hash: Hash}> }
   | { type: 'VIEW_APP', details: AppDetailState }
   | { type: 'FETCH_APP_CODE', code: CodeParams }

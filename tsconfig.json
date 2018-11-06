@@ -17,7 +17,7 @@
     "noImplicitAny": false,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": false
+    "noUnusedLocals": false,
   },
   "files": [
     "./holochain.d.ts"
@@ -27,7 +27,7 @@
   ],
   "exclude": [
     "node_modules",
-    "build",
+    "build-HCHC",
     "scripts",
     "acceptance-tests",
     "webpack",

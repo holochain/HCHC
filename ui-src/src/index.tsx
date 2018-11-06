@@ -1,16 +1,15 @@
 import * as React from 'react';
+import { Provider } from 'react-redux';
+import store from "./store";
 import * as ReactDOM from 'react-dom';
-import App from './App';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.css';
-
-import {Provider} from 'react-redux';
-
 import registerServiceWorker from './registerServiceWorker';
-import store from './store';
+import App from './App.jsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import './style/index.css';
+// import 'typeface-roboto';
 
 const root = <Provider store={store}>
-  <App />
+<App/>
 </Provider>
 
 ReactDOM.render(
