@@ -3,6 +3,9 @@ import Dashboard from "../views/Dashboard/Dashboard.jsx";
 
 import RegisterApp from "../views/Applications/RegisterApp.tsx";
 import AppRegisterLayout from "../views/Applications/AppRegisterLayout.jsx";
+
+import UpdateApp from "../views/Applications/AppUpdate.jsx";
+import AppUpdateLayout from "../views/Applications/AppUpdateLayout.jsx";
 import AppDetails from "../views/Applications/AppDetails.jsx"
 import Notifications from "../views/Applications/NotificationInbox.jsx";
 
@@ -53,7 +56,7 @@ const dashRoutes = [
     path: "/update/:happID",
     name: "Update App",
     icon: Edit,
-    component: AppRegisterLayout
+    component: AppUpdateLayout
   },
   {
     path: "/details/:happID",

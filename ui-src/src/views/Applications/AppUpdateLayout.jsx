@@ -123,13 +123,14 @@ class AppRegisterLayout extends React.Component {
               <CardIcon color="rose">
                 <Camera />
               </CardIcon>
-              <h4 className={classes.cardIconTitle}>Upload App Thumbnail</h4>
+              <h4 className={classes.cardIconTitle}>Update App Thumbnail</h4>
             </CardHeader>
             <CardBody>
               <GridContainer>
                 <GridItem xs={12}>
                   <legend>Image Preview</legend>
                   <ImageUpload
+                    style={{justifyContent:"center"}}
                     addButtonProps={{
                       color: "rose",
                       round: true
@@ -155,7 +156,7 @@ class AppRegisterLayout extends React.Component {
               <CardIcon color="rose">
                 <Camera />
               </CardIcon>
-              <h4 className={classes.cardIconTitle}>Upload App Source Code</h4>
+              <h4 className={classes.cardIconTitle}>Update App Source Code</h4>
             </CardHeader>
             <CardBody>
               <GridContainer>
