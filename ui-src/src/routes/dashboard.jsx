@@ -2,7 +2,7 @@
 import Dashboard from "../views/Dashboard/Dashboard.jsx";
 
 import RegisterApp from "../views/Applications/RegisterApp.tsx";
-import AppRegisterLayout from "/views/Applications/AppRegisterLayout.jsx";
+import AppRegisterLayout from "../views/Applications/AppRegisterLayout.jsx";
 import AppDetails from "../views/Applications/AppDetails.jsx"
 import Notifications from "../views/Applications/NotificationInbox.jsx";
 
@@ -46,7 +46,8 @@ const dashRoutes = [
     path: "/registerapp",
     name: "Register New App",
     icon: OpenInBrowser,
-    component: RegisterApp
+    component: AppRegisterLayout
+    // RegisterApp
   },
   {
     path: "/update/:happID",
