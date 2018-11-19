@@ -15,7 +15,7 @@ import {
 
 const headerStyle = theme => ({
   appBar: {
-    backgroundColor: "#313297",
+    backgroundColor: "#081455",
     boxShadow: "0 12px 20px -10px #25258a, 0 4px 20px 0 #202129, 0 7px 8px -5px #e4e4e4",
     borderBottom: "0",
     marginBottom: "0",
@@ -81,7 +81,8 @@ const headerStyle = theme => ({
     float: "left",
     padding: "0 0 0 15px",
     display: "block",
-    color: "#555555"
+    color: "#555555",
+    background: "#00610"
   },
   sidebarMinimizeRTL: {
     padding: "0 15px 0 0 !important"

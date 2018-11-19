@@ -1,6 +1,7 @@
 import React from "react";
-import classNames from "classnames";
+import { Link } from 'react-router-dom';
 import PropTypes from "prop-types";
+import classNames from "classnames";
 
 // @aterial-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -95,6 +96,7 @@ class HeaderLinks extends React.Component {
               this.anchorEl = node;
             }}
           >
+          <Link to="/notifications">
             <Notifications
               className={
                 classes.headerLinksSvg +
@@ -104,10 +106,11 @@ class HeaderLinks extends React.Component {
                   : classes.links)
               }
             />
+            </Link>
             <span className={classes.notifications}>5</span>
             <Hidden mdUp implementation="css">
               <span onClick={this.handleClick} className={classes.linkText}>
-                {rtlActive ? "إعلام" : "Notification"}
+                {rtlActive ? "" : "Notifications"}
               </span>
             </Hidden>
           </Button>
@@ -137,7 +140,7 @@ class HeaderLinks extends React.Component {
                         className={dropdownItem}
                       >
                         {rtlActive
-                          ? "إجلاء أوزار الأسيوي حين بل, كما"
+                          ? ""
                           : "Mike John responded to your email"}
                       </MenuItem>
                       <MenuItem
@@ -145,7 +148,7 @@ class HeaderLinks extends React.Component {
                         className={dropdownItem}
                       >
                         {rtlActive
-                          ? "شعار إعلان الأرضية قد ذلك"
+                          ?  ""
                           : "You have 5 new tasks"}
                       </MenuItem>
                       <MenuItem
@@ -153,20 +156,20 @@ class HeaderLinks extends React.Component {
                         className={dropdownItem}
                       >
                         {rtlActive
-                          ? "ثمّة الخاصّة و على. مع جيما"
+                          ? ""
                           : "You're now friend with Andrew"}
                       </MenuItem>
                       <MenuItem
                         onClick={this.handleClose}
                         className={dropdownItem}
                       >
-                        {rtlActive ? "قد علاقة" : "Another Notification"}
+                        {rtlActive ? "" : "Another Notification"}
                       </MenuItem>
                       <MenuItem
                         onClick={this.handleClose}
                         className={dropdownItem}
                       >
-                        {rtlActive ? "قد فاتّبع" : "Another One"}
+                        {rtlActive ? "" : "Another One"}
                       </MenuItem>
                     </MenuList>
                   </ClickAwayListener>

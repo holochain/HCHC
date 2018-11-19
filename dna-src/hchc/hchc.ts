@@ -22,7 +22,8 @@ function createApp({ title, description, thumbnail }) {
       Name: App.Agent.String
     },
     description,
-    thumbnail
+    thumbnail,
+    // created:Date.now()
   };
   const hash: Hash = commit("app", appParam);
   // Comment for testing purposes

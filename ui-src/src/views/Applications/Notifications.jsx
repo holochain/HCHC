@@ -14,15 +14,15 @@ import AddAlert from "@material-ui/icons/AddAlert";
 import Close from "@material-ui/icons/Close";
 
 // core components
-import Heading from "components/Heading/Heading.jsx";
-import GridContainer from "components/Grid/GridContainer.jsx";
-import GridItem from "components/Grid/GridItem.jsx";
-import SnackbarContent from "components/Snackbar/SnackbarContent.jsx";
-import Button from "components/CustomButtons/Button.jsx";
-import Snackbar from "components/Snackbar/Snackbar.jsx";
-import Instruction from "components/Instruction/Instruction.jsx";
-import Card from "components/Card/Card.jsx";
-import CardBody from "components/Card/CardBody.jsx";
+import Heading from "../../components/Heading/Heading.jsx";
+import GridContainer from "../../components/Grid/GridContainer.jsx";
+import GridItem from "../../components/Grid/GridItem.jsx";
+import SnackbarContent from "../../components/Snackbar/SnackbarContent.jsx";
+import Button from "../../components/CustomButtons/Button.jsx";
+import Snackbar from "../../components/Snackbar/Snackbar.jsx";
+import Instruction from "../../components/Instruction/Instruction.jsx";
+import Card from "../../components/Card/Card.jsx";
+import CardBody from "../../components/Card/CardBody.jsx";
 
 import notificationsStyle from "../../assets/jss/material-dashboard-pro-react/views/notificationsStyle.jsx";
 

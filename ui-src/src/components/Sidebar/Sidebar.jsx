@@ -21,6 +21,7 @@ import sidebarStyle from "../../assets/jss/material-dashboard-pro-react/componen
 /* tslint:disable:no-shadowed-variable */
 
 // TODO: DELETE BELOW ONCE PLUGGED IN...
+import holochainLogo from "../../assets/img/holochain-logo-lg.png";
 import avatar from "../../assets/img/faces/avatar.jpg";
 const Name = "Lisa Jetton"
 
@@ -50,7 +51,7 @@ class SidebarWrapper extends React.Component {
     return (
       <div className={className} ref="sidebarWrapper">
         {user}
-        {headerLinks}
+        {/* {headerLinks} */}
         {links}
       </div>
     );
@@ -65,7 +66,6 @@ class Sidebar extends React.Component {
       openComponents: this.activeRoute("/components"),
       openForms: this.activeRoute("/forms"),
       openTables: this.activeRoute("/tables"),
-      openMaps: this.activeRoute("/maps"),
       openPages: this.activeRoute("-page"),
       miniActive: true
     };
@@ -140,7 +140,7 @@ class Sidebar extends React.Component {
           <img src={avatar} className={classes.avatarImg} alt="..." />
         </div>
           <NavLink
-            to={"/user-profile"}
+            to={"/userprofile"}
             className={classes.itemLink + " " + classes.userCollapseButton}
             onClick={() => this.openCollapse("openAvatar")}
           >
@@ -332,10 +332,10 @@ class Sidebar extends React.Component {
       });
     var brand = (
       <div className={logoClasses}>
-        <a href="https://www.creative-tim.com" className={logoMini}>
+        <a href="/dashboard" className={logoMini}>
           <img src={logo} alt="logo" className={classes.img} />
         </a>
-        <a href="https://www.creative-tim.com" className={logoNormal}>
+        <a href="/dashboard" className={logoNormal}>
           {logoText}
         </a>
       </div>

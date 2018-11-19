@@ -152,7 +152,7 @@ const sidebarStyle = theme => ({
     lineHeight: "30px",
     overflow: "hidden",
     "&,&:hover,&:focus": {
-      color: "inherit"
+      color: "#3637b8"
     }
   },
   logoNormalRTL: {
@@ -264,6 +264,8 @@ const sidebarStyle = theme => ({
     whiteSpace: "nowrap"
   },
   userItemText: {
+    fontSize: "20px",
+    marginLeft: "2px",
     lineHeight: "22px"
   },
   itemTextRTL: {

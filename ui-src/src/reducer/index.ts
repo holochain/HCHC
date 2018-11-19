@@ -5,19 +5,35 @@ import { Map } from "immutable"  // import { List, Map } from "immutable"
 const dummyAppEntry : AppDetailState = {
   author: {Hash: "asofkdjsoi9726183aj913798olakj", Name: "Joel Ulahanna"},
   thumbnail: "pic1.jpg",
-  description: "My First App is a game app.  Invite your firends and play.",
-  title: "My First App",
+  description: "This hApp is a modern, real-time, multiplayer take on the classic game of Microsoft's Minesweeeper.  Invite your friends and play.",
+  title: "Minersweeper",
   uuid: "asofkdjsoi9726183aj913798olakj",
 }
 
 
+// const dummyAppList = [
+  //   {Entry: dummyAppEntry, Hash: "87687olkjhliuyt765476yuhgi677ty8oui"},
+  //   {Entry: dummyAppEntry2, Hash: "tygt567y7yo8iuholkj879uoi;jk89puio"},
+  // ]
+
+// const dummyAppEntry2 : AppDetailState = {
+//   author: {Hash: "asofkdjsuholkj879uoi;jk83798olakj", Name: "Nico"},
+//   thumbnail: "pic2.jpg",
+//   description: "A HC Container system application.",
+//   title: "HoloScqape",
+//   uuid: "78ofkd8yuihiuo678uijkuoihoi789io",
+// }
+
+
+
 const defaultState: HCHCState = {
   currentAgent: null,
-  MyApps: [{Entry: dummyAppEntry, Hash: "87687olkjhliuyt765476yuhgi677ty8oui"}],
+  AllMyApps: [{Entry: dummyAppEntry, Hash: "87687olkjhliuyt765476yuhgi677ty8oui"}],
   currentAppDetails: null,
   reviewEntries: [{}],
   currentCategory: null,
   appsByCategory: null,
+  allAppCategories: null,
   appCode: null,
   UIappLink: null,
 };
@@ -127,9 +143,12 @@ export default (oldState: HCHCState = defaultState, action: ReduxAction): HCHCSt
     // For REVEIW, maybe use with comments? >>> : state.texts = action.entries.map(entry => entry.text);
 
     case 'FETCH_ALL_APPS': {
-      console.log(">>ln 164 in reducer, ALL APPs Action !!!!: ", action.myApps);
-      const MyApps = action.myApps;
-      return { ...state, MyApps };
+      console.log(">>ln 134 in reducer, ALL APPs Action !!!!: ", action.myApps);
+      if(action.myApps) {
+        const AllMyApps = action.myApps;
+        return { ...state, AllMyApps };
+      }
+      return {...state}
     }
 
     case 'FETCH_AGENT': {

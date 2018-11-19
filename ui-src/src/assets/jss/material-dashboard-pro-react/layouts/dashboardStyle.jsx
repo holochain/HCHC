@@ -37,9 +37,9 @@ const appStyle = theme => ({
   },
   content: {
     marginTop: "70px",
-    padding: "30px 15px",
+    padding: "70px 15px",
     minHeight: "calc(100vh - 123px)",
-    backgroundImage: "linear-gradient(180deg,#b3c0d1,#434655 50%)"
+    backgroundImage: "linear-gradient(180deg,#091869, #036797 50%)"
   },
   container: { ...containerFluid },
   map: {

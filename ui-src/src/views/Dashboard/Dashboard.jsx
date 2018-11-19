@@ -1,13 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-// react plugin for creating charts
-import ChartistGraph from "react-chartist";
-
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import Tooltip from "@material-ui/core/Tooltip";
 import Icon from "@material-ui/core/Icon";
-
 // @material-ui/icons
 // import ContentCopy from "@material-ui/icons/ContentCopy";
 import Store from "@material-ui/icons/Store";
@@ -24,7 +20,6 @@ import Edit from "@material-ui/icons/Edit";
 import Place from "@material-ui/icons/Place";
 import ArtTrack from "@material-ui/icons/ArtTrack";
 import Language from "@material-ui/icons/Language";
-
 // core components
 import GridContainer from "../../components/Grid/GridContainer.jsx";
 import GridItem from "../../components/Grid/GridItem.jsx";
@@ -36,40 +31,95 @@ import CardHeader from "../../components/Card/CardHeader.jsx";
 import CardIcon from "../../components/Card/CardIcon.jsx";
 import CardBody from "../../components/Card/CardBody.jsx";
 import CardFooter from "../../components/Card/CardFooter.jsx";
+import JdenticonPlaceHolder from '../../components/JdenticonFiller';
+// local view components
+import AppData from "./AppDataArray";
+import {emailsSubscriptionChart} from "../../variables/charts";
 
-import {
-  dailySalesChart,
-  emailsSubscriptionChart,
-  completedTasksChart
-} from "../../variables/charts";
+// react plugin for creating charts
+// import ChartistGraph from "react-chartist";
 
 import dashboardStyle from "../../assets/jss/material-dashboard-pro-react/views/dashboardStyle";
-import JdenticonPlaceHolder from '../../components/JdenticonFiller.jsx';
-
-import priceImage1 from "../../assets/img/card-2.jpeg";
-import priceImage2 from "../../assets/img/card-3.jpeg";
-import priceImage3 from "../../assets/img/card-1.jpeg";
+import holochainLogo from "../../assets/img/holochain-logo-lg.png";
+import "./style/dashboard.css"
+import holoLogo from "../../assets/img/holo-logo.png";
 
 
 class Dashboard extends React.Component {
   state = {
     value: 0
   };
+
   handleChange = (event, value) => {
     this.setState({ value });
   };
+
   handleChangeIndex = index => {
     this.setState({ value: index });
   };
+
   render() {
     const { classes } = this.props;
     return (
       <div>
-
-        <h1 style={{color:"white", marginTop:"50px"}}>View Your Stats</h1>
+        <h1 style={{color:"white", margin:"50px 0px", textAlign:"center"}}>View Your Stats</h1>
         <GridContainer>
           <GridItem xs={12} sm={6} md={6} lg={3}>
-            <Card>
+            <Card className="app-card">
+              <CardHeader color="info" stats icon>
+                <CardIcon color="info">
+                  <img src={holochainLogo} width="56" height="56" alt="Holochain Logo"/>
+                </CardIcon>
+                <p className={classes.cardCategory}>Total Downloads</p>
+                <h3 className={classes.cardTitle}>245k</h3>
+              </CardHeader>
+              <CardFooter stats>
+                <div className={classes.stats}>
+                  <Update />
+                  Just Updated
+                </div>
+              </CardFooter>
+            </Card>
+          </GridItem>
+
+          <GridItem xs={12} sm={6} md={6} lg={3}>
+            <Card className="app-card">
+              <CardHeader color="info" stats icon>
+                <CardIcon style={{background: "#313297"}} color="info">
+                  <img src={holoLogo} width="56" height="56" alt="Holo Logo"/>
+                </CardIcon>
+                <p className={classes.cardCategory}>Holo Compatible</p>
+                <h3 className={classes.cardTitle}>2 Apps</h3>
+              </CardHeader>
+              <CardFooter stats>
+                <div className={classes.stats}>
+                  <DateRange />
+                  Last 24 Hours
+                </div>
+              </CardFooter>
+            </Card>
+          </GridItem>
+
+          <GridItem xs={12} sm={6} md={6} lg={3}>
+            <Card className="app-card">
+              <CardHeader color="success" stats icon>
+                <CardIcon color="success">
+                  <Icon>info_outline</Icon>
+                </CardIcon>
+                <p className={classes.cardCategory}>Fixed Issues</p>
+                <h3 className={classes.cardTitle}>75</h3>
+              </CardHeader>
+              <CardFooter stats>
+                <div className={classes.stats}>
+                  <LocalOffer />
+                  Tracked from Github
+                </div>
+              </CardFooter>
+            </Card>
+          </GridItem>
+
+          <GridItem xs={12} sm={6} md={6} lg={3}>
+            <Card className="app-card">
               <CardHeader color="warning" stats icon>
                 <CardIcon color="warning">
                   <Icon>content_copy</Icon>
@@ -91,64 +141,15 @@ class Dashboard extends React.Component {
               </CardFooter>
             </Card>
           </GridItem>
-          <GridItem xs={12} sm={6} md={6} lg={3}>
-            <Card>
-              <CardHeader color="success" stats icon>
-                <CardIcon color="success">
-                  <Store/>
-                </CardIcon>
-                <p className={classes.cardCategory}>Holo Compatible</p>
-                <h3 className={classes.cardTitle}>2 Apps</h3>
-              </CardHeader>
-              <CardFooter stats>
-                <div className={classes.stats}>
-                  <DateRange />
-                  Last 24 Hours
-                </div>
-              </CardFooter>
-            </Card>
-          </GridItem>
-          <GridItem xs={12} sm={6} md={6} lg={3}>
-            <Card>
-              <CardHeader color="danger" stats icon>
-                <CardIcon color="danger">
-                  <Icon>info_outline</Icon>
-                </CardIcon>
-                <p className={classes.cardCategory}>Fixed Issues</p>
-                <h3 className={classes.cardTitle}>75</h3>
-              </CardHeader>
-              <CardFooter stats>
-                <div className={classes.stats}>
-                  <LocalOffer />
-                  Tracked from Github
-                </div>
-              </CardFooter>
-            </Card>
-          </GridItem>
-          <GridItem xs={12} sm={6} md={6} lg={3}>
-            <Card>
-              <CardHeader color="info" stats icon>
-                <CardIcon color="info">
-                  <img src="assets/img/holochain-logo.png" alt="holochain logo"/>
-                </CardIcon>
-                <p className={classes.cardCategory}>Total Downloads</p>
-                <h3 className={classes.cardTitle}>245k</h3>
-              </CardHeader>
-              <CardFooter stats>
-                <div className={classes.stats}>
-                  <Update />
-                  Just Updated
-                </div>
-              </CardFooter>
-            </Card>
-          </GridItem>
         </GridContainer>
         <hr/>
 
-        <h1 style={{color:"white", marginTop:"50px"}}>Manage Your hApps</h1>
+{/* ////////////////////////////////////////////////////////////////////////////////////////////// */}
+        <h1 style={{color:"white", margin:"50px 0px", textAlign:"center"}}>Manage Your hApps</h1>
         <GridContainer>
+          <AppData />
 
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={6} md={4}>
             <Card chart className={classes.cardHover}>
               <CardHeader color="info" className={classes.cardHeaderHover}>
                 <JdenticonPlaceHolder className="jdenticon" size={150} hash={ `asdfas876987ouiho87ui387ryfihasdlfh` } />
@@ -176,13 +177,12 @@ class Dashboard extends React.Component {
                     </Button>
                   </Tooltip>
                 </div>
-                <h4 className={classes.cardTitle}>Minersweeper</h4>
+                <h4 className={classes.cardTitle}>TITLE</h4>
                 <p className={classes.cardCategory}>
                   <span className={classes.successText}>
                     <Description className={classes.upArrowCardCategory} />
                     -   DESCRIPTION OF APP
                   </span>
-
                 </p>
               </CardBody>
               <CardFooter chart>
@@ -193,10 +193,10 @@ class Dashboard extends React.Component {
             </Card>
           </GridItem>
 
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={6} md={4}>
             <Card chart className={classes.cardHover}>
-              <CardHeader color="warning" className={classes.cardHeaderHover}>
-                <JdenticonPlaceHolder className="jdenticon" size={150} hash={ `9870987098uijlkjhy78uib` } />
+              <CardHeader color="info" className={classes.cardHeaderHover}>
+                <JdenticonPlaceHolder className="jdenticon" size={150} hash={ `asdfas876987ouiho87ui387ryfihasdlfh` } />
               </CardHeader>
               <CardBody>
                 <div className={classes.cardHoverUnder}>
@@ -221,65 +221,22 @@ class Dashboard extends React.Component {
                     </Button>
                   </Tooltip>
                 </div>
-                <h4 className={classes.cardTitle}>Errand</h4>
+                <h4 className={classes.cardTitle}>TITLE</h4>
                 <p className={classes.cardCategory}>
-                <span className={classes.successText}>
-                  <Description className={classes.upArrowCardCategory} />
-                  -   DESCRIPTION OF APP
-                </span>
+                  <span className={classes.successText}>
+                    <Description className={classes.upArrowCardCategory} />
+                    -   DESCRIPTION OF APP
+                  </span>
                 </p>
               </CardBody>
               <CardFooter chart>
                 <div className={classes.stats}>
-                  <AccessTime /> Last Updated: 2 minutes ago
+                  <AccessTime /> Last Updated: 1 year ago
                 </div>
               </CardFooter>
             </Card>
           </GridItem>
 
-          <GridItem xs={12} sm={12} md={4}>
-            <Card chart className={classes.cardHover}>
-              <CardHeader color="danger" className={classes.cardHeaderHover}>
-                <JdenticonPlaceHolder className="jdenticon" size={150} hash={ `asdfasfw3r2387ryfihasdlfh` } />
-              </CardHeader>
-              <CardBody>
-                <div className={classes.cardHoverUnder}>
-                  <Tooltip
-                    id="tooltip-top"
-                    title="View Details"
-                    placement="bottom"
-                    classes={{ tooltip: classes.tooltip }}
-                  >
-                    <Button simple color="info" justIcon>
-                      <Pageview className={classes.underChartIcons} />
-                    </Button>
-                  </Tooltip>
-                  <Tooltip
-                    id="tooltip-top"
-                    title="Update hApp"
-                    placement="bottom"
-                    classes={{ tooltip: classes.tooltip }}
-                  >
-                    <Button color="transparent" simple justIcon>
-                      <Edit className={classes.underChartIcons} />
-                    </Button>
-                  </Tooltip>
-                </div>
-                <h4 className={classes.cardTitle}>HoloChat</h4>
-                <p className={classes.cardCategory}>
-                <span className={classes.successText}>
-                  <Description className={classes.upArrowCardCategory} />
-                   -   DESCRIPTION OF APP
-                </span>
-                </p>
-              </CardBody>
-              <CardFooter chart>
-                <div className={classes.stats}>
-                  <AccessTime /> Last Updated: 5 weeks ago
-                </div>
-              </CardFooter>
-            </Card>
-          </GridItem>
         </GridContainer>
       </div>
     );
@@ -313,3 +270,141 @@ export default withStyles(dashboardStyle)(Dashboard);
 //   options={dailySalesChart.options}
 //   listener={dailySalesChart.animation}
 // />
+
+
+////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+          // <GridItem xs={12} sm={12} md={4}>
+          //   <Card chart className={classes.cardHover}>
+          //     <CardHeader color="info" className={classes.cardHeaderHover}>
+          //       <JdenticonPlaceHolder className="jdenticon" size={150} hash={ `asdfas876987ouiho87ui387ryfihasdlfh` } />
+          //     </CardHeader>
+          //     <CardBody>
+          //       <div className={classes.cardHoverUnder}>
+          //         <Tooltip
+          //           id="tooltip-top"
+          //           title="View Details"
+          //           placement="bottom"
+          //           classes={{ tooltip: classes.tooltip }}
+          //         >
+          //           <Button simple color="info" justIcon>
+          //             <Pageview className={classes.underChartIcons} />
+          //           </Button>
+          //         </Tooltip>
+          //         <Tooltip
+          //           id="tooltip-top"
+          //           title="Update hApp"
+          //           placement="bottom"
+          //           classes={{ tooltip: classes.tooltip }}
+          //         >
+          //           <Button color="transparent" simple justIcon>
+          //             <Edit className={classes.underChartIcons} />
+          //           </Button>
+          //         </Tooltip>
+          //       </div>
+          //       <h4 className={classes.cardTitle}>Minersweeper</h4>
+          //       <p className={classes.cardCategory}>
+          //         <span className={classes.successText}>
+          //           <Description className={classes.upArrowCardCategory} />
+          //           -   DESCRIPTION OF APP
+          //         </span>
+          //       </p>
+          //     </CardBody>
+          //     <CardFooter chart>
+          //       <div className={classes.stats}>
+          //         <AccessTime /> Last Updated: 1 year ago
+          //       </div>
+          //     </CardFooter>
+          //   </Card>
+          // </GridItem>
+        //
+        //   <GridItem xs={12} sm={12} md={4}>
+        //     <Card chart className={classes.cardHover}>
+        //       <CardHeader color="warning" className={classes.cardHeaderHover}>
+        //         <JdenticonPlaceHolder className="jdenticon" size={150} hash={ `9870987098uijlkjhy78uib` } />
+        //       </CardHeader>
+        //       <CardBody>
+        //         <div className={classes.cardHoverUnder}>
+        //           <Tooltip
+        //             id="tooltip-top"
+        //             title="View Details"
+        //             placement="bottom"
+        //             classes={{ tooltip: classes.tooltip }}
+        //           >
+        //             <Button simple color="info" justIcon>
+        //               <Pageview className={classes.underChartIcons} />
+        //             </Button>
+        //           </Tooltip>
+        //           <Tooltip
+        //             id="tooltip-top"
+        //             title="Update hApp"
+        //             placement="bottom"
+        //             classes={{ tooltip: classes.tooltip }}
+        //           >
+        //             <Button color="transparent" simple justIcon>
+        //               <Edit className={classes.underChartIcons} />
+        //             </Button>
+        //           </Tooltip>
+        //         </div>
+        //         <h4 className={classes.cardTitle}>Errand</h4>
+        //         <p className={classes.cardCategory}>
+        //         <span className={classes.successText}>
+        //           <Description className={classes.upArrowCardCategory} />
+        //           -   DESCRIPTION OF APP
+        //         </span>
+        //         </p>
+        //       </CardBody>
+        //       <CardFooter chart>
+        //         <div className={classes.stats}>
+        //           <AccessTime /> Last Updated: 2 minutes ago
+        //         </div>
+        //       </CardFooter>
+        //     </Card>
+        //   </GridItem>
+        //
+        //   <GridItem xs={12} sm={12} md={4}>
+        //     <Card chart className={classes.cardHover}>
+        //       <CardHeader color="danger" className={classes.cardHeaderHover}>
+        //         <JdenticonPlaceHolder className="jdenticon" size={150} hash={ `asdfasfw3r2387ryfihasdlfh` } />
+        //       </CardHeader>
+        //       <CardBody>
+        //         <div className={classes.cardHoverUnder}>
+        //           <Tooltip
+        //             id="tooltip-top"
+        //             title="View Details"
+        //             placement="bottom"
+        //             classes={{ tooltip: classes.tooltip }}
+        //           >
+        //             <Button simple color="info" justIcon>
+        //               <Pageview className={classes.underChartIcons} />
+        //             </Button>
+        //           </Tooltip>
+        //           <Tooltip
+        //             id="tooltip-top"
+        //             title="Update hApp"
+        //             placement="bottom"
+        //             classes={{ tooltip: classes.tooltip }}
+        //           >
+        //             <Button color="transparent" simple justIcon>
+        //               <Edit className={classes.underChartIcons} />
+        //             </Button>
+        //           </Tooltip>
+        //         </div>
+        //         <h4 className={classes.cardTitle}>HoloChat</h4>
+        //         <p className={classes.cardCategory}>
+        //         <span className={classes.successText}>
+        //           <Description className={classes.upArrowCardCategory} />
+        //            -   DESCRIPTION OF APP
+        //         </span>
+        //         </p>
+        //       </CardBody>
+        //       <CardFooter chart>
+        //         <div className={classes.stats}>
+        //           <AccessTime /> Last Updated: 5 weeks ago
+        //         </div>
+        //       </CardFooter>
+        //     </Card>
+        //   </GridItem>
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////

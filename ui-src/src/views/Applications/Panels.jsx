@@ -190,6 +190,7 @@ class Panels extends React.Component {
             </Card>
           </GridItem>
         </GridContainer>
+
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
             <Card>
@@ -220,6 +221,7 @@ class Panels extends React.Component {
               </CardBody>
             </Card>
           </GridItem>
+
           <GridItem xs={12} sm={12} md={6}>
             <Card>
               <CardHeader>
@@ -293,6 +295,7 @@ class Panels extends React.Component {
             </Card>
           </GridItem>
         </GridContainer>
+
         <GridContainer justify="center">
           <GridItem xs={12} sm={12} md={8}>
             <h3 className={classes.pageSubcategoriesTitle}>

@@ -29,6 +29,25 @@ function UserProfile(props) {
   return (
     <div>
       <GridContainer>
+      <GridItem xs={12} sm={12} md={4}>
+        <Card profile>
+          <CardAvatar profile>
+            <a href={GITHUB_PROFILE} onClick={e => e.preventDefault()}>
+              <img src={AVATAR_PICTURE} alt="..." />
+            </a>
+          </CardAvatar>
+          <CardBody profile>
+            <h6 className={classes.cardCategory}>Developer/Holochain</h6>
+            <h4 className={classes.cardTitle}>Lisa Jetton</h4>
+            <h6 className={classes.cardCategory}>Username</h6>
+            <hr/>
+            <p className={classes.description}>
+            Description goes here...
+            </p>
+          </CardBody>
+        </Card>
+      </GridItem>
+
         <GridItem xs={12} sm={12} md={8}>
           <Card>
             <CardHeader color="rose" icon>
@@ -41,19 +60,30 @@ function UserProfile(props) {
             </CardHeader>
             <CardBody>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={5}>
+                <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
-                    labelText="Company (disabled)"
-                    id="company-disabled"
+                    labelText="Company"
+                    id="company"
                     formControlProps={{
                       fullWidth: true
                     }}
                     inputProps={{
-                      disabled: true
+                      disabled: false
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText="Job Role"
+                    id="job-role"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+              </GridContainer>
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
                     labelText="Username"
                     id="username"
@@ -62,7 +92,7 @@ function UserProfile(props) {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
+                <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
                     labelText="Email address"
                     id="email-address"
@@ -125,7 +155,7 @@ function UserProfile(props) {
                 <GridItem xs={12} sm={12} md={12}>
                   <InputLabel style={{ color: "#AAAAAA" }}>About me</InputLabel>
                   <CustomInput
-                    labelText="Fun fact about me..."
+                    labelText="How would you like the hApp to remember you?  Write a brief descirption of yourself here."
                     id="about-me"
                     formControlProps={{
                       fullWidth: true
@@ -141,22 +171,6 @@ function UserProfile(props) {
                 Update Profile
               </Button>
               <Clearfix />
-            </CardBody>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card profile>
-            <CardAvatar profile>
-              <a href={GITHUB_PROFILE} onClick={e => e.preventDefault()}>
-                <img src={AVATAR_PICTURE} alt="..." />
-              </a>
-            </CardAvatar>
-            <CardBody profile>
-              <h6 className={classes.cardCategory}>Developer/Holochain</h6>
-              <h4 className={classes.cardTitle}>Lisa Jetton</h4>
-              <p className={classes.description}>
-              Description goes here...
-              </p>
             </CardBody>
           </Card>
         </GridItem>

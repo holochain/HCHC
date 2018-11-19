@@ -4,7 +4,8 @@
 
 import {
   defaultFont,
-  dangerColor
+  dangerColor,
+  roseColor
 } from "../../material-dashboard-pro-react.jsx";
 
 import customDropdownStyle from "./customDropdownStyle.jsx";
@@ -25,7 +26,8 @@ const headerLinksStyle = theme => ({
     }
   },
   searchInput: {
-    paddingTop: "2px"
+    paddingTop: "2px",
+    backgroudn: "#313297",
   },
   searchRTL: {
     [theme.breakpoints.down("sm")]: {
@@ -67,7 +69,8 @@ const headerLinksStyle = theme => ({
     [theme.breakpoints.down("sm")]: {
       top: "-50px !important",
       marginRight: "38px",
-      float: "right"
+      float: "right",
+      background: "#313297"
     }
   },
   top: {
@@ -99,7 +102,7 @@ const headerLinksStyle = theme => ({
       border: "1px solid #FFF",
       right: "5px",
       fontSize: "9px",
-      background: dangerColor,
+      background: roseColor,
       color: "#FFFFFF",
       minWidth: "16px",
       height: "16px",

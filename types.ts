@@ -1,5 +1,5 @@
 import { Hash } from './holochain'
-import { Map } from "immutable"  // import { List, Map } from "immutable"
+import { Map, List } from "immutable"  // import { List, Map } from "immutable"
 
 // ================================
 //       App State Types
@@ -9,21 +9,24 @@ export type WelcomeMsg = string;
 
 export type HCHCState = {
   currentAgent: {agent: {Hash: Hash, Name: string}}| null,
-  MyApps: [{Entry:AppDetailState, Hash: Hash}] | null, // pairing of the app hash and the an obj with its title and thumbanil url path
+  AllMyApps: [{Entry:AppDetailState, Hash: Hash}] | null, // pairing of the app hash and the an obj with its title and thumbanil url path
   currentAppDetails: {Entry: AppDetailState, Hash: Hash} | null,
   reviewEntries: [ReviewLog] | [{}],
   currentCategory: string | null,
   appsByCategory: Array<{Entry: AppDetailState, Hash: Hash}> | null, // A map parigin of the category string AND the array of app hashes and names(titles), belonging to that app Category...
+  allAppCategories: [string] | null,
   appCode: AppDNACode | null,
   UIappLink: uiLinkParams | null,
 };
 
 export type AppDetailState = {
-  author: {Hash: Hash, Name: string},
-  thumbnail: string,
-  description: HTMLInputElement | string,
-  title: string,
   uuid: string,
+  title: string,
+  author: {Hash: Hash, Name: string},
+  description: HTMLInputElement | string,
+  thumbnail: string,
+  created?: string,
+  updated?: string,
 }
 
 export type AppDNACode = {
@@ -32,7 +35,7 @@ export type AppDNACode = {
 
 export type uiLinkParams = {
   title: string,
-  link: string,
+  link: string, // ui url link
   thumbnail: string,
   appHash: Hash,
 }
@@ -44,6 +47,14 @@ export type coreCodeFile = {
 export type CodeParams = {
   dna: string,
   test: string
+}
+
+export type ProfileState = {
+  email?: string,
+  avatar?: string,
+  // avatar?: {file:{}, fileurl: string},
+  handle: string,
+  memberSince?: string,
 }
 
 export type ReviewLog = {
@@ -71,8 +82,16 @@ export type ReduxAction
 
   | { type: 'FETCH_ALL_APPS', myApps: [{Entry:AppDetailState, Hash: Hash}] }  // {Hash:Hash, icon: string}
   | { type: 'GET_APPS_BY_CATEGORY', appsByCurrentCategory: Array<{Entry: AppDetailState, Hash: Hash}> }
+
   | { type: 'VIEW_APP', details: AppDetailState }
+  | { type: 'FETCH_CURRENT_APP_CATEGORIES', categories: [string] }
   | { type: 'FETCH_APP_CODE', code: CodeParams }
+
+  | { type: 'CREATE_NEW_PROFILE', hash: Hash }
+  | { type: 'UPDATE_PROFILE', hash: Hash}
+  | { type: 'FETCH_PROFILE', profileInfo: ProfileParams}
+  | { type: 'FETCH_PROFILE_HASH', hash: Hash }
+
   | { type: 'FETCH_REVIEWS', reviewEntries: [ReviewLog]}
 
   | { type: 'CREATE_NEW_APP_DETAILS', params: AppParams }
@@ -84,6 +103,14 @@ export interface AppParams {
  author: string,
  description: string,
  fileload: string
+}
+
+
+export interface ProfileParams {
+  email?: string,
+  avatar?: string,
+  // avatar?: {file:{}, fileurl: string},
+  handle: string,
 }
 
 export interface ReviewParams {

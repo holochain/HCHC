@@ -11,7 +11,7 @@ const cardIconStyle = {
     "&$warningCardHeader,&$successCardHeader,&$dangerCardHeader,&$infoCardHeader,&$primaryCardHeader,&$roseCardHeader": {
       borderRadius: "3px",
       backgroundColor: "#999",
-      padding: "15px",
+      padding: "20px",
       marginTop: "-20px",
       marginRight: "15px",
       float: "left"
