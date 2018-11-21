@@ -277,7 +277,7 @@ class AppRegisterLayout extends React.Component {
                                     root: classes.selectMenuItem,
                                     selected: classes.selectMenuItemSelectedMultiple
                                   }}
-                                  value="2"
+                                  value="Games"
                                 >
                                   Games
                                 </MenuItem>
@@ -286,7 +286,7 @@ class AppRegisterLayout extends React.Component {
                                     root: classes.selectMenuItem,
                                     selected: classes.selectMenuItemSelectedMultiple
                                   }}
-                                  value="3"
+                                  value="Administrator Tools"
                                 >
                                   Administrator Tools
                                 </MenuItem>
@@ -295,7 +295,7 @@ class AppRegisterLayout extends React.Component {
                                     root: classes.selectMenuItem,
                                     selected: classes.selectMenuItemSelectedMultiple
                                   }}
-                                  value="4"
+                                  value="Developer Tools"
                                 >
                                   Developer Tools
                                 </MenuItem>
@@ -304,7 +304,7 @@ class AppRegisterLayout extends React.Component {
                                     root: classes.selectMenuItem,
                                     selected: classes.selectMenuItemSelectedMultiple
                                   }}
-                                  value="5"
+                                  value="Top Downloads"
                                 >
                                   Top Downloads
                                 </MenuItem>
@@ -313,7 +313,7 @@ class AppRegisterLayout extends React.Component {
                                     root: classes.selectMenuItem,
                                     selected: classes.selectMenuItemSelectedMultiple
                                   }}
-                                  value="6"
+                                  value="Categories"
                                 >
                                   Categories
                                 </MenuItem>
@@ -322,7 +322,7 @@ class AppRegisterLayout extends React.Component {
                                     root: classes.selectMenuItem,
                                     selected: classes.selectMenuItemSelectedMultiple
                                   }}
-                                  value="7"
+                                  value="Movies"
                                 >
                                   Movies
                                 </MenuItem>
@@ -331,7 +331,7 @@ class AppRegisterLayout extends React.Component {
                                     root: classes.selectMenuItem,
                                     selected: classes.selectMenuItemSelectedMultiple
                                   }}
-                                  value="8"
+                                  value="Educational"
                                 >
                                   Educational
                                 </MenuItem>
@@ -340,7 +340,7 @@ class AppRegisterLayout extends React.Component {
                                     root: classes.selectMenuItem,
                                     selected: classes.selectMenuItemSelectedMultiple
                                   }}
-                                  value="9"
+                                  value="Finance"
                                 >
                                   Finance
                                 </MenuItem>
@@ -349,7 +349,7 @@ class AppRegisterLayout extends React.Component {
                                     root: classes.selectMenuItem,
                                     selected: classes.selectMenuItemSelectedMultiple
                                   }}
-                                  value="10"
+                                  value="Leisure"
                                 >
                                   Leisure
                                 </MenuItem>
@@ -358,7 +358,7 @@ class AppRegisterLayout extends React.Component {
                                     root: classes.selectMenuItem,
                                     selected: classes.selectMenuItemSelectedMultiple
                                   }}
-                                  value="11"
+                                  value="Music"
                                 >
                                   Music
                                 </MenuItem>

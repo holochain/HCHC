@@ -60,6 +60,9 @@ class SubmitButton extends React.Component<SubmitButtonProps, SubmitButtonState>
 
     public handleClick = (parentStates) => {
       console.log("PARENT STATES to submit", parentStates);
+
+      const categories : Array<string> = parentStates.multipleSelect;
+      const
       // this.submitForm(parentStates);
     }
 
