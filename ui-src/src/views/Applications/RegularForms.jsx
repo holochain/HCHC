@@ -165,6 +165,7 @@ class RegularForms extends React.Component {
                     />
                   </GridItem>
                 </GridContainer>
+                
                 <GridContainer justify="flex-end">
                   <GridItem xs={12} sm={12} md={9}>
                     <div className={classes.checkboxAndRadio}>

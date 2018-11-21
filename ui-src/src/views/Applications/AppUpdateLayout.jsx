@@ -14,12 +14,11 @@ import Switch from "@material-ui/core/Switch";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
-// plugin that creates slider
-import nouislider from "nouislider";
 // react component plugin for creating tags on an input
 import TagsInput from "react-tagsinput";
 
 // @material-ui/icons
+import Description from "@material-ui/icons/Description";
 import Camera from "@material-ui/icons/Camera";
 import Today from "@material-ui/icons/Today";
 import Check from "@material-ui/icons/Check";
@@ -53,27 +52,12 @@ class AppRegisterLayout extends React.Component {
       checkedB: false,
       simpleSelect: "",
       multipleSelect: [],
-      tags: ["games", "learning", "ai"]
+      tags: [""]
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeEnabled = this.handleChangeEnabled.bind(this);
     this.handleTags = this.handleTags.bind(this);
   }
-
-  // componentDidMount() {
-  //   nouislider.create(this.refs.slider1, {
-  //     start: [40],
-  //     connect: [true, false],
-  //     step: 1,
-  //     range: { min: 0, max: 100 }
-  //   });
-  //   nouislider.create(this.refs.slider2, {
-  //     start: [20, 60],
-  //     connect: [false, true, false],
-  //     step: 1,
-  //     range: { min: 0, max: 100 }
-  //   });
-  // }
 
   handleChange(event) {
     this.setState({ selectedValue: event.target.value });
@@ -130,7 +114,7 @@ class AppRegisterLayout extends React.Component {
                 <GridItem xs={12}>
                   <legend>Image Preview</legend>
                   <ImageUpload
-                    style={{justifyContent:"center"}}
+                    style={{justifyContent:"center", maxWdith:"200px", maxHeight:"100%"}}
                     addButtonProps={{
                       color: "rose",
                       round: true
@@ -154,7 +138,7 @@ class AppRegisterLayout extends React.Component {
           <Card>
             <CardHeader color="rose" icon>
               <CardIcon color="rose">
-                <Camera />
+                <Description />
               </CardIcon>
               <h4 className={classes.cardIconTitle}>Update App Source Code</h4>
             </CardHeader>

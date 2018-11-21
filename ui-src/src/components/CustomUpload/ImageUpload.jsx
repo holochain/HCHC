@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 
 // core components
 import Button from "../CustomButtons/Button.jsx";
-
 import defaultImage from "../../assets/img/image_placeholder.jpg";
 import defaultAvatar from "../../assets/img/placeholder.jpg";
 
@@ -20,6 +19,7 @@ class ImageUpload extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
   }
+
   handleImageChange(e) {
     e.preventDefault();
     let reader = new FileReader();
@@ -30,17 +30,21 @@ class ImageUpload extends React.Component {
         imagePreviewUrl: reader.result
       });
     };
-    reader.readAsDataURL(file);
+    const img = file
+    reader.readAsDataURL(img);
+    this.props.onImageUpdate(img);
   }
+
   handleSubmit(e) {
     e.preventDefault();
-    // this.state.file is the file/image uploaded
-    // in this function you can save the image (this.state.file) on form submit
-    // you have to call it yourself
+    const avatar = this.state.file;  // this.state.file is the file/image uploaded
+    console.log("avatar", avatar);
   }
+
   handleClick() {
     this.refs.fileInput.click();
   }
+
   handleRemove() {
     this.setState({
       file: null,
@@ -49,7 +53,7 @@ class ImageUpload extends React.Component {
     this.refs.fileInput.value = null;
   }
   render() {
-    var {
+    const {
       avatar,
       addButtonProps,
       changeButtonProps,

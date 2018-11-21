@@ -1,5 +1,5 @@
 import React from "react";
-import defaultImage from "../assets/img/default-avatar.png";
+import defaultImage from "../../assets/img/default-avatar.png";
 
 class PictureUpload extends React.Component {
   constructor(props) {
@@ -23,11 +23,12 @@ class PictureUpload extends React.Component {
     };
     reader.readAsDataURL(file);
   }
+
+  // in this function we can save the image (this.state.file) on form submit
   handleSubmit(e) {
     e.preventDefault();
-    // this.state.file is the file/image uploaded
-    // in this function you can save the image (this.state.file) on form submit
-    // you have to call it yourself
+    const avatar = this.state.file;  // this.state.file is the file/image uploaded
+    console.log("avatar", avatar);
   }
   render() {
     return (

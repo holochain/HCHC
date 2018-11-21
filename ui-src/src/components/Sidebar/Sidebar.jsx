@@ -199,6 +199,9 @@ class Sidebar extends React.Component {
               });
             return (
               <ListItem key={key} className={classes.item}>
+                {prop.name === "View App Details" ? (
+                  <div/>
+                ) : (
                 <NavLink
                   to={"#"}
                   className={navLinkClasses}
@@ -226,6 +229,7 @@ class Sidebar extends React.Component {
                     className={itemText}
                   />
                 </NavLink>
+                )}
                 <Collapse in={this.state[prop.state]} unmountOnExit>
                   <List className={classes.list + " " + classes.collapseList}>
                     {prop.views.map((prop, key) => {
