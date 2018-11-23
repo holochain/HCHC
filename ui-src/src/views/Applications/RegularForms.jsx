@@ -18,7 +18,7 @@ import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
 // core components
 import GridContainer from "../../components/Grid/GridContainer.jsx";
 import GridItem from "../../components/Grid/GridItem.jsx";
-import CustomInput from "../../components/CustomInput/CustomInput.jsx";
+// import CustomInput from "../../components/CustomInput/CustomInput.jsx";
 import Button from "../../components/CustomButtons/Button.jsx";
 import Card from "../../components/Card/Card.jsx";
 import CardHeader from "../../components/Card/CardHeader.jsx";
@@ -165,7 +165,7 @@ class RegularForms extends React.Component {
                     />
                   </GridItem>
                 </GridContainer>
-                
+
                 <GridContainer justify="flex-end">
                   <GridItem xs={12} sm={12} md={9}>
                     <div className={classes.checkboxAndRadio}>

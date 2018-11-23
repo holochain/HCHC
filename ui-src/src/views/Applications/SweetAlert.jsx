@@ -301,6 +301,7 @@ class SweetAlertPage extends React.Component {
               </CardBody>
             </Card>
           </GridItem>
+
           <GridItem xs={12} sm={12} md={3}>
             <Card>
               <CardBody>
@@ -313,6 +314,7 @@ class SweetAlertPage extends React.Component {
               </CardBody>
             </Card>
           </GridItem>
+          
           <GridItem xs={12} sm={12} md={3}>
             <Card>
               <CardBody>

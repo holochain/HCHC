@@ -30,7 +30,7 @@ import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
 import GridContainer from "../../components/Grid/GridContainer.jsx";
 import GridItem from "../../components/Grid/GridItem.jsx";
 import ImageUpload from "../../components/CustomUpload/ImageUpload.jsx";
-import CustomInput from "../../components/CustomInput/CustomInput.jsx";
+import TextField from '@material-ui/core/TextField';
 import CardHeader from "../../components/Card/CardHeader.jsx";
 import Button from "../../components/CustomButtons/Button.jsx";
 import Card from "../../components/Card/Card.jsx";
@@ -38,64 +38,68 @@ import CardText from "../../components/Card/CardText.jsx";
 import CardIcon from "../../components/Card/CardIcon.jsx";
 import CardBody from "../../components/Card/CardBody.jsx";
 
+// local components
+import FileUpload from "./FileUpload.tsx"
+import SubmitButton from "./SubmitButton.tsx"
+
 import regularFormsStyle from "../../assets/jss/material-dashboard-pro-react/views/regularFormsStyle";
 import extendedFormsStyle from "../../assets/jss/material-dashboard-pro-react/views/extendedFormsStyle.jsx";
 
-class AppRegisterLayout extends React.Component {
+class AppUpdateLayout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: [24, 22],
-      selectedValue: null,
-      selectedEnabled: "b",
-      HoloOn: true,
-      checkedB: false,
-      simpleSelect: "",
+      selectedImage: null,
+      selectedDNAFile: null,
+      selectedUIFile: null,
+      selectedTitle: "",
+      selectedDescription: "",
+      selectedDate: null,
       multipleSelect: [],
-      tags: [""]
+      holoEnabled: true,
+      tags: ["games"]
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleChangeEnabled = this.handleChangeEnabled.bind(this);
+    this.handleHoloEnabledToggle = this.handleHoloEnabledToggle.bind(this);
     this.handleTags = this.handleTags.bind(this);
+    this.handleInput = this.handleInput.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ selectedValue: event.target.value });
-  }
-
-  handleChangeEnabled(event) {
-    this.setState({ selectedEnabled: event.target.value });
-  }
-
-  handleToggle(value) {
-    const { checked } = this.state;
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    this.setState({
-      checked: newChecked
-    });
-  }
-
-  handleSimple = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
   handleMultiple = event => {
     this.setState({ multipleSelect: event.target.value });
   };
-  handleChange = name => event => {
+
+  handleInput = name => event => {
+    this.setState({ [name]: event.target.value });
+  };
+
+  handleHoloEnabledToggle = name => event => {
     this.setState({ [name]: event.target.checked });
   };
+
   handleTags(regularTags) {
     this.setState({ tags: regularTags });
   }
 
+  imageSelect(img) {
+    this.setState({
+      selectedImage: img,
+    });
+    console.log("THIS IS THE NEWLY SELECTED IMG: ", this.state.selectedImage);
+  }
+
+  dnaFileSelect(file) {
+    this.setState({
+      selectedDNAFile: file,
+    });
+    console.log("THIS IS THE NEWLY SELECTED DNA FILE: ", this.state.selectedDNAFile);
+  }
+
+  uiFileSelect(file) {
+    this.setState({
+      selectedUIFile: file,
+    });
+    console.log("THIS IS THE NEWLY SELECTED UI FILE ", this.state.selectedUIFile);
+  }
 
   render() {
     const { classes } = this.props;
@@ -103,8 +107,8 @@ class AppRegisterLayout extends React.Component {
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
           <Card>
-            <CardHeader color="rose" icon>
-              <CardIcon color="rose">
+            <CardHeader color="primary" icon>
+              <CardIcon color="primary">
                 <Camera />
               </CardIcon>
               <h4 className={classes.cardIconTitle}>Update App Thumbnail</h4>
@@ -114,17 +118,17 @@ class AppRegisterLayout extends React.Component {
                 <GridItem xs={12}>
                   <legend>Image Preview</legend>
                   <ImageUpload
-                    style={{justifyContent:"center", maxWdith:"200px", maxHeight:"100%"}}
+                    onImageUpdate={this.imageSelect}
                     addButtonProps={{
-                      color: "rose",
+                      color: "primary",
                       round: true
                     }}
                     changeButtonProps={{
-                      color: "rose",
+                      color: "primary",
                       round: true
                     }}
                     removeButtonProps={{
-                      color: "danger",
+                      color: "rose",
                       round: true
                     }}
                   />
@@ -136,8 +140,8 @@ class AppRegisterLayout extends React.Component {
 
         <GridItem xs={12} sm={12} md={6}>
           <Card>
-            <CardHeader color="rose" icon>
-              <CardIcon color="rose">
+            <CardHeader color="primary" icon>
+              <CardIcon color="primary">
                 <Description />
               </CardIcon>
               <h4 className={classes.cardIconTitle}>Update App Source Code</h4>
@@ -146,11 +150,39 @@ class AppRegisterLayout extends React.Component {
               <GridContainer>
                 <GridItem xs={12} sm={4} md={6}>
                   <legend>DNA Upload</legend>
-                  file upload here
+                  <FileUpload
+                    onImageUpdate={this.dnaFileSelect}
+                    addButtonProps={{
+                      color: "primary",
+                      round: true
+                    }}
+                    changeButtonProps={{
+                      color: "primary",
+                      round: true
+                    }}
+                    removeButtonProps={{
+                      color: "rose",
+                      round: true
+                    }}
+                  />
                 </GridItem>
                 <GridItem xs={12} sm={4} md={6}>
                   <legend>UI Upload</legend>
-                  file upload here
+                  <FileUpload
+                    onImageUpdate={this.uiFileSelect}
+                    addButtonProps={{
+                      color: "primary",
+                      round: true
+                    }}
+                    changeButtonProps={{
+                      color: "primary",
+                      round: true
+                    }}
+                    removeButtonProps={{
+                      color: "rose",
+                      round: true
+                    }}
+                  />
                 </GridItem>
               </GridContainer>
             </CardBody>
@@ -159,55 +191,176 @@ class AppRegisterLayout extends React.Component {
 
         <GridItem xs={12} sm={12} md={12}>
           <Card>
-            <CardHeader color="rose" text>
-              <CardText color="rose">
-                <h4 className={classes.cardTitle}>App Snapshot</h4>
+            <CardHeader color="primary" text>
+              <CardText color="primary">
+                <h4 className={classes.cardTitle}>Update App Snapshot</h4>
               </CardText>
             </CardHeader>
             <CardBody>
               <form>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <CustomInput
-                      labelText="App Title"
-                      id="app-title"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "text"
-                      }}
-                    />
-                  </GridItem>
+                <Card>
+                  <CardBody>
+                    <GridContainer>
+                      <GridItem xs={12} sm={12} md={6}>
+                        <legend>Title your app.</legend>
+                        <TextField
+                          label="App Title"
+                          id="app-title"
+                          value={this.state.selectedTitle}
+                          onChange= {this.handleInput("selectedTitle")}
+                        />
+                      </GridItem>
+                      <br/>
+                      <br/>
+                      <GridItem xs={12} sm={12} md={6}>
+                        <legend>Select all the categories that represent your app.</legend>
+                          <GridItem xs={12} sm={6} md={5} lg={5}>
+                            <FormControl
+                              fullWidth
+                              className={classes.selectFormControl}
+                            >
+                              <InputLabel
+                                htmlFor="category"
+                                className={classes.selectLabel}
+                              >
+                                Choose Categories
+                              </InputLabel>
 
-                  <GridItem xs={12} sm={12} md={6}>
-                    <CustomInput
-                      labelText="Category"
-                      id="Category"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "text"
-                      }}
-                    />
-                  </GridItem>
-                </GridContainer>
+                              <Select
+                                multiple
+                                value={this.state.multipleSelect}
+                                onChange={this.handleMultiple}
+                                MenuProps={{ className: classes.selectMenu }}
+                                classes={{ select: classes.select }}
+                                inputProps={{
+                                  name: "category",
+                                  id: "category"
+                                }}
+                              >
+                                <MenuItem
+                                  disabled
+                                  classes={{
+                                    root: classes.selectMenuItem
+                                  }}
+                                >
+                                  Choose Categories
+                                </MenuItem>
+                                <MenuItem
+                                  classes={{
+                                    root: classes.selectMenuItem,
+                                    selected: classes.selectMenuItemSelectedMultiple
+                                  }}
+                                  value="Games"
+                                >
+                                  Games
+                                </MenuItem>
+                                <MenuItem
+                                  classes={{
+                                    root: classes.selectMenuItem,
+                                    selected: classes.selectMenuItemSelectedMultiple
+                                  }}
+                                  value="Administrator Tools"
+                                >
+                                  Administrator Tools
+                                </MenuItem>
+                                <MenuItem
+                                  classes={{
+                                    root: classes.selectMenuItem,
+                                    selected: classes.selectMenuItemSelectedMultiple
+                                  }}
+                                  value="Developer Tools"
+                                >
+                                  Developer Tools
+                                </MenuItem>
+                                <MenuItem
+                                  classes={{
+                                    root: classes.selectMenuItem,
+                                    selected: classes.selectMenuItemSelectedMultiple
+                                  }}
+                                  value="Top Downloads"
+                                >
+                                  Top Downloads
+                                </MenuItem>
+                                <MenuItem
+                                  classes={{
+                                    root: classes.selectMenuItem,
+                                    selected: classes.selectMenuItemSelectedMultiple
+                                  }}
+                                  value="Categories"
+                                >
+                                  Categories
+                                </MenuItem>
+                                <MenuItem
+                                  classes={{
+                                    root: classes.selectMenuItem,
+                                    selected: classes.selectMenuItemSelectedMultiple
+                                  }}
+                                  value="Movies"
+                                >
+                                  Movies
+                                </MenuItem>
+                                <MenuItem
+                                  classes={{
+                                    root: classes.selectMenuItem,
+                                    selected: classes.selectMenuItemSelectedMultiple
+                                  }}
+                                  value="Educational"
+                                >
+                                  Educational
+                                </MenuItem>
+                                <MenuItem
+                                  classes={{
+                                    root: classes.selectMenuItem,
+                                    selected: classes.selectMenuItemSelectedMultiple
+                                  }}
+                                  value="Finance"
+                                >
+                                  Finance
+                                </MenuItem>
+                                <MenuItem
+                                  classes={{
+                                    root: classes.selectMenuItem,
+                                    selected: classes.selectMenuItemSelectedMultiple
+                                  }}
+                                  value="Leisure"
+                                >
+                                  Leisure
+                                </MenuItem>
+                                <MenuItem
+                                  classes={{
+                                    root: classes.selectMenuItem,
+                                    selected: classes.selectMenuItemSelectedMultiple
+                                  }}
+                                  value="Music"
+                                >
+                                  Music
+                                </MenuItem>
+                              </Select>
+                            </FormControl>
+                          </GridItem>
+                      </GridItem>
+                    </GridContainer>
 
-                <GridContainer>
-                <GridItem xs={12}>
-                  <CustomInput
-                    labelText="description"
-                    id="description"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      type: "text-area"
-                    }}
-                  />
-                </GridItem>
-                </GridContainer>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <GridContainer>
+                    <GridItem xs={12}>
+                      <legend>Write a brief description about your app.</legend>
+                      <TextField
+                        label="Description"
+                        id="description"
+                        value={this.state.selectedDescription}
+                        onChange={this.handleInput("selectedDescription")}
+                        multiline
+                        rows="5"
+                      />
+                    </GridItem>
+                  </GridContainer>
+                </CardBody>
+              </Card>
 
                 <GridItem xs={12} sm={12} md={12}>
                   <Card>
@@ -216,7 +369,7 @@ class AppRegisterLayout extends React.Component {
                       <br />
                       <GridContainer>
                         <GridItem xs={12} sm={12} md={6}>
-                          <legend>App Tags</legend>
+                          <legend>Create Tags Themes that Identify your App</legend>
                           <TagsInput
                             value={this.state.tags}
                             onChange={this.handleTags}
@@ -230,9 +383,9 @@ class AppRegisterLayout extends React.Component {
                             <FormControlLabel
                               control={
                                 <Switch
-                                  checked={this.state.HoloOn}
-                                  onChange={this.handleChange("HoloOn")}
-                                  value="HoloOn"
+                                  checked={this.state.holoEnabled}
+                                  onChange={this.handleHoloEnabledToggle("holoEnabled")}
+                                  value="holoEnabled"
                                   classes={{
                                     switchBase: classes.switchBase,
                                     checked: classes.switchChecked,
@@ -256,19 +409,21 @@ class AppRegisterLayout extends React.Component {
                       <GridContainer>
                         <GridItem xs={12} sm={12} md={12}>
                           <Card>
-                            <CardHeader color="rose" icon>
-                              <CardIcon color="rose">
+                            <CardHeader color="primary" icon>
+                              <CardIcon color="primary">
                                 <Today />
                               </CardIcon>
-                              <h4 className={classes.cardIconTitle}>App Creation Date</h4>
+                              <h4 className={classes.cardIconTitle}>Publish your App's Birthday</h4>
                             </CardHeader>
                             <CardBody>
                               <InputLabel className={classes.label}>
-                                Publish the birthdate of this app.
+                                Locate the Appication's Creation Date.
                               </InputLabel>
                               <br />
                               <FormControl fullWidth>
                                 <Datetime
+                                  onChange={this.handleInput()}
+                                  name="selectedDate"
                                   inputProps={{ placeholder: "Enter Date and Time Here" }}
                                 />
                               </FormControl>
@@ -280,7 +435,12 @@ class AppRegisterLayout extends React.Component {
                   </Card>
                 </GridItem>
 
-                <Button color="rose">Submit</Button>
+                <SubmitButton
+                  states={this.state}
+                  submitButtonProps={{
+                    color: "primary",
+                    round: true
+                 }}/>
                 <br/>
               </form>
             </CardBody>
@@ -291,4 +451,4 @@ class AppRegisterLayout extends React.Component {
   }
 }
 
-export default withStyles(regularFormsStyle)(AppRegisterLayout);
+export default withStyles(regularFormsStyle)(AppUpdateLayout);

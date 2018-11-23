@@ -129,7 +129,7 @@ export default (oldState: HCHCState = defaultState, action: ReduxAction): HCHCSt
       }
       console.log("the App Details (VIEW_APP) ACTION payload", action.details);
       const { author, thumbnail, description, title, uuid } = action.details;
-      const Entry:AppDetailState = {
+      const Entry : AppDetailState = {
         author,
         thumbnail,
         description,

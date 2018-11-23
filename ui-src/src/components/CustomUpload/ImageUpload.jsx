@@ -60,7 +60,7 @@ class ImageUpload extends React.Component {
       removeButtonProps
     } = this.props;
     return (
-      <div className="fileinput text-center">
+      <div style={{width:"180px"}} className="fileinput text-center">
         <input type="file" onChange={this.handleImageChange} ref="fileInput" />
         <div className={"thumbnail" + (avatar ? " img-circle" : "")}>
           <img src={this.state.imagePreviewUrl} alt="..." />

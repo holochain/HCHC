@@ -192,6 +192,7 @@ class Panels extends React.Component {
         </GridContainer>
 
         <GridContainer>
+
           <GridItem xs={12} sm={12} md={6}>
             <Card>
               <CardHeader>

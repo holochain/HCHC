@@ -8,7 +8,8 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import Input from "@material-ui/core/Input";
+// import Input from "@material-ui/core/Input";
+import TextField from '@material-ui/core/TextField';
 import customInputStyle from "../../assets/jss/material-dashboard-pro-react/components/customInputStyle.jsx";
 
 function CustomInput({ ...props }) {
@@ -23,7 +24,9 @@ function CustomInput({ ...props }) {
     white,
     inputRootCustomClasses,
     success,
-    helpText
+    helpText,
+    value,
+
   } = props;
 
   const labelClasses = classNames({
@@ -43,7 +46,7 @@ function CustomInput({ ...props }) {
     [classes.input]: true,
     [classes.whiteInput]: white
   });
-  var formControlClasses;
+  let formControlClasses;
   if (formControlProps !== undefined) {
     formControlClasses = classNames(
       formControlProps.className,
@@ -52,7 +55,7 @@ function CustomInput({ ...props }) {
   } else {
     formControlClasses = classes.formControl;
   }
-  var helpTextClasses = classNames({
+  let helpTextClasses = classNames({
     [classes.labelRootError]: error,
     [classes.labelRootSuccess]: success && !error
   });
@@ -67,7 +70,7 @@ function CustomInput({ ...props }) {
           {labelText}
         </InputLabel>
       ) : null}
-      <Input
+      <TextField
         classes={{
           input: inputClasses,
           root: marginTop,
@@ -75,6 +78,7 @@ function CustomInput({ ...props }) {
           underline: underlineClasses
         }}
         id={id}
+        value={value}
         {...inputProps}
       />
       {helpText !== undefined ? (

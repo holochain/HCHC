@@ -23,12 +23,14 @@ type FileUploadProps = {
   uploadRequest: () => void,
   uploadFileSuccess: () => void,
   uploadFileError: () => void,
+  onFileUpdate: (file) => void,
 }
 
 type inputState =  string | number | string[];
 type FileUploadState = {
-  errorMessage: string | undefined,
   file: inputState | null,
+  fileName: string | null,
+  errorMessage: string | undefined,
 }
 
 class FileUpload extends React.Component<FileUploadProps, FileUploadState>  {
@@ -36,6 +38,7 @@ class FileUpload extends React.Component<FileUploadProps, FileUploadState>  {
     super(props);
     this.state = ({
       file: null,
+      fileName: null,
       errorMessage: "",
     });
     this.handleChange = this.handleChange.bind(this);
@@ -47,13 +50,9 @@ class FileUpload extends React.Component<FileUploadProps, FileUploadState>  {
 
    const input = event.target.files[0]
    const fileName = input.name;
-   // console.log("Filename: " + input.name);
-   // console.log("Type: " + input.type);
-   // console.log("Size: " + input.size + " bytes");
 
    let fileUrl = "";
    const reader = new FileReader();
-   // reader.readAsDataURL(input);
    reader.onload = () => {
      fileUrl = reader.result;
      console.log("fileURL : ", fileUrl);
@@ -62,13 +61,17 @@ class FileUpload extends React.Component<FileUploadProps, FileUploadState>  {
    reader.onloadend = () => {
        this.addNameToDataURI(fileUrl, fileName);
    };
-
    reader.readAsDataURL(input);
+   const file = input
+   this.props.onFileUpdate(file);
   }
 
   public addNameToDataURI=(dataURL, name) => {
     const fileURL = dataURL.replace(";base64", `;name=${name};base64`);
-    this.setState({ file: fileURL });
+    this.setState({
+      file: fileURL,
+      fileName: name
+     });
     console.log("this.state: ", this.state);
   }
 
@@ -86,7 +89,6 @@ class FileUpload extends React.Component<FileUploadProps, FileUploadState>  {
     }
 
   public render() {
-    console.log("this.props : ", this.props);
     const {file} = this.state;
     return (
       <div className="fileinput text-center">
@@ -96,6 +98,12 @@ class FileUpload extends React.Component<FileUploadProps, FileUploadState>  {
               <Button {...this.props.addButtonProps} onClick={() => this.handleClick()}>Select File</Button>
             ) : (
               <span>
+                <div>
+                  <span style={{fontSize: "75px", color: "Mediumslateblue"}}>
+                    <i className="fas fa-file-code"/>
+                  </span>
+                  <h6>{this.state.fileName ? this.state.fileName : <div/> }</h6>
+                </div>
                 <Button {...this.props.changeButtonProps} onClick={() => this.handleClick()}>Change File</Button>
                 <br/>
                 <Button {...this.props.removeButtonProps} onClick={() => this.handleRemove()}>

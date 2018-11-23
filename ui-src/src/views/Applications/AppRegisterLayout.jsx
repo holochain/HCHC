@@ -14,8 +14,6 @@ import Switch from "@material-ui/core/Switch";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
-// plugin that creates slider
-import nouislider from "nouislider";
 // react component plugin for creating tags on an input
 import TagsInput from "react-tagsinput";
 
@@ -32,7 +30,7 @@ import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
 import GridContainer from "../../components/Grid/GridContainer.jsx";
 import GridItem from "../../components/Grid/GridItem.jsx";
 import ImageUpload from "../../components/CustomUpload/ImageUpload.jsx";
-import CustomInput from "../../components/CustomInput/CustomInput.jsx";
+import TextField from '@material-ui/core/TextField';
 import CardHeader from "../../components/Card/CardHeader.jsx";
 import Button from "../../components/CustomButtons/Button.jsx";
 import Card from "../../components/Card/Card.jsx";
@@ -51,54 +49,51 @@ class AppRegisterLayout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedValue: null,
+      errorMessage: "",
       selectedImage: null,
       selectedDNAFile: null,
       selectedUIFile: null,
-      selectedEnabled: "",
-      HoloOn: true,
+      selectedTitle: "",
+      selectedDescription: "",
+      selectedDate: null,
       multipleSelect: [],
-      tags: ["example"]
+      holoEnabled: true,
+      tags: ["games"]
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleChangeEnabled = this.handleChangeEnabled.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+    this.handleHoloEnabledToggle = this.handleHoloEnabledToggle.bind(this);
     this.handleTags = this.handleTags.bind(this);
-  }
+    this.handleDate = this.handleDate.bind(this);
 
-  handleChange(event) {
-    this.setState({ selectedValue: event.target.value });
-  }
-
-  handleChangeEnabled(event) {
-    this.setState({ selectedEnabled: event.target.value });
-  }
-
-  handleToggle(value) {
-    const { checked } = this.state;
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    this.setState({
-      checked: newChecked
-    });
+    this.imageSelect = this.imageSelect.bind(this);
+    this.uiFileSelect = this.uiFileSelect.bind(this);
+    this.dnaFileSelect = this.dnaFileSelect.bind(this);
   }
 
   handleMultiple = event => {
     this.setState({ multipleSelect: event.target.value });
   };
 
-  handleChange = name => event => {
+  handleInput = name => event => {
+    this.setState({ [name]: event.target.value });
+  };
+
+  handleHoloEnabledToggle = name => event => {
     this.setState({ [name]: event.target.checked });
   };
 
+  handleDate(date) {
+    console.log("new date: ", date);
+    const newDate = date._d;
+    this.setState({ selectedDate: newDate });
+  }
+
   handleTags(regularTags) {
     this.setState({ tags: regularTags });
+  }
+
+  updateErrorMessage(message) {
+    this.setState({ errorMessage: message });
   }
 
   imageSelect(img) {
@@ -112,14 +107,14 @@ class AppRegisterLayout extends React.Component {
     this.setState({
       selectedDNAFile: file,
     });
-    console.log("THIS IS THE NEWLY SELECTED IMG: ", this.state.selectedImage);
+    console.log("THIS IS THE NEWLY SELECTED DNA FILE: ", this.state.selectedDNAFile);
   }
 
   uiFileSelect(file) {
     this.setState({
       selectedUIFile: file,
     });
-    console.log("THIS IS THE NEWLY SELECTED IMG: ", this.state.selectedImage);
+    console.log("THIS IS THE NEWLY SELECTED UI FILE ", this.state.selectedUIFile);
   }
 
   render() {
@@ -128,8 +123,8 @@ class AppRegisterLayout extends React.Component {
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
           <Card>
-            <CardHeader color="rose" icon>
-              <CardIcon color="rose">
+            <CardHeader color="primary" icon>
+              <CardIcon color="primary">
                 <Camera />
               </CardIcon>
               <h4 className={classes.cardIconTitle}>Upload App Thumbnail</h4>
@@ -141,11 +136,11 @@ class AppRegisterLayout extends React.Component {
                   <ImageUpload
                     onImageUpdate={this.imageSelect}
                     addButtonProps={{
-                      color: "rose",
+                      color: "primary",
                       round: true
                     }}
                     changeButtonProps={{
-                      color: "rose",
+                      color: "primary",
                       round: true
                     }}
                     removeButtonProps={{
@@ -161,8 +156,8 @@ class AppRegisterLayout extends React.Component {
 
         <GridItem xs={12} sm={12} md={6}>
           <Card>
-            <CardHeader color="rose" icon>
-              <CardIcon color="rose">
+            <CardHeader color="primary" icon>
+              <CardIcon color="primary">
                 <Description />
               </CardIcon>
               <h4 className={classes.cardIconTitle}>Upload App Source Code</h4>
@@ -171,15 +166,14 @@ class AppRegisterLayout extends React.Component {
               <GridContainer>
                 <GridItem xs={12} sm={4} md={6}>
                   <legend>DNA Upload</legend>
-                  DNA file upload here
                   <FileUpload
-                    onImageUpdate={this.dnaFileSelect}
+                    onFileUpdate={this.dnaFileSelect}
                     addButtonProps={{
-                      color: "rose",
+                      color: "primary",
                       round: true
                     }}
                     changeButtonProps={{
-                      color: "rose",
+                      color: "primary",
                       round: true
                     }}
                     removeButtonProps={{
@@ -190,15 +184,14 @@ class AppRegisterLayout extends React.Component {
                 </GridItem>
                 <GridItem xs={12} sm={4} md={6}>
                   <legend>UI Upload</legend>
-                  UI file upload here
                   <FileUpload
-                    onImageUpdate={this.uiFileSelect}
+                    onFileUpdate={this.uiFileSelect}
                     addButtonProps={{
-                      color: "rose",
+                      color: "primary",
                       round: true
                     }}
                     changeButtonProps={{
-                      color: "rose",
+                      color: "primary",
                       round: true
                     }}
                     removeButtonProps={{
@@ -214,8 +207,8 @@ class AppRegisterLayout extends React.Component {
 
         <GridItem xs={12} sm={12} md={12}>
           <Card>
-            <CardHeader color="rose" text>
-              <CardText color="rose">
+            <CardHeader color="primary" text>
+              <CardText color="primary">
                 <h4 className={classes.cardTitle}>App Snapshot</h4>
               </CardText>
             </CardHeader>
@@ -226,15 +219,11 @@ class AppRegisterLayout extends React.Component {
                     <GridContainer>
                       <GridItem xs={12} sm={12} md={6}>
                         <legend>Title your app.</legend>
-                        <CustomInput
-                          labelText="App Title"
+                        <TextField
+                          label="App Title"
                           id="app-title"
-                          formControlProps={{
-                            fullWidth: true
-                          }}
-                          inputProps={{
-                            type: "text"
-                          }}
+                          value={this.state.selectedTitle}
+                          onChange= {this.handleInput("selectedTitle")}
                         />
                       </GridItem>
                       <br/>
@@ -376,16 +365,13 @@ class AppRegisterLayout extends React.Component {
                     <GridContainer>
                     <GridItem xs={12}>
                       <legend>Write a brief description about your app.</legend>
-                      <CustomInput
-                        labelText="Description"
+                      <TextField
+                        label="Description"
                         id="description"
-                        formControlProps={{
-                          fullWidth: true
-                        }}
-                        inputProps={{
-                          multiline: true,
-                          rows: 5
-                        }}
+                        value={this.state.selectedDescription}
+                        onChange={this.handleInput("selectedDescription")}
+                        multiline
+                        rows="5"
                       />
                     </GridItem>
                   </GridContainer>
@@ -413,9 +399,9 @@ class AppRegisterLayout extends React.Component {
                             <FormControlLabel
                               control={
                                 <Switch
-                                  checked={this.state.HoloOn}
-                                  onChange={this.handleChange("HoloOn")}
-                                  value="HoloOn"
+                                  checked={this.state.holoEnabled}
+                                  onChange={this.handleHoloEnabledToggle("holoEnabled")}
+                                  value="holoEnabled"
                                   classes={{
                                     switchBase: classes.switchBase,
                                     checked: classes.switchChecked,
@@ -439,8 +425,8 @@ class AppRegisterLayout extends React.Component {
                       <GridContainer>
                         <GridItem xs={12} sm={12} md={12}>
                           <Card>
-                            <CardHeader color="rose" icon>
-                              <CardIcon color="rose">
+                            <CardHeader color="primary" icon>
+                              <CardIcon color="primary">
                                 <Today />
                               </CardIcon>
                               <h4 className={classes.cardIconTitle}>Publish your App's Birthday</h4>
@@ -452,6 +438,8 @@ class AppRegisterLayout extends React.Component {
                               <br />
                               <FormControl fullWidth>
                                 <Datetime
+                                  onChange={this.handleDate}
+                                  utc={true}
                                   inputProps={{ placeholder: "Enter Date and Time Here" }}
                                 />
                               </FormControl>
@@ -463,11 +451,11 @@ class AppRegisterLayout extends React.Component {
                   </Card>
                 </GridItem>
 
-////// Work on this...
                 <SubmitButton
+                  toggleErrorMessage={this.updateErrorMessage}
                   states={this.state}
                   submitButtonProps={{
-                    color: "rose",
+                    color: "primary",
                     round: true
                  }}/>
                 <br/>
