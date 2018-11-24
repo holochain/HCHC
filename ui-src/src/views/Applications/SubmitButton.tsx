@@ -103,37 +103,29 @@ class SubmitButton extends React.Component<SubmitButtonProps, SubmitButtonState>
       console.log("this.state", this.state);
 
 
-      const { title, description, thumbnail, appDNAfile, appUiLink } = this.state;
-      if (title !== null && description !== null && thumbnail !== null && appDNAfile !== null && appUiLink !== null) {
+      const { title, description, thumbnail } = this.state;
+      if (title !== null && description !== null && thumbnail !== null) {
+        // { title, description, thumbnail }
          const AppDetailobj = {
          title: this.state.title,
          description: this.state.description,
          thumbnail: JSON.stringify(this.state.thumbnail)
          }
-
-         const AppUiobj = {
-           uiLink: JSON.stringify(this.state.appUiLink)
-         }
-
-         const AppDNAobj = {
-           dnaFile: JSON.stringify(this.state.appDNAfile)
-         }
-        this.handleCreateApp(AppDetailobj, AppUiobj, AppDNAobj);
+        this.handleCreateApp(AppDetailobj);
       };
    }
 
-    public handleCreateApp = (details, ui, dna) => {
-       console.log("this.state", this.state);
+    public handleCreateApp = (details) => {
+       // console.log("this.state", this.state);
+       const { appDNAfile, appUiLink } = this.state;
        console.log("App Detail OBJECT: ", details);
-       console.log("App Ui OBJECT: ", ui);
-       console.log("App Dna obJECT", dna);
+       console.log("App Dna obJECT", appDNAfile);
+       console.log("App Ui OBJECT: ", appUiLink);
 
-        if (!details || !dna || !ui) {
+        if (!details || appDNAfile === null || appUiLink === null) {
           this.setState({errorMessage: "Please be sure you've completed all the necessary infos before submiting."})
         }
         else {
-          console.log("AppDetailobj for Details API CALL", details);
-
           fetchPOST('/fn/hchc/createApp', details)
             .then(response => {
               if (response.errorMessage) {
@@ -145,14 +137,30 @@ class SubmitButton extends React.Component<SubmitButtonProps, SubmitButtonState>
               };
             })
             .then(response => {
-              console.log("THIS is the response after the 1ST '.then' instance...", response);
+              console.log("THIS is the response after the 1ST '.then' instance... [should be the new app hash]", response);
                this.props.fetchAppDetails(response).then(res => {
                  if(res.errorMessage) {
                    this.setState({ errorMessage: "Sorry, there was an error submitting your data." });
                  }
                  if(!res.errorMessage) {
-                   console.log("AppDNAobjlobj for Details API CALL", dna);
-                   console.log("AppUiobj for Details API CALL", ui);
+                   // { UI-title, UI-link, UI-thumbnail, app_hash }
+                 const uiTitle = this.state.title + "_default_ui"
+                 const AppUiobj = {
+                   title: uiTitle,
+                   link: JSON.stringify(this.state.appUiLink),
+                   // TODO: UPDATE the following thumbnail with the uploaded ui icon pic, once avail...
+                   thumbnail: "ui-placeholder-pic.png",
+                   app_hash: this.props.currentAppDetails!.Hash
+                 }
+                 console.log("AppUiobj for Details API CALL", AppUiobj);
+
+                 // { dna, test, app_hash }
+                 const AppDNAobj = {
+                   dna: JSON.stringify(this.state.appDNAfile),
+                   test: "",
+                   app_hash:this.props.currentAppDetails!.Hash
+                 }
+                   console.log("AppDNAobjlobj for Details API CALL", AppDNAobj);
 
                    const CategoryAndTagObj = {
                      categories: this.state.categories,
@@ -161,8 +169,8 @@ class SubmitButton extends React.Component<SubmitButtonProps, SubmitButtonState>
                    }
                    console.log("CategoryAndTagBundle for Category / Tag API CALL", CategoryAndTagObj);
 
-                   this.props.attachDNA(dna);
-                   this.props.attachUI(ui);
+                   this.props.attachUI(AppUiobj);
+                   this.props.attachDNA(AppDNAobj);
                    this.props.addCategoriesAndTags(CategoryAndTagObj);
                  }
                });
