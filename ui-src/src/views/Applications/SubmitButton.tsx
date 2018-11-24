@@ -108,13 +108,15 @@ class SubmitButton extends React.Component<SubmitButtonProps, SubmitButtonState>
          const AppDetailobj = {
          title: this.state.title,
          description: this.state.description,
-         thumbnail: this.state.thumbnail
+         thumbnail: JSON.stringify(this.state.thumbnail)
          }
+
          const AppUiobj = {
-           uiLink: this.state.appUiLink
+           uiLink: JSON.stringify(this.state.appUiLink)
          }
+
          const AppDNAobj = {
-           dnaFile: this.state.appDNAfile
+           dnaFile: JSON.stringify(this.state.appDNAfile)
          }
         this.handleCreateApp(AppDetailobj, AppUiobj, AppDNAobj);
       };
@@ -130,7 +132,6 @@ class SubmitButton extends React.Component<SubmitButtonProps, SubmitButtonState>
           this.setState({errorMessage: "Please be sure you've completed all the necessary infos before submiting."})
         }
         else {
-          JSON.stringify(details);
           console.log("AppDetailobj for Details API CALL", details);
 
           fetchPOST('/fn/hchc/createApp', details)
@@ -150,23 +151,19 @@ class SubmitButton extends React.Component<SubmitButtonProps, SubmitButtonState>
                    this.setState({ errorMessage: "Sorry, there was an error submitting your data." });
                  }
                  if(!res.errorMessage) {
-                   JSON.stringify(dna);
                    console.log("AppDNAobjlobj for Details API CALL", dna);
-
-                   JSON.stringify(ui);
                    console.log("AppUiobj for Details API CALL", ui);
 
-                   const CategoryAndTagBundle = {
+                   const CategoryAndTagObj = {
                      categories: this.state.categories,
                      tags: this.state.tags,
                      hash: this.props.currentAppDetails!.Hash
                    }
-                   JSON.stringify(CategoryAndTagBundle);
-                   console.log("CategoryAndTagBundle for Category / Tag API CALL", CategoryAndTagBundle);
+                   console.log("CategoryAndTagBundle for Category / Tag API CALL", CategoryAndTagObj);
 
                    this.props.attachDNA(dna);
                    this.props.attachUI(ui);
-                   this.props.addCategoriesAndTags(CategoryAndTagBundle);
+                   this.props.addCategoriesAndTags(CategoryAndTagObj);
                  }
                });
             })

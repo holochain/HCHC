@@ -11,7 +11,7 @@ class ImageUpload extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      file: null,
+      image: null,
       imagePreviewUrl: this.props.avatar ? defaultAvatar : defaultImage
     };
     this.handleImageChange = this.handleImageChange.bind(this);
@@ -19,20 +19,37 @@ class ImageUpload extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
   }
-
-  handleImageChange(e) {
-    e.preventDefault();
+  handleImageChange = ( event) => {
+    event.preventDefault();
     let reader = new FileReader();
-    let file = e.target.files[0];
-    reader.onloadend = () => {
-      this.setState({
-        file: file,
-        imagePreviewUrl: reader.result
-      });
+    let file = event.target.files[0];
+    const fileName = file.name;
+
+    let fileUrl = "";
+    reader.onload = () => {
+      fileUrl = reader.result;
+      console.log("fileURL : ", fileUrl);
     };
-    const img = file
-    reader.readAsDataURL(img);
-    this.props.onImageUpdate(img);
+
+    reader.onloadend = () => {
+      this.addNameToDataURI(fileUrl, fileName, reader);
+      // console.log(fileName);
+      const {image} = this.state;
+      this.props.onImageUpdate(image);
+    };
+    reader.readAsDataURL(file);
+  }
+
+  addNameToDataURI=(fileURL, fileName, reader) => {
+    const fileObj = {
+      imageData: fileURL,
+      imageName: fileName
+    }
+    this.setState({
+      image: fileObj,
+      imagePreviewUrl: reader.result
+    });
+    console.log("this.state: ", this.state);
   }
 
   handleSubmit(e) {
@@ -47,7 +64,7 @@ class ImageUpload extends React.Component {
 
   handleRemove() {
     this.setState({
-      file: null,
+      image: null,
       imagePreviewUrl: this.props.avatar ? defaultAvatar : defaultImage
     });
     this.refs.fileInput.value = null;
@@ -66,7 +83,7 @@ class ImageUpload extends React.Component {
           <img src={this.state.imagePreviewUrl} alt="..." />
         </div>
         <div>
-          {this.state.file === null ? (
+          {this.state.image === null ? (
             <Button {...addButtonProps} onClick={() => this.handleClick()}>
               {avatar ? "Add Photo" : "Select image"}
             </Button>

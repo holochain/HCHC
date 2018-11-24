@@ -5,23 +5,42 @@ class PictureUpload extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      file: null,
+      image: null,
       imagePreviewUrl: defaultImage
     };
     this.handleImageChange = this.handleImageChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleImageChange(e) {
-    e.preventDefault();
+  handleImageChange = (event) => {
+    event.preventDefault();
     let reader = new FileReader();
     let file = e.target.files[0];
+    const fileName = file.name;
+
+    let fileUrl = "";
+    reader.onload = () => {
+      fileUrl = reader.result;
+      console.log("fileURL : ", fileUrl);
+    };
+
     reader.onloadend = () => {
-      this.setState({
-        file: file,
-        imagePreviewUrl: reader.result
-      });
+      this.addNameToDataURI(fileUrl, fileName, reader);
+      const {image} = this.state;
+      this.props.onImageUpdate(image);
     };
     reader.readAsDataURL(file);
+  }
+
+  addNameToDataURI=(dataURL, name, reader) => {
+    const fileObj = {
+      imageData: dataURL,
+      imageName: name
+    }
+    this.setState({
+      image: fileObj,
+      imagePreviewUrl: reader.result
+    });
+    console.log("this.state: ", this.state);
   }
 
   // in this function we can save the image (this.state.file) on form submit
@@ -39,7 +58,7 @@ class PictureUpload extends React.Component {
             className="picture-src"
             alt="..."
           />
-          <input type="file" onChange={e => this.handleImageChange(e)} />
+          <input type="file" onChange={this.handleImageChange} />
         </div>
         <h6 className="description">Choose Picture</h6>
       </div>

@@ -1,17 +1,13 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import { fetchPOST, uploadFileRequest, fetchFormPOST } from '../../utils';
-import { ReduxAction, AppDNACode, AppDetailState, uiLinkParams } from '../../../../types';
+import { AppDNACode, AppDetailState, uiLinkParams } from '../../../../types';
 import { Hash } from '../../../../holochain';
-// import './RegisterApp.css';
-
 // core components
 import Button from "../../components/CustomButtons/Button.jsx";
-
 /*tslint:disable jsx-no-lambda*/
 /*tslint:disable jsx-no-string-ref*/
 
-type FileUploadProps = {
+type FolderUploadProps = {
   addButtonProps:{color: string, round: boolean},
   changeButtonProps:{color: string, round: boolean},
   removeButtonProps:{color: string, round: boolean},
@@ -23,79 +19,64 @@ type FileUploadProps = {
   uploadRequest: () => void,
   uploadFileSuccess: () => void,
   uploadFileError: () => void,
-  onFileUpdate: (file) => void,
+  onFileUpdate: (folder) => void,
 }
 
 type inputState =  string | number | string[];
-type FileUploadState = {
-  file: {fileData: inputState, fileName: string} | null,
+type FolderUploadState = {
+  folder: inputState | null,
+  allFilesListing: Array<inputState> | null,
   errorMessage: string | undefined,
 }
 
-class FileUpload extends React.Component<FileUploadProps, FileUploadState>  {
+class FolderUpload extends React.Component<FolderUploadProps, FolderUploadState>  {
   constructor(props: any) {
-    super(props);
-    this.state = ({
-      file: null,
-      errorMessage: "",
-    });
-    this.handleChange = this.handleChange.bind(this);
-    // this.fileInput = React.createRef();
-  }
+      super(props);
+      this.state = ({
+        folder: null,
+        allFilesListing: null,
+        errorMessage: "",
+      });
+      this.handleChange = this.handleChange.bind(this);
+    }
 
-  public handleChange = (event: any) => {
-   // console.log("current file - on inputChange", event.target.files[0]);
-   const input = event.target.files[0]
-   const fileName = input.name;
+    public handleChange = (event: any) => {
+     const allFiles : Array<any> = [];
+       for (const file of Array.from(event.target.files)) {
+         allFiles.push((file as any).webkitRelativePath);
+       };
 
-   let fileUrl = "";
-   const reader = new FileReader();
-   reader.onload = () => {
-     fileUrl = reader.result;
-     console.log("fileURL : ", fileUrl);
-   };
+       this.setState({
+         allFilesListing: allFiles
+        });
+        console.log("uploaded allFilesListing : ", this.state.allFilesListing);
 
-   reader.onloadend = () => {
-       this.addNameToDataURI(fileUrl, fileName);
-       const {file} = this.state;
-       this.props.onFileUpdate(file);
-   };
-
-   reader.readAsDataURL(input);
-  }
-
-  public addNameToDataURI=(dataURL, name) => {
-    // const fileURL = dataURL.replace(";base64", `;name=${name};base64`);
-    const fileObj = {
-    fileData: dataURL,
-    fileName: name
-  }
-    this.setState({
-      file: fileObj,
-     });
-    console.log("this.state: ", this.state);
-  }
+      // this.props.onFileUpdate(this.state.folder);
+      // console.log("uploaded folder : ", this.state.folder);
+    };
 
     public handleClick() {
-      // (this.fileInput as any).current.click();
-      (this.refs as any).fileInput.click();
+      (this.refs as any).folderInput.click();
     }
 
     public handleRemove() {
       this.setState({
-        file: null
+        allFilesListing: null
       });
-      // (this.fileInput as any).current.value = null;
-      (this.refs as any).fileInput.value = null;
+      (this.refs as any).folderInput.value = null;
     }
 
   public render() {
-    const {file} = this.state;
+    const {folder} = this.state;
+    const multiple : boolean = true;
+    const webkitdirectory : boolean = true;
+    console.log("folder >> ", folder);
+    let i = 0;
     return (
-      <div className="fileinput text-center">
-          <input id="linkUpload" type="file" name="fileInput" onChange={this.handleChange} ref="fileInput" /> {/* ref={this.fileInput} */}
+      <div className="folderinput text-center">
+          <input id="linkUpload" type="file" name="folderInput" onChange={this.handleChange} ref="folderInput" multiple={multiple}/>  // webkitdirectory={webkitdirectory}
           <div>
-            {this.state.file === null ? (
+            {this.state.folder === null ? (
               <Button {...this.props.addButtonProps} onClick={() => this.handleClick()}>Select File</Button>
             ) : (
               <span>
@@ -103,7 +84,13 @@ class FileUpload extends React.Component<FileUploadProps, FileUploadState>  {
                   <span style={{fontSize: "75px", color: "Mediumslateblue"}}>
                     <i className="fas fa-file-code"/>
                   </span>
-                  <h6>{this.state.file.fileName ? this.state.file.fileName : <div/> }</h6>
+                  <ul>{this.state.allFilesListing ?
+                    ( this.state.allFilesListing.map((file )=> {
+                        i++;
+                        return(<li key={i}>{file}</li>)
+                      })
+                    ) : (<div/>)}
+                  </ul>
                 </div>
                 <Button {...this.props.changeButtonProps} onClick={() => this.handleClick()}>Change File</Button>
                 <br/>
@@ -126,4 +113,4 @@ const mapDispatchToProps = dispatch => ({
   returnState: () => dispatch({type: 'RETURN_STATE'})
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(FileUpload);
+export default connect(mapStateToProps, mapDispatchToProps)(FolderUpload);

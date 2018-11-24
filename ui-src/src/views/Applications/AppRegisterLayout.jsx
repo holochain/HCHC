@@ -129,11 +129,12 @@ class AppRegisterLayout extends React.Component {
               </CardIcon>
               <h4 className={classes.cardIconTitle}>Upload App Thumbnail</h4>
             </CardHeader>
-            <CardBody>
+            <CardBody style={{margin:"0 auto"}}>
               <GridContainer>
-                <GridItem xs={12}>
+                <GridItem xs={12} style={{margin:"0 auto"}}>
                   <legend>Image Preview</legend>
                   <ImageUpload
+                    fullWidth
                     onImageUpdate={this.imageSelect}
                     addButtonProps={{
                       color: "primary",
@@ -161,11 +162,14 @@ class AppRegisterLayout extends React.Component {
                 <Description />
               </CardIcon>
               <h4 className={classes.cardIconTitle}>Upload App Source Code</h4>
+
+              {/* TODO: MAKE THE FOLLOWING A TOOL-TIP */}
+              <h5 className={classes.cardIconTitle}><em>NB: When uploading folders, please ensure they are zipped.</em></h5>
             </CardHeader>
-            <CardBody>
+            <CardBody style={{margin:"0 auto"}}>
               <GridContainer>
-                <GridItem xs={12} sm={4} md={6}>
-                  <legend>DNA Upload</legend>
+                <GridItem xs={12} sm={4} md={6} style={{margin:"0 auto"}}>
+                  <legend sytle={{textAlign:"center"}}>DNA File</legend>
                   <FileUpload
                     onFileUpdate={this.dnaFileSelect}
                     addButtonProps={{
@@ -182,8 +186,8 @@ class AppRegisterLayout extends React.Component {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={4} md={6}>
-                  <legend>UI Upload</legend>
+                <GridItem xs={12} sm={4} md={6} style={{margin:"0 auto"}}>
+                  <legend>UI File</legend>
                   <FileUpload
                     onFileUpdate={this.uiFileSelect}
                     addButtonProps={{
@@ -217,20 +221,22 @@ class AppRegisterLayout extends React.Component {
                 <Card>
                   <CardBody>
                     <GridContainer>
-                      <GridItem xs={12} sm={12} md={6}>
+                      <GridItem xs={12} sm={6}>
                         <legend>Title your app.</legend>
                         <TextField
+                          fullWidth
                           label="App Title"
                           id="app-title"
                           value={this.state.selectedTitle}
                           onChange= {this.handleInput("selectedTitle")}
                         />
                       </GridItem>
+
                       <br/>
                       <br/>
-                      <GridItem xs={12} sm={12} md={6}>
+                      <GridItem xs={12} sm={6}>
                         <legend>Select categories that represent your app.</legend>
-                          <GridItem xs={12} sm={6} md={5} lg={5}>
+                          <GridItem xs={12}>
                             <FormControl
                               fullWidth
                               className={classes.selectFormControl}
@@ -363,109 +369,107 @@ class AppRegisterLayout extends React.Component {
                     <br/>
 
                     <GridContainer>
-                    <GridItem xs={12}>
-                      <legend>Write a brief description about your app.</legend>
-                      <TextField
-                        label="Description"
-                        id="description"
-                        value={this.state.selectedDescription}
-                        onChange={this.handleInput("selectedDescription")}
-                        multiline
-                        rows="5"
+                      <GridItem xs={12} sm={12}>
+                        <legend>Write a brief description about your app.</legend>
+                        <TextField
+                          fullWidth
+                          label="Description"
+                          id="description"
+                          value={this.state.selectedDescription}
+                          onChange={this.handleInput("selectedDescription")}
+                          multiline
+                          rows="5"
+                        />
+                      </GridItem>
+                  </GridContainer>
+                </CardBody>
+              </Card>
+
+              <Card>
+                <CardBody>
+                  <br />
+                  <br />
+                  <GridContainer>
+                    <GridItem xs={12} sm={6}>
+                      <legend>Create Tags Themes that Identify your App</legend>
+                      <TagsInput
+                        value={this.state.tags}
+                        onChange={this.handleTags}
+                        tagProps={{ className: "react-tagsinput-tag info" }}
                       />
+                    </GridItem>
+
+                    <GridItem xs={12} sm={6}>
+                      <legend>Enable Holo Hosting</legend>
+                      <div className={classes.block}>
+                        <FormControlLabel
+                          control={
+                            <Switch
+                              checked={this.state.holoEnabled}
+                              onChange={this.handleHoloEnabledToggle("holoEnabled")}
+                              value="holoEnabled"
+                              classes={{
+                                switchBase: classes.switchBase,
+                                checked: classes.switchChecked,
+                                icon: classes.switchIcon,
+                                iconChecked: classes.switchIconChecked,
+                                bar: classes.switchBar
+                              }}
+                            />
+                          }
+                          classes={{
+                            label: classes.label
+                          }}
+                          label="Turn on to enroll app in Holo Hosting"
+                        />
+                      </div>
+                    </GridItem>
+                  </GridContainer>
+                  <br />
+                  <br />
+
+                  <GridContainer>
+                    <GridItem xs={12}>
+                      <Card>
+                        <CardHeader color="primary" icon>
+                          <CardIcon color="primary">
+                            <Today />
+                          </CardIcon>
+                          <h4 className={classes.cardIconTitle}>Publish your App's Birthday</h4>
+                        </CardHeader>
+                        <CardBody>
+                          <InputLabel className={classes.label}>
+                            Locate the Appication's Creation Date.
+                          </InputLabel>
+                          <br />
+                          <FormControl fullWidth>
+                            <Datetime
+                              onChange={this.handleDate}
+                              utc={true}
+                              inputProps={{ placeholder: "Enter Date and Time Here" }}
+                            />
+                          </FormControl>
+                        </CardBody>
+                      </Card>
                     </GridItem>
                   </GridContainer>
                 </CardBody>
               </Card>
 
-                <GridItem xs={12} sm={12} md={12}>
-                  <Card>
-                    <CardBody>
-                      <br />
-                      <br />
-                      <GridContainer>
-                        <GridItem xs={12} sm={12} md={6}>
-                          <legend>Create Tags Themes that Identify your App</legend>
-                          <TagsInput
-                            value={this.state.tags}
-                            onChange={this.handleTags}
-                            tagProps={{ className: "react-tagsinput-tag info" }}
-                          />
-                        </GridItem>
-
-                        <GridItem xs={12} sm={12} md={6}>
-                          <legend>Enable Holo Hosting</legend>
-                          <div className={classes.block}>
-                            <FormControlLabel
-                              control={
-                                <Switch
-                                  checked={this.state.holoEnabled}
-                                  onChange={this.handleHoloEnabledToggle("holoEnabled")}
-                                  value="holoEnabled"
-                                  classes={{
-                                    switchBase: classes.switchBase,
-                                    checked: classes.switchChecked,
-                                    icon: classes.switchIcon,
-                                    iconChecked: classes.switchIconChecked,
-                                    bar: classes.switchBar
-                                  }}
-                                />
-                              }
-                              classes={{
-                                label: classes.label
-                              }}
-                              label="Turn on to enroll app in Holo Hosting"
-                            />
-                          </div>
-                        </GridItem>
-                      </GridContainer>
-                      <br />
-                      <br />
-
-                      <GridContainer>
-                        <GridItem xs={12} sm={12} md={12}>
-                          <Card>
-                            <CardHeader color="primary" icon>
-                              <CardIcon color="primary">
-                                <Today />
-                              </CardIcon>
-                              <h4 className={classes.cardIconTitle}>Publish your App's Birthday</h4>
-                            </CardHeader>
-                            <CardBody>
-                              <InputLabel className={classes.label}>
-                                Locate the Appication's Creation Date.
-                              </InputLabel>
-                              <br />
-                              <FormControl fullWidth>
-                                <Datetime
-                                  onChange={this.handleDate}
-                                  utc={true}
-                                  inputProps={{ placeholder: "Enter Date and Time Here" }}
-                                />
-                              </FormControl>
-                            </CardBody>
-                          </Card>
-                        </GridItem>
-                      </GridContainer>
-                    </CardBody>
-                  </Card>
-                </GridItem>
-
-                <SubmitButton
-                  toggleErrorMessage={this.updateErrorMessage}
-                  states={this.state}
-                  submitButtonProps={{
-                    color: "primary",
-                    round: true
-                 }}/>
-                <br/>
-              </form>
-            </CardBody>
-          </Card>
-        </GridItem>
-      </GridContainer>
-    );
-  }
-}
+              <SubmitButton
+                toggleErrorMessage={this.updateErrorMessage}
+                states={this.state}
+                submitButtonProps={{
+                  color: "primary",
+                  round: true
+               }}/>
+              <br/>
+            </form>
+          </CardBody>
+        </Card>
+      </GridItem>
+    </GridContainer>
+  );
+}}
 
 export default withStyles(regularFormsStyle)(AppRegisterLayout);

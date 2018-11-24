@@ -233,7 +233,7 @@ class  RegisterApp extends React.Component<RegisterAppsProps, RegisterAppState> 
         this.setState({errorMessage: "Please be sure you've completed all the necessary infos before submiting."})
       }
       else {
-        fetchPOST('/fn/ratings/createApp', { title, description, thumbnail })
+        fetchPOST('/fn/hchc/createApp', { title, description, thumbnail })
           .then(response => {
             if (response.errorMessage) {
               // TODO: IMPROVE ERROR MESSAGE

@@ -145,6 +145,7 @@ class AppUpdateLayout extends React.Component {
                 <Description />
               </CardIcon>
               <h4 className={classes.cardIconTitle}>Update App Source Code</h4>
+              <h5><em>NB: Please ensure the folders are zipped</em></h5>
             </CardHeader>
             <CardBody>
               <GridContainer>
