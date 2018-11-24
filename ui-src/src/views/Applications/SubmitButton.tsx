@@ -243,20 +243,20 @@ const mapDispatchToProps = dispatch => ({
       dispatch({type: 'VIEW_APP', appDetails})
     })
   },
-  addNewApp: ({title, description, thumbnail}) => {
-    fetchPOST('/fn/hchc/createApp', { title, description, thumbnail })
+  addNewApp: ( newAppBundle ) => {
+    fetchPOST('/fn/hchc/createApp', newAppBundle)
       .then(appHash => {
         dispatch({ type: 'CREATE_NEW_APP_DETAILS', appHash})
     })
   },
-  attachDNA: ({dnaFile, testFile, appHash}) => {
-    fetchPOST('/fn/hchc/addAppCode', { dnaFile, testFile, appHash })
+  attachDNA: ( appDnaBundle ) => {
+    fetchPOST('/fn/hchc/addAppCode', appDnaBundle)
         .then(dnaFileHash => {
         dispatch({type: 'ADD_DNA_FILE', dnaFileHash})
       })
   },
-  attachUI: ({uiFilLink, title, thumbnail, appHash}) => {
-    fetchPOST('/fn/hchc/addUISkin', { uiFilLink, title, thumbnail, appHash })
+  attachUI: (appUiBundle) => {
+    fetchPOST('/fn/hchc/addUISkin', appUiBundle)
         .then(dnaFileHash => {
         dispatch({type: 'ADD_DNA_FILE', dnaFileHash})
       })

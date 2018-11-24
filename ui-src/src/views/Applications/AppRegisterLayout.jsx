@@ -235,7 +235,7 @@ class AppRegisterLayout extends React.Component {
                       <br/>
                       <br/>
                       <GridItem xs={12} sm={6}>
-                        <legend>Select categories that represent your app.</legend>
+                        <legend>Select all categories representing your app.</legend>
                           <GridItem xs={12}>
                             <FormControl
                               fullWidth
