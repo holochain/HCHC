@@ -64,6 +64,7 @@ class AppRegisterLayout extends React.Component {
     this.handleHoloEnabledToggle = this.handleHoloEnabledToggle.bind(this);
     this.handleTags = this.handleTags.bind(this);
     this.handleDate = this.handleDate.bind(this);
+    this.updateErrorMessage = this.updateErrorMessage.bind(this);
 
     this.imageSelect = this.imageSelect.bind(this);
     this.uiFileSelect = this.uiFileSelect.bind(this);
@@ -93,6 +94,7 @@ class AppRegisterLayout extends React.Component {
   }
 
   updateErrorMessage(message) {
+    console.log("update error message", message);
     this.setState({ errorMessage: message });
   }
 
@@ -131,7 +133,7 @@ class AppRegisterLayout extends React.Component {
             </CardHeader>
             <CardBody style={{margin:"0 auto"}}>
               <GridContainer>
-                <GridItem xs={12} style={{margin:"0 auto"}}>
+                <GridItem xs={12} style={{margin:"0 auto", textAlign:"center"}}>
                   <legend>Image Preview</legend>
                   <ImageUpload
                     fullWidth
@@ -166,9 +168,9 @@ class AppRegisterLayout extends React.Component {
               {/* TODO: MAKE THE FOLLOWING A TOOL-TIP */}
               <h5 className={classes.cardIconTitle}><em>NB: When uploading folders, please ensure they are zipped.</em></h5>
             </CardHeader>
-            <CardBody style={{margin:"0 auto"}}>
-              <GridContainer>
-                <GridItem xs={12} sm={4} md={6} style={{margin:"0 auto"}}>
+            <CardBody>
+              <GridContainer style={{width:"100%"}}>
+                <GridItem xs={12} sm={4} md={6} style={{margin:"0 auto", textAlign:"center"}}>
                   <legend sytle={{textAlign:"center"}}>DNA File</legend>
                   <FileUpload
                     onFileUpdate={this.dnaFileSelect}
@@ -186,7 +188,7 @@ class AppRegisterLayout extends React.Component {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={4} md={6} style={{margin:"0 auto"}}>
+                <GridItem xs={12} sm={4} md={6} style={{margin:"0 auto", textAlign:"center"}}>
                   <legend>UI File</legend>
                   <FileUpload
                     onFileUpdate={this.uiFileSelect}
@@ -213,7 +215,7 @@ class AppRegisterLayout extends React.Component {
           <Card>
             <CardHeader color="primary" text>
               <CardText color="primary">
-                <h4 className={classes.cardTitle}>App Snapshot</h4>
+                <h4 className={classes.cardTitle}>App Details</h4>
               </CardText>
             </CardHeader>
             <CardBody>
@@ -389,7 +391,7 @@ class AppRegisterLayout extends React.Component {
                 <CardBody>
                   <br />
                   <br />
-                  <GridContainer>
+                  <GridContainer style={{margin:"0 auto"}}>
                     <GridItem xs={12} sm={6}>
                       <legend>Create Tags Themes that Identify your App</legend>
                       <TagsInput

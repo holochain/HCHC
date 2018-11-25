@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import { fetchPOST, uploadFileRequest, fetchFormPOST } from '../../utils';
-import { ReduxAction, AppDNACode, AppDetailState, uiLinkParams } from '../../../../types';
+import { ReduxAction, CodeParams, AppDetailState, uiLinkParams } from '../../../../types';
 import { Hash } from '../../../../holochain';
 // import './RegisterApp.css';
 
@@ -17,7 +17,7 @@ type FileUploadProps = {
   removeButtonProps:{color: string, round: boolean},
   currentAgent: {agent: {Hash: Hash, Name: string}},
   currentAppDetails: {Entry: AppDetailState, Hash: Hash},
-  appCode: AppDNACode,
+  appCode: CodeParams,
   UIappLink: uiLinkParams,
   returnState: () => void,
   uploadRequest: () => void,

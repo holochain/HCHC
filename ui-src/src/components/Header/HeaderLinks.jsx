@@ -32,6 +32,8 @@ class HeaderLinks extends React.Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+
+
   render() {
     const { classes, rtlActive } = this.props;
     const { open } = this.state;
@@ -62,12 +64,13 @@ class HeaderLinks extends React.Component {
             className: classes.top + " " + classes.search
           }}
           inputProps={{
-            placeholder: rtlActive ? "بحث" : "Search",
+            placeholder: "Search",
             inputProps: {
-              "aria-label": rtlActive ? "بحث" : "Search",
+              "aria-label": "Search",
               className: classes.searchInput
             }
           }}
+          sytle={{borderColor:"#303f9f !important"}}
         />
         <Button
           color="white"
@@ -80,18 +83,17 @@ class HeaderLinks extends React.Component {
             className={classes.headerLinksSvg + " " + classes.searchIcon}
           />
         </Button>
+
         <div className={managerClasses}>
           <Button
             color="transparent"
             justIcon
+            style={{marginTop:"-10px"}}
             aria-label="Notifications"
             aria-owns={open ? "menu-list" : null}
             aria-haspopup="true"
-            onClick={this.handleClick}
+            // onClick={this.handleClick}
             className={rtlActive ? classes.buttonLinkRTL : classes.buttonLink}
-            muiClasses={{
-              label: rtlActive ? classes.labelRTL : ""
-            }}
             buttonRef={node => {
               this.anchorEl = node;
             }}
@@ -107,13 +109,14 @@ class HeaderLinks extends React.Component {
               }
             />
             </Link>
-            <span className={classes.notifications}>5</span>
+            {/* <span className={classes.notifications}>{this.props.notificationsUnseen}</span> */}
             <Hidden mdUp implementation="css">
               <span onClick={this.handleClick} className={classes.linkText}>
                 {rtlActive ? "" : "Notifications"}
               </span>
             </Hidden>
           </Button>
+
           <Popper
             open={open}
             anchorEl={this.anchorEl}

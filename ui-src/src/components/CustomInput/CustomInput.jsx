@@ -25,8 +25,7 @@ function CustomInput({ ...props }) {
     inputRootCustomClasses,
     success,
     helpText,
-    value,
-
+    value
   } = props;
 
   const labelClasses = classNames({

@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 // import * as path from 'path'
 
 import { fetchPOST, fetchFormPOST, uploadFileRequest } from '../../utils';  // the file upload resource code is located in this file...
-import { ReduxAction, AppDNACode, AppDetailState, uiLinkParams } from '../../../../types'
+import { ReduxAction, CodeParams, AppDetailState, uiLinkParams } from '../../../../types'
 import { Hash } from '../../../../holochain';
 import JdenticonPlaceHolder from '../../components/JdenticonFiller';
 
@@ -18,7 +18,7 @@ import { Container, Col, Form, FormGroup, Label, Input, Button, FormText } from 
 type RegisterAppsProps = {
   currentAgent: {agent: {Hash: Hash, Name: string}},
   currentAppDetails: {Entry: AppDetailState, Hash: Hash},
-  appCode: AppDNACode,
+  appCode: CodeParams,
   UIappLink: uiLinkParams,
   fetchAgent: () => void,
   returnState: () => void,

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import { AppDNACode, AppDetailState, uiLinkParams } from '../../../../types';
+import { CodeParams, AppDetailState, uiLinkParams } from '../../../../types';
 import { Hash } from '../../../../holochain';
 // core components
 import Button from "../../components/CustomButtons/Button.jsx";
@@ -13,7 +13,7 @@ type FolderUploadProps = {
   removeButtonProps:{color: string, round: boolean},
   currentAgent: {agent: {Hash: Hash, Name: string}},
   currentAppDetails: {Entry: AppDetailState, Hash: Hash},
-  appCode: AppDNACode,
+  appCode: CodeParams,
   UIappLink: uiLinkParams,
   returnState: () => void,
   uploadRequest: () => void,

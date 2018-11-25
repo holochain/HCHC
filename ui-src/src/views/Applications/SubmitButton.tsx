@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import { fetchPOST, uploadFileRequest, fetchFormPOST } from '../../utils';
-import { ReduxAction, AppDNACode, AppDetailState, uiLinkParams } from '../../../../types';
+import { ReduxAction, CodeParams, AppDetailState, uiLinkParams } from '../../../../types';
 import { Hash } from '../../../../holochain';
 // react component used to create alerts
 import SweetAlert from "react-bootstrap-sweetalert";
@@ -13,7 +13,7 @@ type SubmitButtonProps = {
   states: {},
   currentAgent: {agent: {Hash: Hash, Name: string}},
   currentAppDetails: {Entry: AppDetailState, Hash: Hash},
-  appCode: AppDNACode,
+  appCode: CodeParams,
   UIappLink: uiLinkParams,
   submitButtonProps:{color: string, round: boolean},
   fetchAgent: () => void,
@@ -21,7 +21,7 @@ type SubmitButtonProps = {
   returnState: () => void,
   attachUI: (uiFilLinkBundle) => void,
   attachDNA: (dnaFileBundle) => void,
-  addNewApp: (detialBundle) => void,
+  addNewApp: (detailBundle) => Promise<any>,
   addCategoriesAndTags: (categoryAndTagBundle) => void,
   uploadRequest: () => void,
   uploadFileSuccess: () => void,
@@ -63,6 +63,7 @@ class SubmitButton extends React.Component<SubmitButtonProps, SubmitButtonState>
     this.handleClick = this.handleClick.bind(this);
     this.hideAlert = this.hideAlert.bind(this);
     this.successAlert = this.successAlert.bind(this);
+    this.addData = this.addData.bind(this);
   }
 
     public handleClick = (parentStates) => {
@@ -91,17 +92,22 @@ class SubmitButton extends React.Component<SubmitButtonProps, SubmitButtonState>
         holoEnabled,
         dateAppCreated
       })
-      this.createAppObjects();
+      this.createAppDetailObject();
     }
 
     // public componentDidMount() {
-    //   this.createAppObjects();
+    //   this.createAppDetailObject();
     // }
 
-    public createAppObjects = () => {
-      console.log("INSIDE createAppObjects");
-      console.log("this.state", this.state);
+    public addData = (AppUiobj, AppDNAobj, CategoryAndTagObj, callback) => {
+     this.props.attachUI(AppUiobj);
+     this.props.attachDNA(AppDNAobj);
+     this.props.addCategoriesAndTags(CategoryAndTagObj);
+     callback(this);
+    }
 
+    public createAppDetailObject = () => {
+      console.log("this.state", this.state);
 
       const { title, description, thumbnail } = this.state;
       if (title !== null && description !== null && thumbnail !== null) {
@@ -119,77 +125,70 @@ class SubmitButton extends React.Component<SubmitButtonProps, SubmitButtonState>
        // console.log("this.state", this.state);
        const { appDNAfile, appUiLink } = this.state;
        console.log("App Detail OBJECT: ", details);
-       console.log("App Dna obJECT", appDNAfile);
-       console.log("App Ui OBJECT: ", appUiLink);
 
         if (!details || appDNAfile === null || appUiLink === null) {
           this.setState({errorMessage: "Please be sure you've completed all the necessary infos before submiting."})
         }
         else {
-          fetchPOST('/fn/hchc/createApp', details)
-            .then(response => {
-              if (response.errorMessage) {
-                this.setState({errorMessage: "Sorry, there was an error submitting your data. Review both details and resubmit."})
-              }
-              else {
-                this.setState({ errorMessage: undefined });
-                this.props.addNewApp(details);
-              };
-            })
-            .then(response => {
-              console.log("THIS is the response after the 1ST '.then' instance... [should be the new app hash]", response);
-               this.props.fetchAppDetails(response).then(res => {
-                 if(res.errorMessage) {
-                   this.setState({ errorMessage: "Sorry, there was an error submitting your data." });
-                 }
-                 if(!res.errorMessage) {
-                   // { UI-title, UI-link, UI-thumbnail, app_hash }
-                 const uiTitle = this.state.title + "_default_ui"
-                 const AppUiobj = {
-                   title: uiTitle,
-                   link: JSON.stringify(this.state.appUiLink),
-                   // TODO: UPDATE the following thumbnail with the uploaded ui icon pic, once avail...
-                   thumbnail: "ui-placeholder-pic.png",
-                   app_hash: this.props.currentAppDetails!.Hash
-                 }
-                 console.log("AppUiobj for Details API CALL", AppUiobj);
+          fetchPOST('/fn/hchc/createApp', details).then(response => {
+            if (response.errorMessage) {
+              this.setState({errorMessage: "Sorry, there was an error submitting your data. please review your details and resubmit."})
+            }
+            else {
+              this.setState({ errorMessage: undefined });
+              console.log("FIRST promise response after the 1ST api call [should be the new app hash]", response);
+              const hashAsStringResponse = response.toString();
 
-                 // { dna, test, app_hash }
-                 const AppDNAobj = {
-                   dna: JSON.stringify(this.state.appDNAfile),
-                   test: "",
-                   app_hash:this.props.currentAppDetails!.Hash
+              fetchPOST('/fn/hchc/getAppDetails', hashAsStringResponse).then((res) => {
+                console.log("hashAsStringResponse", hashAsStringResponse);
+                console.log("SECOND promise response after the 2ND api call [should be the new app details]", res);
+                 if (res.errorMessage) {
+                   this.setState({ errorMessage: "Sorry, there was an error retrieving your app data." });
                  }
-                   console.log("AppDNAobjlobj for Details API CALL", AppDNAobj);
+                 else if (!res.errorMessage) {
+                   // { UI-title, UI-link, UI-thumbnail, app_hash }
+                   const uiTitle = this.state.title + "_default_ui"
+                   const AppUiobj = {
+                     title: uiTitle,
+                     link: JSON.stringify(this.state.appUiLink),
+                     // TODO: UPDATE the following thumbnail with the uploaded ui icon pic, once avail...
+                     thumbnail: "ui-placeholder-pic.png",
+                     // the following should be "res.Hash"
+                     app_hash: hashAsStringResponse
+                   }
+                   console.log("AppUiobj for UI API CALL", AppUiobj);
+
+                   // { dna, test, app_hash }
+                   const AppDNAobj = {
+                     dna: JSON.stringify(this.state.appDNAfile),
+                     test: "",
+                     app_hash: hashAsStringResponse
+                   }
+                  console.log("AppDNAobjlobj for DNA API CALL", AppDNAobj);
 
                    const CategoryAndTagObj = {
-                     categories: this.state.categories,
+                     category: this.state.categories,
                      tags: this.state.tags,
-                     hash: this.props.currentAppDetails!.Hash
+                     hash: hashAsStringResponse
                    }
                    console.log("CategoryAndTagBundle for Category / Tag API CALL", CategoryAndTagObj);
 
-                   this.props.attachUI(AppUiobj);
-                   this.props.attachDNA(AppDNAobj);
-                   this.props.addCategoriesAndTags(CategoryAndTagObj);
-                 }
-               });
-            })
-            .then(response => {
-              this.successAlert();
-              // alert("Congrats. You've offically registered an app.");
-
-              const message = this.state.errorMessage;
-              this.props.toggleErrorMessage(message);
-              // location.assign(`/dashboard`);
-            })
-       }
+                   this.addData(AppUiobj, AppDNAobj, CategoryAndTagObj, function(this) {
+                       this.successAlert();
+                       // alert("Congrats. You've offically registered an app.");
+                   })
+                 };
+               })
+            };
+        });
+      };
+      // this.props.toggleErrorMessage(this.state.errorMessage);
     }
 
     public handleEnter = (event: React.KeyboardEvent) => {
       const { description, title, thumbnail, appDNAfile, appUiLink } = this.state;
       if (event.keyCode === 13 && title !== null && description !== null && thumbnail !== null && appDNAfile !== null && appUiLink !== null ) {
-        this.createAppObjects();
+        this.createAppDetailObject();
       }
       else if (event.keyCode === 13) {
         this.setState({errorMessage: "Please be sure you've completed your review before pressing enter."});
@@ -246,33 +245,33 @@ const mapDispatchToProps = dispatch => ({
     })
   },
   fetchAppDetails: (appHash) => {
-  fetchPOST('/fn/hchc/getAppDetails', appHash)
-      .then(appDetails => {
-      dispatch({type: 'VIEW_APP', appDetails})
+  return fetchPOST('/fn/hchc/getAppDetails', appHash)
+      .then(details => {
+      dispatch({type: 'VIEW_APP', details})
     })
   },
   addNewApp: ( newAppBundle ) => {
-    fetchPOST('/fn/hchc/createApp', newAppBundle)
-      .then(appHash => {
-        dispatch({ type: 'CREATE_NEW_APP_DETAILS', appHash})
+    return fetchPOST('/fn/hchc/createApp', newAppBundle)
+      .then(params => {
+        dispatch({ type: 'CREATE_NEW_APP_DETAILS', params});
     })
   },
   attachDNA: ( appDnaBundle ) => {
-    fetchPOST('/fn/hchc/addAppCode', appDnaBundle)
-        .then(dnaFileHash => {
-        dispatch({type: 'ADD_DNA_FILE', dnaFileHash})
+    return fetchPOST('/fn/hchc/addAppCode', appDnaBundle)
+        .then(params => {
+        dispatch({type: 'CREATE_NEW_APP_CODE', params}) // params = dna commit hash
       })
   },
   attachUI: (appUiBundle) => {
-    fetchPOST('/fn/hchc/addUISkin', appUiBundle)
-        .then(dnaFileHash => {
-        dispatch({type: 'ADD_DNA_FILE', dnaFileHash})
+    return fetchPOST('/fn/hchc/addUISkin', appUiBundle)
+        .then(params => {
+        dispatch({type: 'CREATE_NEW_UI_FILE', params}) // params = ui commit hash
       })
   },
   addCategoriesAndTags: (categoryAndTagBundle) => {
-    fetchPOST('/fn/categories/addCategory', categoryAndTagBundle)
-        .then(categoryCommitHash => {
-        dispatch({type: 'ADD_CATEGORIES_AND_TAGS', categoryCommitHash})
+    return fetchPOST('/fn/categories/addCategory', categoryAndTagBundle)
+        .then(params => {
+        dispatch({type: 'ADD_CATEGORIES_AND_TAGS', params}) // params = dna commit hash
       })
   },
   returnState: () => dispatch({type: 'RETURN_STATE'})

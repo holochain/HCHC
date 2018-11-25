@@ -112,10 +112,11 @@ const mapDispatchToProps = dispatch => ({
         dispatch({ type: 'VIEW_APP', appDetails })
       })
   },
+  // this retrieves the app Categories AND Tags (if avail)
   getCurrentAppCategories: (appHash) => {
     fetchPOST('/fn/categories/getAppCategories', appHash)
-      .then( currentAppCategories => {
-        dispatch({ type: 'FETCH_CURRENT_APP_CATEGORIES', currentAppCategories })
+      .then( categories => {
+        dispatch({ type: 'FETCH_CURRENT_APP_CATEGORIES', categories })
       })
   },
   getappsByCategory: (category) => {

@@ -27,7 +27,8 @@ const headerLinksStyle = theme => ({
   },
   searchInput: {
     paddingTop: "2px",
-    backgroudn: "#313297",
+    background: "transparent",
+    color: "#303f9f", // #313297 007bff
   },
   searchRTL: {
     [theme.breakpoints.down("sm")]: {
@@ -58,7 +59,7 @@ const headerLinksStyle = theme => ({
       },
       "& .fab,& .fas,& .far,& .fal,& .material-icons": {
         width: "30px",
-        fontSize: "24px",
+        fontSize: "11px",
         lineHeight: "30px",
         marginRight: "19px",
         marginLeft: "3px"
@@ -70,7 +71,7 @@ const headerLinksStyle = theme => ({
       top: "-50px !important",
       marginRight: "38px",
       float: "right",
-      background: "#313297"
+      background: "#007bff"
     }
   },
   top: {
