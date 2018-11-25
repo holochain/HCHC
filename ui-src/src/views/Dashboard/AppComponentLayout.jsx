@@ -40,8 +40,8 @@ class AppComponentLayout extends React.Component {
     return (
       <Card chart className={classes.cardHover}>
         <CardHeader color="warning" className={classes.cardHeaderHover}>
-          <JdenticonPlaceHolder className="jdenticon" size={150} hash={this.props.hash} />
-          {/* <img src={this.props.thumbanil} alt="App Thumbnail Image" /> */}
+          {/* // <JdenticonPlaceHolder className="jdenticon" size={150} hash={this.props.hash} /> */}
+         <img src={this.props.thumbanil} alt="App Thumbnail Image" />
         </CardHeader>
         <CardBody>
           <div className={classes.cardHoverUnder}>

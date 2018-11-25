@@ -165,13 +165,13 @@ class AppRegisterLayout extends React.Component {
               </CardIcon>
               <h4 className={classes.cardIconTitle}>Upload App Source Code</h4>
 
-              {/* TODO: MAKE THE FOLLOWING A TOOL-TIP */}
+              {/* TODO: MAKE THE FOLLOWING A TOOL-TIP  && Add file check for uploads (ensure only req type is avail) */}
               <h5 className={classes.cardIconTitle}><em>NB: When uploading folders, please ensure they are zipped.</em></h5>
             </CardHeader>
             <CardBody>
               <GridContainer style={{width:"100%"}}>
                 <GridItem xs={12} sm={4} md={6} style={{margin:"0 auto", textAlign:"center"}}>
-                  <legend sytle={{textAlign:"center"}}>DNA File</legend>
+                  <legend sytle={{textAlign:"center"}}>DNA Zip File</legend>
                   <FileUpload
                     onFileUpdate={this.dnaFileSelect}
                     addButtonProps={{
@@ -189,7 +189,7 @@ class AppRegisterLayout extends React.Component {
                   />
                 </GridItem>
                 <GridItem xs={12} sm={4} md={6} style={{margin:"0 auto", textAlign:"center"}}>
-                  <legend>UI File</legend>
+                  <legend>UI Zip File</legend>
                   <FileUpload
                     onFileUpdate={this.uiFileSelect}
                     addButtonProps={{
@@ -244,10 +244,10 @@ class AppRegisterLayout extends React.Component {
                               className={classes.selectFormControl}
                             >
                               <InputLabel
-                                htmlFor="category"
+                                htmlFor="categories"
                                 className={classes.selectLabel}
                               >
-                                Choose Category
+                                Choose Categories
                               </InputLabel>
 
                               <Select
@@ -257,8 +257,8 @@ class AppRegisterLayout extends React.Component {
                                 MenuProps={{ className: classes.selectMenu }}
                                 classes={{ select: classes.select }}
                                 inputProps={{
-                                  name: "category",
-                                  id: "category"
+                                  name: "categories",
+                                  id: "categories"
                                 }}
                               >
                                 <MenuItem
@@ -267,7 +267,7 @@ class AppRegisterLayout extends React.Component {
                                     root: classes.selectMenuItem
                                   }}
                                 >
-                                  Choose Category
+                                  Choose Categories
                                 </MenuItem>
                                 <MenuItem
                                   classes={{
@@ -304,15 +304,6 @@ class AppRegisterLayout extends React.Component {
                                   value="Top Downloads"
                                 >
                                   Top Downloads
-                                </MenuItem>
-                                <MenuItem
-                                  classes={{
-                                    root: classes.selectMenuItem,
-                                    selected: classes.selectMenuItemSelectedMultiple
-                                  }}
-                                  value="Categories"
-                                >
-                                  Categories
                                 </MenuItem>
                                 <MenuItem
                                   classes={{

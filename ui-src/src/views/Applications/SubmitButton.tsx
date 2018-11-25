@@ -102,7 +102,7 @@ class SubmitButton extends React.Component<SubmitButtonProps, SubmitButtonState>
     public addData = (AppUiobj, AppDNAobj, CategoryAndTagObj, callback) => {
      this.props.attachUI(AppUiobj);
      this.props.attachDNA(AppDNAobj);
-     this.props.addCategoriesAndTags(CategoryAndTagObj);
+     // this.props.addCategoriesAndTags(CategoryAndTagObj);
      callback(this);
     }
 
@@ -139,7 +139,7 @@ class SubmitButton extends React.Component<SubmitButtonProps, SubmitButtonState>
               console.log("FIRST promise response after the 1ST api call [should be the new app hash]", response);
               const hashAsStringResponse = response.toString();
 
-              fetchPOST('/fn/hchc/getAppDetails', hashAsStringResponse).then((res) => {
+              fetchPOST('/fn/hchc/getAppDetails', {app_hash:hashAsStringResponse}).then((res) => {
                 console.log("hashAsStringResponse", hashAsStringResponse);
                 console.log("SECOND promise response after the 2ND api call [should be the new app details]", res);
                  if (res.errorMessage) {
@@ -174,15 +174,17 @@ class SubmitButton extends React.Component<SubmitButtonProps, SubmitButtonState>
                    console.log("CategoryAndTagBundle for Category / Tag API CALL", CategoryAndTagObj);
 
                    this.addData(AppUiobj, AppDNAobj, CategoryAndTagObj, function(this) {
-                       this.successAlert();
-                       // alert("Congrats. You've offically registered an app.");
+                       // this.successAlert();
+                       alert("Congrats. You've offically registered an app.");
                    })
                  };
                })
             };
         });
       };
-      // this.props.toggleErrorMessage(this.state.errorMessage);
+      if(this.state.errorMessage !== undefined) {
+        this.props.toggleErrorMessage(this.state.errorMessage);
+      }
     }
 
     public handleEnter = (event: React.KeyboardEvent) => {

@@ -101,9 +101,9 @@ const mapDispatchToProps = dispatch => ({
   },
   fetchAllApps: () => {
     fetchPOST('/fn/hchc/getMyApps')
-      .then(allApps => {
-        console.log("allApps returned from local chain-->",allApps)
-        dispatch({ type: 'FETCH_ALL_APPS', allApps })
+      .then(myApps => {
+        console.log("myApps returned from local chain-->",myApps)
+        dispatch({ type: 'FETCH_ALL_APPS', myApps })
     })
 },
   fetchAppDetails: (appHash) => {

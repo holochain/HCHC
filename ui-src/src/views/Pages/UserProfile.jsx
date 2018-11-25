@@ -21,15 +21,19 @@ import AVATAR_PICTURE from "../../assets/img/faces/avatar.jpg";
 
 function UserProfile(props) {
   const { classes } = props;
-
   // constants
   // const AVATAR_PICTURE = this.props.profile.avatar;
   const GITHUB_PROFILE = "#";
+  
+  const updateProfile = (updatedProfileProps) => {
+    console.log("updatedProfileProps", updatedProfileProps);
+    // function here
+  }
 
   return (
     <div>
       <GridContainer>
-      <GridItem xs={12} sm={12} md={4}>
+      <GridItem xs={12} sm={12} md={4} submitProfileState={updateProfile}>
         <Card profile>
           <CardAvatar profile>
             <a href={GITHUB_PROFILE} onClick={e => e.preventDefault()}>

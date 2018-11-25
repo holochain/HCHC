@@ -7,7 +7,6 @@ import { Hash } from '../../../../holochain';
 
 // core components
 import Button from "../../components/CustomButtons/Button.jsx";
-
 /*tslint:disable jsx-no-lambda*/
 /*tslint:disable jsx-no-string-ref*/
 
@@ -40,11 +39,9 @@ class FileUpload extends React.Component<FileUploadProps, FileUploadState>  {
       errorMessage: "",
     });
     this.handleChange = this.handleChange.bind(this);
-    // this.fileInput = React.createRef();
   }
 
   public handleChange = (event: any) => {
-   // console.log("current file - on inputChange", event.target.files[0]);
    const input = event.target.files[0]
    const fileName = input.name;
 
@@ -77,7 +74,6 @@ class FileUpload extends React.Component<FileUploadProps, FileUploadState>  {
   }
 
     public handleClick() {
-      // (this.fileInput as any).current.click();
       (this.refs as any).fileInput.click();
     }
 
@@ -85,7 +81,6 @@ class FileUpload extends React.Component<FileUploadProps, FileUploadState>  {
       this.setState({
         file: null
       });
-      // (this.fileInput as any).current.value = null;
       (this.refs as any).fileInput.value = null;
     }
 
@@ -93,7 +88,7 @@ class FileUpload extends React.Component<FileUploadProps, FileUploadState>  {
     const {file} = this.state;
     return (
       <div className="fileinput text-center">
-          <input id="linkUpload" type="file" name="fileInput" onChange={this.handleChange} ref="fileInput" /> {/* ref={this.fileInput} */}
+          <input id="linkUpload" type="file" accept=".zip" name="fileInput" onChange={this.handleChange} ref="fileInput" />
           <div>
             {this.state.file === null ? (
               <Button {...this.props.addButtonProps} onClick={() => this.handleClick()}>Select File</Button>

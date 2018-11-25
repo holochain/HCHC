@@ -171,7 +171,7 @@ class AppRegisterLayout extends React.Component {
             <CardBody>
               <GridContainer style={{width:"100%"}}>
                 <GridItem xs={12} sm={4} md={6} style={{margin:"0 auto", textAlign:"center"}}>
-                  <legend sytle={{textAlign:"center"}}>DNA File</legend>
+                  <legend sytle={{textAlign:"center"}}>DNA Zip Folder</legend>
                   <FileUpload
                     onFileUpdate={this.dnaFileSelect}
                     addButtonProps={{
@@ -189,7 +189,7 @@ class AppRegisterLayout extends React.Component {
                   />
                 </GridItem>
                 <GridItem xs={12} sm={4} md={6} style={{margin:"0 auto", textAlign:"center"}}>
-                  <legend>UI File</legend>
+                  <legend>UI Zip Folder</legend>
                   <FileUpload
                     onFileUpdate={this.uiFileSelect}
                     addButtonProps={{
