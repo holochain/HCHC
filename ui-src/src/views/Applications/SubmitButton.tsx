@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Redirect, Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 import { fetchPOST, uploadFileRequest, fetchFormPOST } from '../../utils';
 import { ReduxAction, CodeParams, AppDetailState, uiLinkParams } from '../../../../types';
@@ -102,7 +103,7 @@ class SubmitButton extends React.Component<SubmitButtonProps, SubmitButtonState>
     public addData = (AppUiobj, AppDNAobj, CategoryAndTagObj, callback) => {
      this.props.attachUI(AppUiobj);
      this.props.attachDNA(AppDNAobj);
-     // this.props.addCategoriesAndTags(CategoryAndTagObj);
+     this.props.addCategoriesAndTags(CategoryAndTagObj);
      callback(this);
     }
 
@@ -112,6 +113,8 @@ class SubmitButton extends React.Component<SubmitButtonProps, SubmitButtonState>
       const { title, description, thumbnail } = this.state;
       if (title !== null && description !== null && thumbnail !== null) {
         // { title, description, thumbnail }
+
+        console.log("this.state.thumbnail BEFORE STRINGIFIED... >> ", this.state.thumbnail);
          const AppDetailobj = {
          title: this.state.title,
          description: this.state.description,
@@ -227,9 +230,11 @@ class SubmitButton extends React.Component<SubmitButtonProps, SubmitButtonState>
   public render() {
     return (
       <div className="text-center">
+        <Link to={`/registerapp`}>
           <Button {...this.props.submitButtonProps} onClick={() => this.handleClick(this.props.states)}>
             Submit
           </Button>
+        </Link>
       </div>
     );
   }

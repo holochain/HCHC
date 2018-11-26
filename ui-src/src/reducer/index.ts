@@ -2,33 +2,18 @@ import { Hash } from '../../../holochain';
 import {HCHCState, AppDetailState, CodeParams, ReviewLog, uiLinkParams, ReduxAction} from "../../../types";
 import { Map } from "immutable"  // import { List, Map } from "immutable"
 
-const dummyAppEntry : AppDetailState = {
-  author: {Hash: "asofkdjsoi9726183aj913798olakj", Name: "Joel Ulahanna"},
-  thumbnail: "pic1.jpg",
-  description: "This hApp is a modern, real-time, multiplayer take on the classic game of Microsoft's Minesweeeper.  Invite your friends and play.",
-  title: "Minersweeper",
-  uuid: "asofkdjsoi9726183aj913798olakj",
-}
-
-
-// const dummyAppList = [
-  //   {Entry: dummyAppEntry, Hash: "87687olkjhliuyt765476yuhgi677ty8oui"},
-  //   {Entry: dummyAppEntry2, Hash: "tygt567y7yo8iuholkj879uoi;jk89puio"},
-  // ]
-
-// const dummyAppEntry2 : AppDetailState = {
-//   author: {Hash: "asofkdjsuholkj879uoi;jk83798olakj", Name: "Nico"},
-//   thumbnail: "pic2.jpg",
-//   description: "A HC Container system application.",
-//   title: "HoloScqape",
-//   uuid: "78ofkd8yuihiuo678uijkuoihoi789io",
+// const dummyAppEntry : AppDetailState = {
+//   author: {Hash: "asofkdjsoi9726183aj913798olakj", Name: "Joel Ulahanna"},
+//   thumbnail: "pic1.jpg",
+//   description: "This hApp is a modern, real-time, multiplayer take on the classic game of Microsoft's Minesweeeper.  Invite your friends and play.",
+//   title: "Minersweeper",
+//   uuid: "asofkdjsoi9726183aj913798olakj",
 // }
-
 
 
 const defaultState: HCHCState = {
   currentAgent: null,
-  AllMyApps: [{Entry: dummyAppEntry, Hash: "87687olkjhliuyt765476yuhgi677ty8oui"}],
+  AllMyApps: null,
   appsByCategory: null,
   currentCategory: null,
   currentAppDetails: null,

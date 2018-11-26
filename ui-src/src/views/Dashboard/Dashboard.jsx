@@ -146,9 +146,7 @@ class Dashboard extends React.Component {
 
 {/* ////////////////////////////////////////////////////////////////////////////////////////////// */}
         <h1 style={{color:"white", margin:"50px 0px", textAlign:"center"}}>Manage Your hApps</h1>
-        <GridContainer>
-          <AppData />
-        </GridContainer>
+        <AppData />
       </div>
     );
   }

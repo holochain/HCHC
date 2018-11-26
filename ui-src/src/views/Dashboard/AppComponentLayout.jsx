@@ -35,56 +35,113 @@ import "./style/dashboard.css"
 
 
 class AppComponentLayout extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      image: null,
+      timelapse: null,
+    };
+    this.handleImageUpload();
+    this.handleImageUpload = this.handleImageUpload.bind(this);
+  }
+
+  b64toBlob = (b64Data, contentType, sliceSize=512) => {
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+
+      const byteArray = new Uint8Array(byteNumbers);
+
+      byteArrays.push(byteArray);
+    }
+    const blob = new Blob(byteArrays, {type: contentType});
+    return blob;
+  }
+
+  makeBlob = (imageData) => {
+    // console.log("this.props.thumbnail.imageData >> ", imageData);
+    const splitData = imageData.split(",");
+    const contentType=splitData[0].split(";")[0]
+    const base64Data = splitData[1]
+    console.log("this.props.thumbnail.base64Data >> ", base64Data);
+    console.log("contentType: ",contentType);
+    // const contentType = 'image/png';
+
+    const blob = this.b64toBlob(imageData, contentType);
+    const blobUrl = URL.createObjectURL(blob);
+
+    console.log("blobUrl src", blobUrl);
+    this.setState({blobUrl})
+  }
+
+  handleImageUpload = () => {
+    const imageData = (this.props.thumbnail).split(":")[2];
+    this.makeBlob(imageData);
+  }
+
   render() {
+    const defaultImg = <JdenticonPlaceHolder className="jdenticon" size={150} hash={this.props.hash} />;
     const { classes } = this.props;
     return (
-      <Card chart className={classes.cardHover}>
-        <CardHeader color="warning" className={classes.cardHeaderHover}>
-          {/* // <JdenticonPlaceHolder className="jdenticon" size={150} hash={this.props.hash} /> */}
-         <img src={this.props.thumbanil} alt="App Thumbnail Image" />
-        </CardHeader>
-        <CardBody>
-          <div className={classes.cardHoverUnder}>
-             <Link to={`/details/${this.props.Hash}`}>
-              <Tooltip
-                id="tooltip-top"
-                title="View Details"
-                placement="bottom"
-                classes={{ tooltip: classes.tooltip }}
-              >
-                <Button simple color="info" justIcon>
-                  <Pageview className={classes.underChartIcons} />
-                </Button>
-              </Tooltip>
-            </Link>
-            <Link to={`/update/${this.props.Hash}`}>
-              <Tooltip
-                id="tooltip-top"
-                title="Update hApp"
-                placement="bottom"
-                classes={{ tooltip: classes.tooltip }}
-              >
-                <Button color="transparent" simple justIcon>
-                  <Edit className={classes.underChartIcons} />
-                </Button>
-              </Tooltip>
-            </Link>
-          </div>
-          <h4 className={classes.cardTitle}>{this.props.title}</h4>
-          <p className={classes.cardCategory}>
-          <span className={classes.successText}>
-            <Description className={classes.upArrowCardCategory} />
-            {this.props.description}
-          </span>
-          </p>
-        </CardBody>
-        <CardFooter chart>
-          <div className={classes.stats}>
-            <AccessTime /> Last Updated: 2 minutes ago
-            {/* {this.props.lastUpdate} */}
-          </div>
-        </CardFooter>
-      </Card>
+      <GridItem xs={12} sm={6} md={4}>
+        <Card chart className={classes.cardHover}>
+          <CardHeader color="warning" className={classes.cardHeaderHover}>
+          {this.state.image ?
+            <img src={this.props.thumbanil} alt="App Thumbnail Image" />
+            :
+            defaultImg
+          }
+          </CardHeader>
+          <CardBody>
+            <div className={classes.cardHoverUnder}>
+               <Link to={`/details/${this.props.Hash}`}>
+                <Tooltip
+                  id="tooltip-top"
+                  title="View Details"
+                  placement="bottom"
+                  classes={{ tooltip: classes.tooltip }}
+                >
+                  <Button simple color="info" justIcon>
+                    <Pageview className={classes.underChartIcons} />
+                  </Button>
+                </Tooltip>
+              </Link>
+              <Link to={`/update/${this.props.Hash}`}>
+                <Tooltip
+                  id="tooltip-top"
+                  title="Update hApp"
+                  placement="bottom"
+                  classes={{ tooltip: classes.tooltip }}
+                >
+                  <Button color="transparent" simple justIcon>
+                    <Edit className={classes.underChartIcons} />
+                  </Button>
+                </Tooltip>
+              </Link>
+            </div>
+            <h4 className={classes.cardTitle}>{this.props.title}</h4>
+            <p className={classes.cardCategory}>
+            <span className={classes.successText}>
+              <Description className={classes.upArrowCardCategory} />
+              {this.props.description}
+            </span>
+            </p>
+          </CardBody>
+          <CardFooter chart>
+            <div className={classes.stats}>
+              <AccessTime /> Last Updated: 2 minutes ago
+              {/* {this.props.lastUpdate} */}
+            </div>
+          </CardFooter>
+        </Card>
+      </GridItem>
     );
   }
 }

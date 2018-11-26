@@ -8,7 +8,8 @@ import { ProfileState, AppDetailState } from '../../../../types'
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/core/Icon";
-import GridItem from "../../components/Grid/GridItem.jsx";
+// core components
+import GridContainer from "../../components/Grid/GridContainer.jsx";
 import AppComponentLayout from "./AppComponentLayout";
 
 /*tslint:disable jsx-no-lambda*/
@@ -22,7 +23,6 @@ type AppComponentProps = {
   currentAppHash: string,
   submitted: boolean,
   fetchAgent: () => void,
-  fetchProfile: () => void,
   fetchAllApps: () => void,
   registerCurrentAppHash: (appHash) => void,
   getappsByCategory: (cateogry) => void,
@@ -41,9 +41,7 @@ class AppDataArray extends React.Component<AppComponentProps, {}>  {
 
   public componentDidMount() {
     this.props.fetchAgent();
-    this.props.fetchProfile();
     this.props.fetchAllApps();
-    // setInterval(this.props.fetchAllApps(), 500);
   }
 
     public redirect = () => {
@@ -59,7 +57,12 @@ class AppDataArray extends React.Component<AppComponentProps, {}>  {
     public render() {
       if (!this.props.currentAgent || !this.props.AllMyApps) {
         return <div>
-          <h4 className="loading-text">Loading...</h4>
+          <h4 className="loading-text" style={{textAlign:"center", color:"#eee"}}>Loading...</h4>
+        </div>
+      }
+      if (this.props.AllMyApps.length <= 0) {
+        return <div>
+          <h4 className="loading-text" style={{textAlign:"center", color:"#eee"}}>You don't yet have any hApps.  Please proceed to the Register Page via the sidebar menu to your left to register your first hApp.</h4>
         </div>
       }
       const { agent } = this.props.currentAgent;
@@ -72,14 +75,14 @@ class AppDataArray extends React.Component<AppComponentProps, {}>  {
         const justIcon :boolean = true;
         const simple :boolean = true;
         return (
-          <AppComponentLayout key={app.Entry.uuid} hash={ app.Hash } title={app.Entry.title} description={app.Entry.description} image={app.Entry.thumbnail} lastUpdate={app.Entry.updated} />
+          <AppComponentLayout key={app.Entry.uuid} hash={ app.Hash } title={app.Entry.title} description={app.Entry.description} thumbnail={app.Entry.thumbnail} lastUpdate={app.Entry.updated} />
         )
       });
 
       return (
-        <GridItem xs={12} sm={6} md={4}>
+        <GridContainer>
           {renderApps}
-        </GridItem>
+        </GridContainer>
       );
     }
   }
@@ -91,12 +94,6 @@ const mapDispatchToProps = dispatch => ({
     fetchPOST('/fn/whoami/getAgent')
       .then(agent => {
         dispatch({ type: 'FETCH_AGENT', agent })
-      })
-  },
-  fetchProfile: () => {
-    return fetchPOST('/fn/profile/getProfile')
-      .then(profileInfo => {
-        dispatch({ type: 'FETCH_PROFILE', profileInfo })
       })
   },
   fetchAllApps: () => {
