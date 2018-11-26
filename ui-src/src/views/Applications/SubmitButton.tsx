@@ -102,7 +102,7 @@ class SubmitButton extends React.Component<SubmitButtonProps, SubmitButtonState>
     public addData = (AppUiobj, AppDNAobj, CategoryAndTagObj, callback) => {
      this.props.attachUI(AppUiobj);
      this.props.attachDNA(AppDNAobj);
-     // this.props.addCategoriesAndTags(CategoryAndTagObj);
+     this.props.addCategoriesAndTags(CategoryAndTagObj);
      callback(this);
     }
 
@@ -115,7 +115,8 @@ class SubmitButton extends React.Component<SubmitButtonProps, SubmitButtonState>
          const AppDetailobj = {
          title: this.state.title,
          description: this.state.description,
-         thumbnail: JSON.stringify(this.state.thumbnail)
+         // thumbnail: JSON.stringify(this.state.thumbnail)
+         thumbnail: "/IMG"
          }
         this.handleCreateApp(AppDetailobj);
       };
