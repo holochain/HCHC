@@ -1,6 +1,6 @@
 [
   {
-    "Path": "C:\\Users\\ldpan\\Desktop\\hchc-appstore-with-tests\\Interns-hApps-Store\\HApps-Store/build-HApps",
+    "Path": "/home/zo-el/Documents/GitRepo/Holochain/HApps-Store/build-HApps",
     "Side": 1,
     "BridgeZome": "bridge_request"
   }

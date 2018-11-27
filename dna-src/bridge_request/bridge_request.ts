@@ -32,7 +32,7 @@ function pushAppDetailsToStore({ appParam }) {
 // Should return all the details including the stats for the app
 function getAppDetails({ app_hash }) {
   const app_details = bridge(getBackupAppsHash()[0].CalleeApp, 'bridge_replies', 'getAppDetails', { app_hash });
-  debug("App_details from the App Store"+app_details);
+  // debug("App_details from the App Store"+app_details);
   return app_details
 }
 

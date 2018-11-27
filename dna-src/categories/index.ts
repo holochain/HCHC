@@ -11,7 +11,15 @@ let module = {};
 
 // this function links to the bridge_request function and send the info to be linked in the HApps-Store
 function addCategory(payload:{ category, tags, hash }){
-  return JSON.parse(call("bridge_request","requestAddCategories",payload));
+  // debug("Payload: "+JSON.stringify(payload))
+  for (let cat_index in payload.category){
+    for (let tag_index in payload.tags){
+
+      let return_payload = (JSON.parse(call("bridge_request","requestAddCategories",{category:payload.category[cat_index],tags:payload.tags[tag_index],hash:payload.hash})));
+      // debug("->"+return_payload)
+    }
+  }
+  return true;
 }
 
 function getAppCategories(payload:{hash}){

@@ -118,7 +118,8 @@ class SubmitButton extends React.Component<SubmitButtonProps, SubmitButtonState>
          const AppDetailobj = {
          title: this.state.title,
          description: this.state.description,
-         thumbnail: JSON.stringify(this.state.thumbnail)
+         // thumbnail: JSON.stringify(this.state.thumbnail)
+         thumbnail: "/IMG"
          }
         this.handleCreateApp(AppDetailobj);
       };
