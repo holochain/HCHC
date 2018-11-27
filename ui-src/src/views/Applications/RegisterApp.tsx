@@ -324,15 +324,15 @@ class  RegisterApp extends React.Component<RegisterAppsProps, RegisterAppState> 
               <Label for="category" sm={2}>Category</Label>
              <Col sm={10}>
                <Input type="select" name="selectMulti" id="category" onChange={ this.handleChange } multiple={multiple}>
-                 <option id="Games" value="games">Games</option>
-                 <option id="Admin Tools" value="admintools">Admin Tools</option>
-                 <option id="Dev Tools" value="devtools">Dev Tools</option>
-                 <option id="Top Downloads" value="topdownloads">Top Downloads</option>
-                 <option id="Movies" value="movies">Movies</option>
-                 <option id="Educational" value="educational">Educational</option>
-                 <option id="Finance" value="finance">Finance</option>
-                 <option id="Leisure" value="Leisure">Leisure</option>
-                 <option id="Music" value="music">Music</option>
+                 <option id="games" value="games">Games</option>
+                 <option id="admintools" value="admintools">Admin Tools</option>
+                 <option id="devtools" value="devtools">Dev Tools</option>
+                 <option id="topdownloads" value="topdownloads">Top Downloads</option>
+                 <option id="movies" value="movies">Movies</option>
+                 <option id="educational" value="educational">Educational</option>
+                 <option id="finance" value="finance">Finance</option>
+                 <option id="leisure" value="leisure">Leisure</option>
+                 <option id="music" value="music">Music</option>
                </Input>
              </Col>
          </FormGroup>
