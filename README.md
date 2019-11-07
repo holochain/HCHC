@@ -1,8 +1,15 @@
 # HCHC
 
+[![Project](https://img.shields.io/badge/project-holochain-blue.svg?style=flat-square)](http://holochain.org/)
+[![Chat](https://img.shields.io/badge/chat-chat%2eholochain%2enet-blue.svg?style=flat-square)](https://chat.holochain.org)
+
+[![Twitter Follow](https://img.shields.io/twitter/follow/holochain.svg?style=social&label=Follow)](https://twitter.com/holochain)
+
+License: [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
+
 The Holochain of Holochains
 
-Its a distributed directory for finding and installing distributed apps that run on holochain
+A distributed directory for finding and installing distributed apps that run on holochain
 
 > Note : This is the developer.console for Holochain devs to upload their HApps
 
@@ -55,5 +62,13 @@ Subsequent steps also assumes npm/yarn is installed.
 * **Lisa Jetton** - [JettTech](https://github.com/JettTech)
 
 ## License
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+Copyright (C) 2017 - 2019, Holochain Foundation
+
+This program is free software: you can redistribute it and/or modify it under the terms of the license p
+rovided in the LICENSE file (GPLv3).  This program is distributed in the hope that it will be useful, bu
+t WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+ PURPOSE.
+
+**Note:** We are considering other 'looser' licensing options (like MIT license) but at this stage are using GPL while we're getting the matter sorted out.  See [this article](https://medium.com/holochain/licensing-needs-for-truly-p2p-software-a3e0fa42be6c) for some of our thinking on licensing for distributed application frameworks.
